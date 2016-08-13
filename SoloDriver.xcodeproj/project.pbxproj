@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4142D22F097C3AE8DEEAC1E2 /* Pods_SoloDriverTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BA15B3473D9F6AA4AC4796 /* Pods_SoloDriverTests.framework */; };
+		4F21A7B51D5F178D00EA66B5 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F21A7B41D5F178D00EA66B5 /* LocationService.swift */; };
 		4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083C1D5EF9E0006F980A /* AppDelegate.swift */; };
-		4F52083F1D5EF9E0006F980A /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083E1D5EF9E0006F980A /* FirstViewController.swift */; };
+		4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083E1D5EF9E0006F980A /* MapController.swift */; };
 		4F5208411D5EF9E0006F980A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5208401D5EF9E0006F980A /* SecondViewController.swift */; };
 		4F5208441D5EF9E0006F980A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208421D5EF9E0006F980A /* Main.storyboard */; };
 		4F5208461D5EF9E0006F980A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208451D5EF9E0006F980A /* Assets.xcassets */; };
 		4F5208491D5EF9E0006F980A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208471D5EF9E0006F980A /* LaunchScreen.storyboard */; };
 		4F5208541D5EF9E0006F980A /* SoloDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5208531D5EF9E0006F980A /* SoloDriverTests.swift */; };
+		DC2BE3CC0EE73AA6519CF15D /* Pods_SoloDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2205E36CEB74CA392FAB298F /* Pods_SoloDriver.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,9 +30,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		034B429F8F97EE100E765B71 /* Pods-SoloDriverTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriverTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriverTests/Pods-SoloDriverTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2205E36CEB74CA392FAB298F /* Pods_SoloDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoloDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7B30651BED94DAC91114BF /* Pods-SoloDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriver/Pods-SoloDriver.debug.xcconfig"; sourceTree = "<group>"; };
+		47BA15B3473D9F6AA4AC4796 /* Pods_SoloDriverTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoloDriverTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A4CBA006268E6CA9B33116A /* Pods-SoloDriverTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriverTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriverTests/Pods-SoloDriverTests.release.xcconfig"; sourceTree = "<group>"; };
+		4F21A7B41D5F178D00EA66B5 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		4F5208391D5EF9E0006F980A /* SoloDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoloDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F52083C1D5EF9E0006F980A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4F52083E1D5EF9E0006F980A /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		4F52083E1D5EF9E0006F980A /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		4F5208401D5EF9E0006F980A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		4F5208431D5EF9E0006F980A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F5208451D5EF9E0006F980A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +47,7 @@
 		4F52084F1D5EF9E0006F980A /* SoloDriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoloDriverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5208531D5EF9E0006F980A /* SoloDriverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloDriverTests.swift; sourceTree = "<group>"; };
 		4F5208551D5EF9E0006F980A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6F816D8F06860C9C75CB4C1 /* Pods-SoloDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriver/Pods-SoloDriver.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC2BE3CC0EE73AA6519CF15D /* Pods_SoloDriver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,18 +63,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4142D22F097C3AE8DEEAC1E2 /* Pods_SoloDriverTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F21A7B21D5F0DE400EA66B5 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				4F52083E1D5EF9E0006F980A /* MapController.swift */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		4F21A7B31D5F16AE00EA66B5 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				4F21A7B41D5F178D00EA66B5 /* LocationService.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
 		4F5208301D5EF9E0006F980A = {
 			isa = PBXGroup;
 			children = (
 				4F52083B1D5EF9E0006F980A /* SoloDriver */,
 				4F5208521D5EF9E0006F980A /* SoloDriverTests */,
 				4F52083A1D5EF9E0006F980A /* Products */,
+				8E0EF80FEC7C67568E509376 /* Pods */,
+				C6D5DF4254495653DEDAE034 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,8 +109,9 @@
 		4F52083B1D5EF9E0006F980A /* SoloDriver */ = {
 			isa = PBXGroup;
 			children = (
+				4F21A7B31D5F16AE00EA66B5 /* Service */,
+				4F21A7B21D5F0DE400EA66B5 /* Map */,
 				4F52083C1D5EF9E0006F980A /* AppDelegate.swift */,
-				4F52083E1D5EF9E0006F980A /* FirstViewController.swift */,
 				4F5208401D5EF9E0006F980A /* SecondViewController.swift */,
 				4F5208421D5EF9E0006F980A /* Main.storyboard */,
 				4F5208451D5EF9E0006F980A /* Assets.xcassets */,
@@ -99,6 +130,26 @@
 			path = SoloDriverTests;
 			sourceTree = "<group>";
 		};
+		8E0EF80FEC7C67568E509376 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3E7B30651BED94DAC91114BF /* Pods-SoloDriver.debug.xcconfig */,
+				A6F816D8F06860C9C75CB4C1 /* Pods-SoloDriver.release.xcconfig */,
+				034B429F8F97EE100E765B71 /* Pods-SoloDriverTests.debug.xcconfig */,
+				4A4CBA006268E6CA9B33116A /* Pods-SoloDriverTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C6D5DF4254495653DEDAE034 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2205E36CEB74CA392FAB298F /* Pods_SoloDriver.framework */,
+				47BA15B3473D9F6AA4AC4796 /* Pods_SoloDriverTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,9 +157,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4F5208581D5EF9E0006F980A /* Build configuration list for PBXNativeTarget "SoloDriver" */;
 			buildPhases = (
+				A16AE112D010D6D9592C95B6 /* [CP] Check Pods Manifest.lock */,
 				4F5208351D5EF9E0006F980A /* Sources */,
 				4F5208361D5EF9E0006F980A /* Frameworks */,
 				4F5208371D5EF9E0006F980A /* Resources */,
+				568F18D0EB8F498CE077CCC8 /* [CP] Embed Pods Frameworks */,
+				7FE2947F1BEA34FB9A04518E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -123,9 +177,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4F52085B1D5EF9E0006F980A /* Build configuration list for PBXNativeTarget "SoloDriverTests" */;
 			buildPhases = (
+				54D73641A02ED206523CFAE7 /* [CP] Check Pods Manifest.lock */,
 				4F52084B1D5EF9E0006F980A /* Sources */,
 				4F52084C1D5EF9E0006F980A /* Frameworks */,
 				4F52084D1D5EF9E0006F980A /* Resources */,
+				E4F36BBB9C994CC2219042A2 /* [CP] Embed Pods Frameworks */,
+				B71A1F9E44549FFF8E25F6FF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -196,6 +253,99 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		54D73641A02ED206523CFAE7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		568F18D0EB8F498CE077CCC8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoloDriver/Pods-SoloDriver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7FE2947F1BEA34FB9A04518E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoloDriver/Pods-SoloDriver-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A16AE112D010D6D9592C95B6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B71A1F9E44549FFF8E25F6FF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoloDriverTests/Pods-SoloDriverTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E4F36BBB9C994CC2219042A2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoloDriverTests/Pods-SoloDriverTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4F5208351D5EF9E0006F980A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -203,7 +353,8 @@
 			files = (
 				4F5208411D5EF9E0006F980A /* SecondViewController.swift in Sources */,
 				4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */,
-				4F52083F1D5EF9E0006F980A /* FirstViewController.swift in Sources */,
+				4F21A7B51D5F178D00EA66B5 /* LocationService.swift in Sources */,
+				4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +414,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -308,7 +460,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -330,9 +483,10 @@
 		};
 		4F5208591D5EF9E0006F980A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E7B30651BED94DAC91114BF /* Pods-SoloDriver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SoloDriver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haoboji.SoloDriver;
@@ -342,9 +496,10 @@
 		};
 		4F52085A1D5EF9E0006F980A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6F816D8F06860C9C75CB4C1 /* Pods-SoloDriver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = SoloDriver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haoboji.SoloDriver;
@@ -354,6 +509,7 @@
 		};
 		4F52085C1D5EF9E0006F980A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 034B429F8F97EE100E765B71 /* Pods-SoloDriverTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SoloDriverTests/Info.plist;
@@ -366,6 +522,7 @@
 		};
 		4F52085D1D5EF9E0006F980A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A4CBA006268E6CA9B33116A /* Pods-SoloDriverTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SoloDriverTests/Info.plist;
@@ -395,6 +552,7 @@
 				4F52085A1D5EF9E0006F980A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4F52085B1D5EF9E0006F980A /* Build configuration list for PBXNativeTarget "SoloDriverTests" */ = {
 			isa = XCConfigurationList;
@@ -403,6 +561,7 @@
 				4F52085D1D5EF9E0006F980A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
