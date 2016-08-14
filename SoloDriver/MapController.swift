@@ -18,16 +18,18 @@ class MapController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Default location - Melbourne
 
-        let lastLocation = LocationService.shared.getLastLocation()
-
+        // Add current location button
         let currentLocationItem = MKUserTrackingBarButtonItem(mapView: mapView)
         navBar.topItem!.rightBarButtonItem = currentLocationItem
         navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         navBar.shadowImage = UIImage()
         navBar.translucent = true
         navBar.backgroundColor = UIColor.clearColor()
+
+        // Default location - Melbourne
+        let lastLocation = LocationService.shared.getLastLocation()
+
 //        if (lastLocation != nil) {
 //            camera = GMSCameraPosition.cameraWithLatitude(
 //                lastLocation!.coordinate.latitude, longitude: lastLocation!.coordinate.longitude, zoom: 10.0)

@@ -31,7 +31,8 @@
                                             <constraint firstAttribute="height" constant="30" id="Mu6-EW-njN" userLabel="height = 45"/>
                                         </constraints>
                                         <state key="normal" title="Search this area">
-                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -50,7 +51,8 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.96999999999999997" alpha="0.81999999999999995" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="TmY-jl-Pyo" firstAttribute="centerX" secondItem="NQ0-Hw-7cV" secondAttribute="centerX" id="BQY-9Y-Z45"/>
                                     <constraint firstAttribute="height" constant="45" id="EDf-it-Hju"/>
@@ -116,15 +118,15 @@
                                 <exclude reference="Trh-vo-Cvo"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="EIs-eu-jan"/>
-                                <exclude reference="Eti-6s-lC1"/>
-                                <exclude reference="dds-vK-h48"/>
-                                <exclude reference="qzd-Jb-Q6j"/>
-                                <exclude reference="rNH-PK-823"/>
                                 <exclude reference="i2r-TD-Wb6"/>
                                 <exclude reference="DYK-M9-ZqT"/>
                                 <exclude reference="KA2-L0-247"/>
                                 <exclude reference="SuO-LY-tEh"/>
+                                <exclude reference="rNH-PK-823"/>
+                                <exclude reference="EIs-eu-jan"/>
+                                <exclude reference="Eti-6s-lC1"/>
+                                <exclude reference="dds-vK-h48"/>
+                                <exclude reference="qzd-Jb-Q6j"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -134,19 +136,22 @@
                                 <include reference="Trh-vo-Cvo"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="EIs-eu-jan"/>
-                                <include reference="Eti-6s-lC1"/>
-                                <include reference="dds-vK-h48"/>
-                                <include reference="qzd-Jb-Q6j"/>
-                                <include reference="rNH-PK-823"/>
                                 <include reference="i2r-TD-Wb6"/>
                                 <include reference="DYK-M9-ZqT"/>
                                 <include reference="KA2-L0-247"/>
                                 <include reference="SuO-LY-tEh"/>
+                                <include reference="rNH-PK-823"/>
+                                <include reference="EIs-eu-jan"/>
+                                <include reference="Eti-6s-lC1"/>
+                                <include reference="dds-vK-h48"/>
+                                <include reference="qzd-Jb-Q6j"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="unF-0f-EIu"/>
+                    <navigationItem key="navigationItem" title="Title" id="unF-0f-EIu">
+                        <barButtonItem key="leftBarButtonItem" title="Categories" id="x9m-SR-aRt"/>
+                        <barButtonItem key="rightBarButtonItem" title="About" id="Qit-yg-Za4"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="mapView" destination="sLT-Fw-Yd2" id="2m4-FF-QQB"/>
@@ -221,7 +226,7 @@
         <scene sceneID="eN2-po-TZY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bKj-7z-STt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Support" image="google_maps-50" selectedImage="google_maps_filled-50" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Support" image="Waypoint Map-50" selectedImage="Waypoint Map Filled-50" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aIY-Yz-mvH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -238,8 +243,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="google_maps-50" width="25" height="25"/>
-        <image name="google_maps_filled-50" width="25" height="25"/>
+        <image name="Waypoint Map Filled-50" width="25" height="25"/>
+        <image name="Waypoint Map-50" width="25" height="25"/>
         <image name="second" width="30" height="30"/>
     </resources>
 </document>
