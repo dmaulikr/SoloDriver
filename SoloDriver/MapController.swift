@@ -33,15 +33,7 @@ class MapController: UIViewController {
     }
 
     @IBAction func searchThisArea(sender: UIButton) {
-        let cameraPosition = mapView!.camera.target
-        let minX = cameraPosition.latitude * 100000 - 500
-        let maxX = cameraPosition.latitude * 100000 + 500
-        let minY = cameraPosition.longitude * 100000 - 1000
-        let maxY = cameraPosition.longitude * 100000 + 1000
-        print(minX)
-        print(maxX)
-        print(minY)
-        print(maxY)
+        // let cameraPosition = mapView!.camera.target
     }
 
     override func didReceiveMemoryWarning() {
