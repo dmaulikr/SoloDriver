@@ -16,6 +16,7 @@
 		4F5208461D5EF9E0006F980A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208451D5EF9E0006F980A /* Assets.xcassets */; };
 		4F5208491D5EF9E0006F980A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208471D5EF9E0006F980A /* LaunchScreen.storyboard */; };
 		4F5208541D5EF9E0006F980A /* SoloDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5208531D5EF9E0006F980A /* SoloDriverTests.swift */; };
+		4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F656DB41D606987009FA6B2 /* PublicDataService.swift */; };
 		DC2BE3CC0EE73AA6519CF15D /* Pods_SoloDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2205E36CEB74CA392FAB298F /* Pods_SoloDriver.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		4F52084F1D5EF9E0006F980A /* SoloDriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoloDriverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5208531D5EF9E0006F980A /* SoloDriverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloDriverTests.swift; sourceTree = "<group>"; };
 		4F5208551D5EF9E0006F980A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F656DB41D606987009FA6B2 /* PublicDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicDataService.swift; sourceTree = "<group>"; };
 		A6F816D8F06860C9C75CB4C1 /* Pods-SoloDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriver/Pods-SoloDriver.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				4F21A7B41D5F178D00EA66B5 /* LocationService.swift */,
+				4F656DB41D606987009FA6B2 /* PublicDataService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F5208411D5EF9E0006F980A /* SecondViewController.swift in Sources */,
+				4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */,
 				4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */,
 				4F21A7B51D5F178D00EA66B5 /* LocationService.swift in Sources */,
 				4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */,
