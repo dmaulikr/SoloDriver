@@ -21,17 +21,20 @@ public class LocationService: NSObject, CLLocationManagerDelegate {
         super.init()
         self.manager.activityType = CLActivityType.AutomotiveNavigation
         self.manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        self.manager.delegate = self
+    }
+
+    public func start() {
         self.manager.requestAlwaysAuthorization()
         self.manager.startUpdatingLocation()
         self.manager.startMonitoringSignificantLocationChanges()
-        self.manager.delegate = self
     }
 
     public func getLastLocation() -> CLLocation? {
         return manager.location
     }
 
-    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { 
+    public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(manager.location!.timestamp)
     }
 }
