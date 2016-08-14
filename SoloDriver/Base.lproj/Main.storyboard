@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Support-->
@@ -17,6 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sLT-Fw-Yd2">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NQ0-Hw-7cV">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
@@ -27,7 +31,7 @@
                                             <constraint firstAttribute="height" constant="30" id="Mu6-EW-njN" userLabel="height = 45"/>
                                         </constraints>
                                         <state key="normal" title="Search this area">
-                                            <color key="titleShadowColor" cocoaTouchSystemColor="lightTextColor"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -46,7 +50,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.96999999999999997" alpha="0.81999999999999995" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="TmY-jl-Pyo" firstAttribute="centerX" secondItem="NQ0-Hw-7cV" secondAttribute="centerX" id="BQY-9Y-Z45"/>
                                     <constraint firstAttribute="height" constant="45" id="EDf-it-Hju"/>
@@ -81,36 +85,74 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trh-vo-Cvo">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <navigationItem id="Gcq-DR-a4E"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="NQ0-Hw-7cV" secondAttribute="bottom" constant="26" id="mdf-Sg-aDu"/>
+                            <constraint firstItem="Trh-vo-Cvo" firstAttribute="leading" secondItem="NQ0-Hw-7cV" secondAttribute="trailing" constant="24" id="DYK-M9-ZqT">
+                                <variation key="heightClass=regular-widthClass=compact" constant="55"/>
+                            </constraint>
+                            <constraint firstItem="sLT-Fw-Yd2" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="EIs-eu-jan"/>
+                            <constraint firstItem="sLT-Fw-Yd2" firstAttribute="centerX" secondItem="NQ0-Hw-7cV" secondAttribute="centerX" id="Eti-6s-lC1"/>
+                            <constraint firstItem="Trh-vo-Cvo" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="KA2-L0-247">
+                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                            </constraint>
+                            <constraint firstItem="Trh-vo-Cvo" firstAttribute="bottom" secondItem="NQ0-Hw-7cV" secondAttribute="bottom" id="SuO-LY-tEh"/>
+                            <constraint firstAttribute="bottom" secondItem="sLT-Fw-Yd2" secondAttribute="bottom" id="dds-vK-h48"/>
+                            <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="NQ0-Hw-7cV" secondAttribute="bottom" constant="16" id="i2r-TD-Wb6"/>
+                            <constraint firstItem="sLT-Fw-Yd2" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="qzd-Jb-Q6j"/>
                             <constraint firstItem="NQ0-Hw-7cV" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="rNH-PK-823"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="sLT-Fw-Yd2"/>
                                 <exclude reference="NQ0-Hw-7cV"/>
+                                <exclude reference="Trh-vo-Cvo"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="mdf-Sg-aDu"/>
+                                <exclude reference="EIs-eu-jan"/>
+                                <exclude reference="Eti-6s-lC1"/>
+                                <exclude reference="dds-vK-h48"/>
+                                <exclude reference="qzd-Jb-Q6j"/>
                                 <exclude reference="rNH-PK-823"/>
+                                <exclude reference="i2r-TD-Wb6"/>
+                                <exclude reference="DYK-M9-ZqT"/>
+                                <exclude reference="KA2-L0-247"/>
+                                <exclude reference="SuO-LY-tEh"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
+                                <include reference="sLT-Fw-Yd2"/>
                                 <include reference="NQ0-Hw-7cV"/>
+                                <include reference="Trh-vo-Cvo"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="mdf-Sg-aDu"/>
+                                <include reference="EIs-eu-jan"/>
+                                <include reference="Eti-6s-lC1"/>
+                                <include reference="dds-vK-h48"/>
+                                <include reference="qzd-Jb-Q6j"/>
                                 <include reference="rNH-PK-823"/>
+                                <include reference="i2r-TD-Wb6"/>
+                                <include reference="DYK-M9-ZqT"/>
+                                <include reference="KA2-L0-247"/>
+                                <include reference="SuO-LY-tEh"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="rPm-he-e0X">
-                        <barButtonItem key="leftBarButtonItem" title="Categories" id="h63-eE-fVf"/>
-                        <barButtonItem key="rightBarButtonItem" title="About" id="jFm-Ek-MlC"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Title" id="unF-0f-EIu"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="mapView" destination="sLT-Fw-Yd2" id="2m4-FF-QQB"/>
+                        <outlet property="navBar" destination="Trh-vo-Cvo" id="523-gY-Kqg"/>
+                        <outlet property="navItem" destination="Gcq-DR-a4E" id="du9-3m-6lT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
