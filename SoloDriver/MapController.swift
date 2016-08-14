@@ -11,8 +11,6 @@ import GoogleMaps
 
 class MapController: UIViewController {
 
-    @IBOutlet var bSearch: UIButton!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Default location - Melbourne
@@ -30,6 +28,10 @@ class MapController: UIViewController {
         mapView.settings.myLocationButton = true
         mapView.padding = UIEdgeInsets(top: 80.0, left: 0.0, bottom: 60.0, right: 0.0)
         self.view.insertSubview(mapView, atIndex: 0)
+
+    }
+
+    @IBAction func searchThisArea(sender: UIButton) {
 
     }
 
