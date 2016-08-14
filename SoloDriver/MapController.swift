@@ -11,6 +11,8 @@ import GoogleMaps
 
 class MapController: UIViewController {
 
+    var mapView: GMSMapView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Default location - Melbourne
@@ -22,17 +24,24 @@ class MapController: UIViewController {
         } else {
             camera = GMSCameraPosition.cameraWithLatitude(-37.768356, longitude: 144.9663673, zoom: 8.0)
         }
-        let mapView = GMSMapView.mapWithFrame(self.view.bounds, camera: camera)
-        mapView.myLocationEnabled = true
-        mapView.settings.compassButton = true
-        mapView.settings.myLocationButton = true
-        mapView.padding = UIEdgeInsets(top: 80.0, left: 0.0, bottom: 60.0, right: 0.0)
-        self.view.insertSubview(mapView, atIndex: 0)
-
+        mapView = GMSMapView.mapWithFrame(self.view.bounds, camera: camera)
+        mapView!.myLocationEnabled = true
+        mapView!.settings.compassButton = true
+        mapView!.settings.myLocationButton = true
+        mapView!.padding = UIEdgeInsets(top: 80.0, left: 0.0, bottom: 60.0, right: 0.0)
+        self.view.insertSubview(mapView!, atIndex: 0)
     }
 
     @IBAction func searchThisArea(sender: UIButton) {
-
+        let cameraPosition = mapView!.camera.target
+        let minX = cameraPosition.latitude * 100000 - 500
+        let maxX = cameraPosition.latitude * 100000 + 500
+        let minY = cameraPosition.longitude * 100000 - 1000
+        let maxY = cameraPosition.longitude * 100000 + 1000
+        print(minX)
+        print(maxX)
+        print(minY)
+        print(maxY)
     }
 
     override func didReceiveMemoryWarning() {
