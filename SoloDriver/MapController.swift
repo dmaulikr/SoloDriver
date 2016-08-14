@@ -33,7 +33,10 @@ class MapController: UIViewController {
     }
 
     @IBAction func searchThisArea(sender: UIButton) {
-        // let cameraPosition = mapView!.camera.target
+        let cameraPosition = mapView!.camera.target
+        PublicDataService.getHMLRoute(cameraPosition) { (result) in
+            print(result)
+        }
     }
 
     override func didReceiveMemoryWarning() {

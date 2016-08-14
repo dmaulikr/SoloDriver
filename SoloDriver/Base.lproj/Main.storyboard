@@ -42,7 +42,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="searchThisArea:" destination="9pv-A4-QxB" eventType="touchUpInside" id="pXD-SH-zJY"/>
+                                            <action selector="searchThisArea:" destination="9pv-A4-QxB" eventType="touchUpInside" id="Rko-Rp-xF7"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -92,8 +92,8 @@
                                 <exclude reference="NQ0-Hw-7cV"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="rNH-PK-823"/>
                                 <exclude reference="mdf-Sg-aDu"/>
+                                <exclude reference="rNH-PK-823"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -101,8 +101,8 @@
                                 <include reference="NQ0-Hw-7cV"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="rNH-PK-823"/>
                                 <include reference="mdf-Sg-aDu"/>
+                                <include reference="rNH-PK-823"/>
                             </mask>
                         </variation>
                     </view>
