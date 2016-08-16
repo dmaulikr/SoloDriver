@@ -8,8 +8,9 @@
 
 import UIKit
 import MapKit
+import SwiftyJSON
 
-class MapController: UIViewController {
+class MapController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet var mapView: MKMapView!
 
@@ -18,7 +19,7 @@ class MapController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.mapView.delegate = self
         // Add current location button
         let currentLocationItem = MKUserTrackingBarButtonItem(mapView: mapView)
         navBar.topItem!.rightBarButtonItem = currentLocationItem
@@ -27,33 +28,65 @@ class MapController: UIViewController {
         navBar.translucent = true
         navBar.backgroundColor = UIColor.clearColor()
 
+        // Set map camera
+        var lastLocation = LocationService.shared.getLastLocation()
+        var camera: MKMapCamera
         // Default location - Melbourne
-        let lastLocation = LocationService.shared.getLastLocation()
-
-//        if (lastLocation != nil) {
-//            camera = GMSCameraPosition.cameraWithLatitude(
-//                lastLocation!.coordinate.latitude, longitude: lastLocation!.coordinate.longitude, zoom: 10.0)
-//        } else {
-//            camera = GMSCameraPosition.cameraWithLatitude(-37.768356, longitude: 144.9663673, zoom: 8.0)
-//        }
-//        mapView = GMSMapView.mapWithFrame(self.view.bounds, camera: camera)
-//        mapView!.myLocationEnabled = true
-//        mapView!.settings.compassButton = true
-//        mapView!.settings.myLocationButton = true
-//        mapView!.padding = UIEdgeInsets(top: 80.0, left: 0.0, bottom: 60.0, right: 0.0)
-//        self.view.insertSubview(mapView!, atIndex: 0)
+        if (lastLocation == nil) {
+            lastLocation = CLLocation(latitude: -37.768356, longitude: 144.9663673)
+        }
+        camera = MKMapCamera(lookingAtCenterCoordinate: lastLocation!.coordinate, fromEyeCoordinate: lastLocation!.coordinate, eyeAltitude: 50000)
+        mapView.setCamera(camera, animated: false)
     }
 
     @IBAction func searchThisArea(sender: UIButton) {
-//        let cameraPosition = mapView!.camera.target
-//        PublicDataService.getHMLRoute(cameraPosition) { (result) in
-//            print(result)
-//        }
+        PublicDataService.getHMLRoute(mapView.camera.centerCoordinate) { (roads) in
+            // Loop through roads
+            for (_, road): (String, JSON) in roads {
+                // let attributes = road["attributes"]
+                var pointsToUse: [CLLocationCoordinate2D] = []
+                let paths = road["geometry"]["paths"][0]
+                // Loop road points
+                for (_, point): (String, JSON) in paths {
+                    let coordinate = CLLocationCoordinate2D(latitude: point[1].doubleValue, longitude: point[0].doubleValue)
+                    pointsToUse += [coordinate]
+                }
+                let roadPolyline = Geometries.HMLPolyLine(coordinates: &pointsToUse, count: paths.count)
+                // Set color
+                switch road["attributes"]["HVR_HML"].stringValue {
+                case "Approved":
+                    roadPolyline.color = Geometries.GREEN
+                    break
+                case "Conditionally Approved":
+                    roadPolyline.color = Geometries.ORANGE
+                    break
+                case "Restricted":
+                    roadPolyline.color = Geometries.RED
+                    break
+                default:
+                    roadPolyline.color = UIColor.clearColor()
+                }
+                self.mapView.addOverlay(roadPolyline)
+            }
+
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    // MARK:- MapViewDelegate methods
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is Geometries.HMLPolyLine {
+            let hmlOverlay = overlay as! Geometries.HMLPolyLine
+            let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+            polylineRenderer.strokeColor = hmlOverlay.color
+            polylineRenderer.lineWidth = 3
+            return polylineRenderer
+        }
+        return MKPolylineRenderer()
     }
 
 }

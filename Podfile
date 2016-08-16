@@ -6,7 +6,6 @@ target 'SoloDriver' do
   use_frameworks!
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
-  pod 'GEOSwift'
 
   # Pods for SoloDriver
 

@@ -35,6 +35,6 @@ public class LocationService: NSObject, CLLocationManagerDelegate {
     }
 
     public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(manager.location!.timestamp)
+        // print(manager.location!.timestamp)
     }
 }
