@@ -40,35 +40,19 @@ class MapController: UIViewController, MKMapViewDelegate {
     }
 
     @IBAction func searchThisArea(sender: UIButton) {
-        PublicDataService.getHMLRoute(mapView.camera.centerCoordinate) { (roads) in
-            // Loop through roads
-            for (_, road): (String, JSON) in roads {
-                // let attributes = road["attributes"]
-                var pointsToUse: [CLLocationCoordinate2D] = []
-                let paths = road["geometry"]["paths"][0]
-                // Loop road points
-                for (_, point): (String, JSON) in paths {
-                    let coordinate = CLLocationCoordinate2D(latitude: point[1].doubleValue, longitude: point[0].doubleValue)
-                    pointsToUse += [coordinate]
+        mapView.removeOverlays(mapView.overlays)
+        PublicDataService.getHMLRoute(mapView) { (roads) in
+            // Draw lines in background
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                // Loop through roads
+                for (_, road): (String, JSON) in roads {
+                    // let attributes = road["attributes"]
+                    let roadPolyline = Geometries.createHMLPolylineFrom(road)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.mapView.addOverlay(roadPolyline)
+                    })
                 }
-                let roadPolyline = Geometries.HMLPolyLine(coordinates: &pointsToUse, count: paths.count)
-                // Set color
-                switch road["attributes"]["HVR_HML"].stringValue {
-                case "Approved":
-                    roadPolyline.color = Geometries.GREEN
-                    break
-                case "Conditionally Approved":
-                    roadPolyline.color = Geometries.ORANGE
-                    break
-                case "Restricted":
-                    roadPolyline.color = Geometries.RED
-                    break
-                default:
-                    roadPolyline.color = UIColor.clearColor()
-                }
-                self.mapView.addOverlay(roadPolyline)
-            }
-
+            })
         }
     }
 
@@ -83,7 +67,7 @@ class MapController: UIViewController, MKMapViewDelegate {
             let hmlOverlay = overlay as! Geometries.HMLPolyLine
             let polylineRenderer = MKPolylineRenderer(overlay: overlay)
             polylineRenderer.strokeColor = hmlOverlay.color
-            polylineRenderer.lineWidth = 3
+            polylineRenderer.lineWidth = 2
             return polylineRenderer
         }
         return MKPolylineRenderer()
