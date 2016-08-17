@@ -23,7 +23,7 @@ public class PublicDataService: NSObject {
     private static let queryParamsHMLRoute = "/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
     private static let layersHMLRoute = [9, 8, 6, 5, 3, 2]
 
-    public static func getHMLRoute(mapView: MKMapView, completion: (result: JSON) -> Void) {
+    public static func getHMLRoute(mapView: MKMapView, completion: (result: AnyObject) -> Void) {
         for layerID in layersHMLRoute {
             let url = baseUrlHMLRoute + String(layerID) + queryParamsHMLRoute + Geometries.getVisibleAreaEnvelope(mapView)
             print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
@@ -31,8 +31,7 @@ public class PublicDataService: NSObject {
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
-                        let json = JSON(value)
-                        completion(result: json["features"])
+                        completion(result: value)
                     }
                 case .Failure(let error):
                     print(error)
