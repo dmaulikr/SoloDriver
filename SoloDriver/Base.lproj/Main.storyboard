@@ -151,7 +151,7 @@
                     <navigationItem key="navigationItem" title="Title" id="unF-0f-EIu">
                         <barButtonItem key="leftBarButtonItem" title="Categories" id="x9m-SR-aRt">
                             <connections>
-                                <segue destination="rNn-NR-c6f" kind="presentation" modalTransitionStyle="coverVertical" id="8og-pD-W8Y"/>
+                                <segue destination="rNn-NR-c6f" kind="presentation" identifier="CategorySeque" modalTransitionStyle="coverVertical" id="8og-pD-W8Y"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="About" id="Qit-yg-Za4"/>
@@ -170,25 +170,30 @@
         <!--Categories-->
         <scene sceneID="23A-iG-btg">
             <objects>
-                <tableViewController title="Categories" id="90C-GJ-r3L" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dAk-6l-ud0">
+                <tableViewController title="Categories" id="90C-GJ-r3L" customClass="CategoriesController" customModule="SoloDriver" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="dAk-6l-ud0">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="bfS-XM-Jqr">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CategoryCell" rowHeight="64" id="Txq-Os-xvv">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bfS-XM-Jqr" id="jro-vm-HFE">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Txq-Os-xvv" id="VYb-WE-6mQ">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="90C-GJ-r3L" id="bVR-wk-4Ss"/>
                             <outlet property="delegate" destination="90C-GJ-r3L" id="Jz3-oV-waU"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Categories" id="ye8-NA-bJA">
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="uVk-hE-Xx2"/>
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="uVk-hE-Xx2">
+                            <connections>
+                                <action selector="cancel:" destination="90C-GJ-r3L" id="dMF-En-ssZ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3w-zu-dcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
