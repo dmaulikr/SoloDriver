@@ -10,10 +10,13 @@ import UIKit
 
 class CategoriesController: UITableViewController {
 
+    static let TITLE_HML = "HML Routes"
+    static let TITLE_BRIDGE = "Bridge Clearances"
+    static let TITLE_ROADWORK = "Road Works"
+    static var currentCategory: String = TITLE_HML
+
     @IBAction func cancel(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true) {
-            // TODO
-        }
+        self.dismissViewControllerAnimated(true) { }
     }
 
     // MARK: - Table view data source
@@ -25,7 +28,7 @@ class CategoriesController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return 3
     }
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -35,8 +38,29 @@ class CategoriesController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
         // Configure the cell...
-        cell.imageView!.image = UIImage(named: "Truck Filled-100")
+        switch indexPath.row {
+        case 0:
+            cell.imageView!.image = UIImage(named: "Shipped Filled-100")
+            cell.textLabel!.text = CategoriesController.TITLE_HML
+            break
+        case 1:
+            cell.imageView!.image = UIImage(named: "Walking Bridge Filled-100")
+            cell.textLabel!.text = CategoriesController.TITLE_BRIDGE
+            break
+        case 2:
+            cell.imageView!.image = UIImage(named: "Road Closure Filled-100")
+            cell.textLabel!.text = CategoriesController.TITLE_ROADWORK
+            break
+        default:
+            break
+        }
         return cell
+    }
+
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        CategoriesController.currentCategory = tableView.cellForRowAtIndexPath(indexPath)!.textLabel!.text!
+        self.dismissViewControllerAnimated(true) { }
     }
 
 }

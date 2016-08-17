@@ -13,12 +13,12 @@ import SwiftyJSON
 class MapController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet var mapView: MKMapView!
-
     @IBOutlet var navItem: UINavigationItem!
     @IBOutlet var navBar: UINavigationBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = CategoriesController.TITLE_HML
         self.mapView.delegate = self
         // Add current location button
         let currentLocationItem = MKUserTrackingBarButtonItem(mapView: mapView)
@@ -39,21 +39,44 @@ class MapController: UIViewController, MKMapViewDelegate {
         mapView.setCamera(camera, animated: false)
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = CategoriesController.currentCategory
+    }
+
     @IBAction func searchThisArea(sender: UIButton) {
         mapView.removeOverlays(mapView.overlays)
-        PublicDataService.getHMLRoute(mapView) { (result) in
-            // Draw lines in background
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                let roads = JSON(result)["features"]
-                // Loop through roads
-                for (_, road): (String, JSON) in roads {
-                    // let attributes = road["attributes"]
-                    let roadPolyline = Geometries.createHMLPolylineFrom(road)
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.mapView.addOverlay(roadPolyline)
-                    })
-                }
-            })
+        switch self.title! {
+        case CategoriesController.TITLE_HML:
+            PublicDataService.getHMLRoute(mapView) { (result) in
+                // Draw lines in background
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                    let roads = JSON(result)["features"]
+                    // Loop through roads
+                    for (_, road): (String, JSON) in roads {
+                        // let attributes = road["attributes"]
+                        let roadPolyline = Geometries.createHMLPolylineFrom(road)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.mapView.addOverlay(roadPolyline)
+                        })
+                    }
+                })
+            }
+            break
+        default:
+            break
+        }
+
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segue.identifier! {
+        case "CategoriesSeque":
+            mapView.removeOverlays(mapView.overlays)
+            CategoriesController.currentCategory = self.title!
+            break
+        default:
+            return
         }
     }
 
