@@ -20,6 +20,12 @@ class Geometries: NSObject {
         var color: UIColor?
     }
 
+    class BridgeAnnotation: MKPointAnnotation {
+        static let RED_BRIDGE = UIImage(named: "avenue-or-road-bridge")
+
+        var image: UIImage = UIImage(named: "avenue-or-road-bridge")!
+    }
+
     static func getVisibleAreaEnvelope(mapView: MKMapView) -> String {
         let mRect = mapView.visibleMapRect
         let xmin = MKMapRectGetMinX(mRect)
@@ -56,5 +62,19 @@ class Geometries: NSObject {
             roadPolyline.color = UIColor.clearColor()
         }
         return roadPolyline
+    }
+
+    static func createBridgeAnnotationFrom(bridge: JSON) -> BridgeAnnotation {
+        let geometry = bridge["geometry"]
+        let attributes = bridge["attributes"]
+        let coordinate = CLLocationCoordinate2D(latitude: geometry["x"].doubleValue, longitude: geometry["y"].doubleValue)
+        var subtitle = "BRIDGE TYPE: " + attributes["BRIDGE_TYPE"].stringValue
+        subtitle += "\nMIN CLEARANCE: " + attributes["MIN_CLEARANCE"].stringValue
+        // Set annotation
+        let bridgeAnnotation = BridgeAnnotation()
+        bridgeAnnotation.coordinate = coordinate
+        bridgeAnnotation.title = attributes["FEATURE_CROSSED"].stringValue
+        bridgeAnnotation.subtitle = subtitle
+        return bridgeAnnotation
     }
 }

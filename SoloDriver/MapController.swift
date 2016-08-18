@@ -63,6 +63,22 @@ class MapController: UIViewController, MKMapViewDelegate {
                 })
             }
             break
+        case CategoriesController.TITLE_BRIDGE:
+            PublicDataService.getBridgeStructures(mapView, completion: { (result) in
+                // Draw annotations in background
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                    let bridges = JSON(result)["features"]
+                    // Loop through bridges
+                    for (_, bridge): (String, JSON) in bridges {
+                        print(bridge)
+                        let bridgeAnnotation = Geometries.createBridgeAnnotationFrom(bridge)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.mapView.addAnnotation(bridgeAnnotation)
+                        })
+                    }
+                })
+            })
+            break
         default:
             break
         }
@@ -92,5 +108,21 @@ class MapController: UIViewController, MKMapViewDelegate {
         return MKPolylineRenderer()
     }
 
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if (annotation is Geometries.BridgeAnnotation) {
+            let reuseId = "bridge"
+            var bridgeAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            if bridgeAnnotationView == nil {
+                bridgeAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                bridgeAnnotationView!.canShowCallout = true
+            } else {
+                bridgeAnnotationView!.annotation = annotation
+            }
+            let bridgeAnnotation = annotation as! Geometries.BridgeAnnotation
+            bridgeAnnotationView!.image = bridgeAnnotation.image
+            return bridgeAnnotationView
+        }
+        return nil
+    }
 }
 
