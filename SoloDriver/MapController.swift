@@ -16,9 +16,11 @@ class MapController: UIViewController, MKMapViewDelegate {
     @IBOutlet var navItem: UINavigationItem!
     @IBOutlet var navBar: UINavigationBar!
 
+    var currentTask: Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = CategoriesController.TITLE_HML
+        self.title = CategoriesController.currentCategory
         self.mapView.delegate = self
         // Add current location button
         let currentLocationItem = MKUserTrackingBarButtonItem(mapView: mapView)
@@ -45,7 +47,8 @@ class MapController: UIViewController, MKMapViewDelegate {
     }
 
     @IBAction func searchThisArea(sender: UIButton) {
-        mapView.removeOverlays(mapView.overlays)
+        currentTask = (currentTask + 1) % 1024
+        let thisTask = currentTask
         switch self.title! {
         case CategoriesController.TITLE_HML:
             PublicDataService.getHMLRoute(mapView) { (result) in
@@ -56,6 +59,9 @@ class MapController: UIViewController, MKMapViewDelegate {
                     for (_, road): (String, JSON) in roads {
                         // let attributes = road["attributes"]
                         let roadPolyline = Geometries.createHMLPolylineFrom(road)
+                        if (thisTask != self.currentTask) {
+                            break
+                        }
                         dispatch_async(dispatch_get_main_queue(), {
                             self.mapView.addOverlay(roadPolyline)
                         })
@@ -70,10 +76,10 @@ class MapController: UIViewController, MKMapViewDelegate {
                     let bridges = JSON(result)["features"]
                     // Loop through bridges
                     for (_, bridge): (String, JSON) in bridges {
-                        print(bridge)
                         let bridgeAnnotation = Geometries.createBridgeAnnotationFrom(bridge)
+                        let bridgeAnnotationView = MKPinAnnotationView(annotation: bridgeAnnotation, reuseIdentifier: "bridge")
                         dispatch_async(dispatch_get_main_queue(), {
-                            self.mapView.addAnnotation(bridgeAnnotation)
+                            self.mapView.addAnnotation(bridgeAnnotationView.annotation!)
                         })
                     }
                 })
@@ -82,10 +88,11 @@ class MapController: UIViewController, MKMapViewDelegate {
         default:
             break
         }
-
+        mapView.removeOverlays(mapView.overlays)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        currentTask = (currentTask + 1) % 1024
         switch segue.identifier! {
         case "CategoriesSeque":
             mapView.removeOverlays(mapView.overlays)
@@ -113,13 +120,14 @@ class MapController: UIViewController, MKMapViewDelegate {
             let reuseId = "bridge"
             var bridgeAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
             if bridgeAnnotationView == nil {
-                bridgeAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                bridgeAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
                 bridgeAnnotationView!.canShowCallout = true
+                bridgeAnnotationView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
             } else {
                 bridgeAnnotationView!.annotation = annotation
             }
             let bridgeAnnotation = annotation as! Geometries.BridgeAnnotation
-            bridgeAnnotationView!.image = bridgeAnnotation.image
+            (bridgeAnnotationView! as! MKPinAnnotationView).pinTintColor = bridgeAnnotation.color
             return bridgeAnnotationView
         }
         return nil

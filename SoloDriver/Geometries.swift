@@ -15,15 +15,14 @@ class Geometries: NSObject {
     static let RED = UIColor(red: 0.74, green: 0.21, blue: 0.18, alpha: 1.0)
     static let ORANGE = UIColor(red: 0.97, green: 0.58, blue: 0.02, alpha: 1.0)
     static let GREEN = UIColor(red: 0.32, green: 0.64, blue: 0.32, alpha: 1.0)
+    // static let CIRCLE = UIImage(named: "circle")
 
     class HMLPolyLine: MKPolyline {
         var color: UIColor?
     }
 
     class BridgeAnnotation: MKPointAnnotation {
-        static let RED_BRIDGE = UIImage(named: "avenue-or-road-bridge")
-
-        var image: UIImage = UIImage(named: "avenue-or-road-bridge")!
+        var color: UIColor?
     }
 
     static func getVisibleAreaEnvelope(mapView: MKMapView) -> String {
@@ -67,14 +66,13 @@ class Geometries: NSObject {
     static func createBridgeAnnotationFrom(bridge: JSON) -> BridgeAnnotation {
         let geometry = bridge["geometry"]
         let attributes = bridge["attributes"]
-        let coordinate = CLLocationCoordinate2D(latitude: geometry["x"].doubleValue, longitude: geometry["y"].doubleValue)
-        var subtitle = "BRIDGE TYPE: " + attributes["BRIDGE_TYPE"].stringValue
-        subtitle += "\nMIN CLEARANCE: " + attributes["MIN_CLEARANCE"].stringValue
+        let coordinate = CLLocationCoordinate2D(latitude: geometry["y"].doubleValue, longitude: geometry["x"].doubleValue)
         // Set annotation
         let bridgeAnnotation = BridgeAnnotation()
         bridgeAnnotation.coordinate = coordinate
         bridgeAnnotation.title = attributes["FEATURE_CROSSED"].stringValue
-        bridgeAnnotation.subtitle = subtitle
+        bridgeAnnotation.subtitle = "CLEARANCE: " + attributes["MIN_CLEARANCE"].stringValue
+        bridgeAnnotation.color = Geometries.GREEN
         return bridgeAnnotation
     }
 }
