@@ -54,6 +54,9 @@ class CategoriesController: UITableViewController {
         default:
             break
         }
+        if (cell.textLabel!.text == CategoriesController.currentCategory) {
+            cell.accessoryType = .Checkmark
+        }
         return cell
     }
 

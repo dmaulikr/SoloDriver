@@ -6,6 +6,30 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--About-->
+        <scene sceneID="VoK-6S-eN9">
+            <objects>
+                <viewController title="About" id="uaS-G8-D94" customClass="AboutController" customModule="SoloDriver" customModuleProvider="target" sceneMemberID="viewController">
+                    <webView key="view" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" id="efF-pR-QsJ">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </webView>
+                    <navigationItem key="navigationItem" id="H47-w0-nGV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="tbl-jc-ZTy">
+                            <connections>
+                                <action selector="done:" destination="uaS-G8-D94" id="PcA-s3-O1i"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="efF-pR-QsJ" id="SDn-g6-1Yj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mXB-9N-AGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3294" y="-1138.5"/>
+        </scene>
         <!--Support-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
@@ -154,7 +178,11 @@
                                 <segue destination="rNn-NR-c6f" kind="presentation" identifier="CategoriesSeque" modalTransitionStyle="coverVertical" id="8og-pD-W8Y"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="About" id="Qit-yg-Za4"/>
+                        <barButtonItem key="rightBarButtonItem" title="About" id="Qit-yg-Za4">
+                            <connections>
+                                <segue destination="7al-dn-RRA" kind="presentation" identifier="AboutSegue" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="Af8-8Q-Psh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -287,6 +315,24 @@
                 </navigationController>
             </objects>
             <point key="canvasLocation" x="2376" y="-320.25"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IAf-Nk-kod">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7al-dn-RRA" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tot-9l-Rif">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="uaS-G8-D94" kind="relationship" relationship="rootViewController" id="ycq-bL-R8P"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9gj-yH-gsJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2376" y="-1138.5"/>
         </scene>
     </scenes>
     <resources>
