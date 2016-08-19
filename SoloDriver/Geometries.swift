@@ -66,13 +66,20 @@ class Geometries: NSObject {
     static func createBridgeAnnotationFrom(bridge: JSON) -> BridgeAnnotation {
         let geometry = bridge["geometry"]
         let attributes = bridge["attributes"]
+        let clearance = attributes["MIN_CLEARANCE"].doubleValue
         let coordinate = CLLocationCoordinate2D(latitude: geometry["y"].doubleValue, longitude: geometry["x"].doubleValue)
         // Set annotation
         let bridgeAnnotation = BridgeAnnotation()
         bridgeAnnotation.coordinate = coordinate
         bridgeAnnotation.title = attributes["FEATURE_CROSSED"].stringValue
-        bridgeAnnotation.subtitle = "CLEARANCE: " + attributes["MIN_CLEARANCE"].stringValue
-        bridgeAnnotation.color = Geometries.GREEN
+        bridgeAnnotation.subtitle = "CLEARANCE: " + String(clearance)
+        if (clearance < 4) {
+            bridgeAnnotation.color = Geometries.RED
+        } else if (clearance < 5) {
+            bridgeAnnotation.color = Geometries.ORANGE
+        } else {
+            bridgeAnnotation.color = Geometries.GREEN
+        }
         return bridgeAnnotation
     }
 }

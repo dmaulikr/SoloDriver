@@ -44,6 +44,8 @@ class MapController: UIViewController, MKMapViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.title = CategoriesController.currentCategory
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
     }
 
     @IBAction func searchThisArea(sender: UIButton) {
@@ -76,8 +78,17 @@ class MapController: UIViewController, MKMapViewDelegate {
                     let bridges = JSON(result)["features"]
                     // Loop through bridges
                     for (_, bridge): (String, JSON) in bridges {
+                        if (!bridge["attributes"]["BRIDGE_TYPE"].stringValue.containsString("OVER ROAD")) {
+                            continue
+                        }
+                        if (bridge["attributes"]["MIN_CLEARANCE"].doubleValue <= 1) {
+                            continue
+                        }
                         let bridgeAnnotation = Geometries.createBridgeAnnotationFrom(bridge)
                         let bridgeAnnotationView = MKPinAnnotationView(annotation: bridgeAnnotation, reuseIdentifier: "bridge")
+                        if (thisTask != self.currentTask) {
+                            break
+                        }
                         dispatch_async(dispatch_get_main_queue(), {
                             self.mapView.addAnnotation(bridgeAnnotationView.annotation!)
                         })
@@ -89,6 +100,7 @@ class MapController: UIViewController, MKMapViewDelegate {
             break
         }
         mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

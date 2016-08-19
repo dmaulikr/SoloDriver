@@ -12,7 +12,6 @@ class CategoriesController: UITableViewController {
 
     static let TITLE_HML = "HML Routes"
     static let TITLE_BRIDGE = "Bridge Clearances"
-    static let TITLE_ROADWORK = "Road Works"
     static var currentCategory: String = TITLE_HML
 
     @IBAction func cancel(sender: UIBarButtonItem) {
@@ -28,7 +27,7 @@ class CategoriesController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return 2
     }
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -49,7 +48,7 @@ class CategoriesController: UITableViewController {
             break
         case 2:
             cell.imageView!.image = UIImage(named: "Road Closure Filled-100")
-            cell.textLabel!.text = CategoriesController.TITLE_ROADWORK
+            // cell.textLabel!.text = CategoriesController.TITLE_ROADWORK
             break
         default:
             break
