@@ -43,9 +43,11 @@ class MapController: UIViewController, MKMapViewDelegate {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = CategoriesController.currentCategory
-        mapView.removeOverlays(mapView.overlays)
-        mapView.removeAnnotations(mapView.annotations)
+        if (self.title != CategoriesController.currentCategory) {
+            self.title = CategoriesController.currentCategory
+            mapView.removeOverlays(mapView.overlays)
+            mapView.removeAnnotations(mapView.annotations)
+        }
     }
 
     @IBAction func searchThisArea(sender: UIButton) {
@@ -127,6 +129,7 @@ class MapController: UIViewController, MKMapViewDelegate {
         return MKPolylineRenderer()
     }
 
+    // Annotation View
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if (annotation is Geometries.BridgeAnnotation) {
             let reuseId = "bridge"
@@ -143,6 +146,16 @@ class MapController: UIViewController, MKMapViewDelegate {
             return bridgeAnnotationView
         }
         return nil
+    }
+
+    // Annotation View Callout
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            if (view.annotation is Geometries.BridgeAnnotation) {
+                let bridgeAnnotation = view.annotation as! Geometries.BridgeAnnotation
+                // TODO
+            }
+        }
     }
 }
 

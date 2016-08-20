@@ -23,6 +23,7 @@ class Geometries: NSObject {
 
     class BridgeAnnotation: MKPointAnnotation {
         var color: UIColor?
+        var bridge: JSON?
     }
 
     static func getVisibleAreaEnvelope(mapView: MKMapView) -> String {
@@ -70,6 +71,7 @@ class Geometries: NSObject {
         let coordinate = CLLocationCoordinate2D(latitude: geometry["y"].doubleValue, longitude: geometry["x"].doubleValue)
         // Set annotation
         let bridgeAnnotation = BridgeAnnotation()
+        bridgeAnnotation.bridge = attributes
         bridgeAnnotation.coordinate = coordinate
         bridgeAnnotation.title = attributes["FEATURE_CROSSED"].stringValue
         bridgeAnnotation.subtitle = "CLEARANCE: " + String(clearance)
