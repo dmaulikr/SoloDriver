@@ -25,9 +25,10 @@ public class LocationService: NSObject, CLLocationManagerDelegate {
     }
 
     public func start() {
-        self.manager.requestAlwaysAuthorization()
-        self.manager.startUpdatingLocation()
-        self.manager.startMonitoringSignificantLocationChanges()
+        self.manager.requestWhenInUseAuthorization()
+//        self.manager.requestAlwaysAuthorization()
+//        self.manager.startUpdatingLocation()
+//        self.manager.startMonitoringSignificantLocationChanges()
     }
 
     public func getLastLocation() -> CLLocation? {
