@@ -64,11 +64,13 @@ class MapController: UIViewController, MKMapViewDelegate {
                     for (_, road): (String, JSON) in roads {
                         // let attributes = road["attributes"]
                         let roadPolyline = Geometries.createHMLPolylineFrom(road)
+                        let roadAnnotations = Geometries.createHMLAnnotationsFrom(road)
                         if (thisTask != self.currentTask) {
                             break
                         }
                         dispatch_async(dispatch_get_main_queue(), {
                             self.mapView.addOverlay(roadPolyline)
+                            self.mapView.addAnnotations(roadAnnotations)
                         })
                     }
                 })
@@ -81,7 +83,6 @@ class MapController: UIViewController, MKMapViewDelegate {
                     let roads = JSON(result)["features"]
                     // Loop through roads
                     for (_, road): (String, JSON) in roads {
-                        // let attributes = road["attributes"]
                         let roadPolyline = Geometries.createHPFVPolylineFrom(road)
                         if (thisTask != self.currentTask) {
                             break
@@ -140,10 +141,10 @@ class MapController: UIViewController, MKMapViewDelegate {
 
     // MARK:- MapViewDelegate methods
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        if overlay is Geometries.HMLPolyLine {
-            let hmlOverlay = overlay as! Geometries.HMLPolyLine
+        if overlay is Geometries.ColorPolyline {
+            let colorOverlay = overlay as! Geometries.ColorPolyline
             let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-            polylineRenderer.strokeColor = hmlOverlay.color
+            polylineRenderer.strokeColor = colorOverlay.color
             polylineRenderer.lineWidth = 2
             return polylineRenderer
         }
@@ -166,6 +167,20 @@ class MapController: UIViewController, MKMapViewDelegate {
             (bridgeAnnotationView! as! MKPinAnnotationView).pinTintColor = bridgeAnnotation.color
             bridgeAnnotationView!.rightCalloutAccessoryView!.tintColor = bridgeAnnotation.color
             return bridgeAnnotationView
+        } else if (annotation is Geometries.HMLAnnotation) {
+            let reuseId = "HML"
+            var hmlAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            if (hmlAnnotationView == nil) {
+                hmlAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                hmlAnnotationView!.canShowCallout = true
+                hmlAnnotationView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+            } else {
+                hmlAnnotationView!.annotation = annotation
+            }
+            print(annotation)
+            let hmlAnnotation = annotation as! Geometries.HMLAnnotation
+            hmlAnnotationView!.rightCalloutAccessoryView!.tintColor = hmlAnnotation.color
+            return hmlAnnotationView
         }
         return nil
     }
@@ -173,19 +188,18 @@ class MapController: UIViewController, MKMapViewDelegate {
     // Annotation View Callout
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            if (view.annotation is Geometries.BridgeAnnotation) {
-                let bridgeAnnotation = view.annotation as! Geometries.BridgeAnnotation
+            if (view.annotation is Geometries.AlertViewAnnotation) {
+                let annotation = view.annotation as! Geometries.AlertViewAnnotation
                 SCLAlertView(appearance: SCLAlertView.SCLAppearance(
-                    kWindowWidth: UIScreen.mainScreen().bounds.width - 20))
+                    kWindowWidth: UIScreen.mainScreen().bounds.width - 50))
                     .showTitle(
-                        bridgeAnnotation.title!,
-                        subTitle: bridgeAnnotation.alertSubtitle!,
-                        style: bridgeAnnotation.alertStyle!,
+                        annotation.title!,
+                        subTitle: annotation.alertSubtitle!,
+                        style: annotation.alertStyle!,
                         closeButtonTitle: "Close",
                         duration: 0,
-                        colorStyle: bridgeAnnotation.alertColor!,
+                        colorStyle: annotation.alertColor!,
                         colorTextButton: 0xFFFFFF)
-
             }
         }
     }

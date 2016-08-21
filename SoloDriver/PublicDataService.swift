@@ -27,9 +27,11 @@ public class PublicDataService: NSObject {
 
     public static func getHMLRoute(mapView: MKMapView, completion: (result: AnyObject) -> Void) {
         for layerID in layersHMLRoute {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             let url = baseUrlHMLRoute + String(layerID) + queryParamsHMLRoute + Geometries.getVisibleAreaEnvelope(mapView)
             // print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
             Alamofire.request(.GET, url).validate().responseJSON { response in
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 switch response.result {
                 case .Success:
                     if let value = response.result.value {
@@ -43,9 +45,11 @@ public class PublicDataService: NSObject {
     }
 
     public static func getBridgeStructures(mapView: MKMapView, completion: (result: AnyObject) -> Void) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = baseUrlBridgeStructures + Geometries.getVisibleAreaEnvelope(mapView)
         // print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
         Alamofire.request(.GET, url).validate().responseJSON { response in
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             switch response.result {
             case .Success:
                 if let value = response.result.value {
@@ -58,9 +62,11 @@ public class PublicDataService: NSObject {
     }
 
     public static func getHPFVRoute(mapView: MKMapView, completion: (result: AnyObject) -> Void) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = baseUrlHPFVRoute + Geometries.getVisibleAreaEnvelope(mapView)
         // print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
         Alamofire.request(.GET, url).validate().responseJSON { response in
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             switch response.result {
             case .Success:
                 if let value = response.result.value {
