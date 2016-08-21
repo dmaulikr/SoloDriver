@@ -14,13 +14,13 @@ import SCLAlertView
 class Geometries: NSObject {
 
     static let RED = UIColor(red: 0.74, green: 0.21, blue: 0.18, alpha: 1.0)
-    static let RED_CODE = 0xBD362E
+    static let RED_CODE = 0xBD362E as UInt
     static let ORANGE = UIColor(red: 0.97, green: 0.58, blue: 0.02, alpha: 1.0)
-    static let ORANGE_CODE = 0xF79405
+    static let ORANGE_CODE = 0xF79405 as UInt
     static let GREEN = UIColor(red: 0.32, green: 0.64, blue: 0.32, alpha: 1.0)
-    static let GREEN_CODE = 0x52A352
+    static let GREEN_CODE = 0x52A352 as UInt
     static let BLUE = UIColor(red: 0.00, green: 0.27, blue: 0.80, alpha: 1.0)
-    static let BLUE_CODE = 0x0045CC
+    static let BLUE_CODE = 0x0045CC as UInt
 
     class HMLPolyLine: MKPolyline {
         var color: UIColor?
@@ -34,7 +34,7 @@ class Geometries: NSObject {
         var color: UIColor?
         var alertTitle: String?
         var alertSubtitle: String?
-        var alertColor: Int?
+        var alertColor: UInt?
         var alertStyle: SCLAlertViewStyle?
 
     }
@@ -114,26 +114,36 @@ class Geometries: NSObject {
         let attributes = bridge["attributes"]
         let clearance = attributes["MIN_CLEARANCE"].doubleValue
         let coordinate = CLLocationCoordinate2D(latitude: geometry["y"].doubleValue, longitude: geometry["x"].doubleValue)
-        // Set annotation
+        // Set annotation: required
         let bridgeAnnotation = BridgeAnnotation()
         bridgeAnnotation.coordinate = coordinate
-        bridgeAnnotation.title = attributes["FEATURE_CROSSED"].stringValue.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        bridgeAnnotation.title = attributes["FEATURE_CROSSED"].stringValue
+            .stringByReplacingOccurrencesOfString("RAILWAY OVER ", withString: "")
+            .stringByReplacingOccurrencesOfString("RAILWAY LINE OVER ", withString: "")
+            .stringByTrimmingCharactersInSet(NSCharacterSet.decimalDigitCharacterSet())
+            .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         bridgeAnnotation.subtitle = "CLEARANCE: " + String(clearance)
-        bridgeAnnotation.alertTitle = bridge["COLLOQUIAL_NAME_1"].stringValue
+        // For alert view
+        var subtitle = "CLEARANCE: " + String(clearance)
+        subtitle += "\nBRIDGE TYPE: " + attributes["BRIDGE_TYPE"].stringValue
+            .stringByReplacingOccurrencesOfString("(GRADE SEPARATION)", withString: "")
+            .stringByReplacingOccurrencesOfString("(RAIL OVERPASS)", withString: "")
+        subtitle += "\nBRIDGE WIDTH: " + String(attributes["OVERALL_WIDTH"].doubleValue).stringByReplacingOccurrencesOfString("0.0", withString: "N/A")
+        subtitle += "\nBRIDGE LENGTH: " + String(attributes["OVERALL_LENGTH"].doubleValue).stringByReplacingOccurrencesOfString("0.0", withString: "N/A")
+        bridgeAnnotation.alertSubtitle = subtitle
         if (clearance < 4) {
             bridgeAnnotation.color = Geometries.RED
             bridgeAnnotation.alertColor = Geometries.RED_CODE
-            bridgeAnnotation.alertStyle = SCLAlertViewStyle.Warning
+            bridgeAnnotation.alertStyle = SCLAlertViewStyle.Info
         } else if (clearance < 5) {
             bridgeAnnotation.color = Geometries.ORANGE
             bridgeAnnotation.alertColor = Geometries.ORANGE_CODE
-            bridgeAnnotation.alertStyle = SCLAlertViewStyle.Notice
+            bridgeAnnotation.alertStyle = SCLAlertViewStyle.Info
         } else {
             bridgeAnnotation.color = Geometries.GREEN
             bridgeAnnotation.alertColor = Geometries.GREEN_CODE
             bridgeAnnotation.alertStyle = SCLAlertViewStyle.Success
         }
-        bridgeAnnotation.alertSubtitle = bridgeAnnotation.subtitle
         return bridgeAnnotation
     }
 }

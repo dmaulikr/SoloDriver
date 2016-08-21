@@ -13,10 +13,6 @@ import SCLAlertView
 
 class MapController: UIViewController, MKMapViewDelegate {
 
-    static let alertAppearance = SCLAlertView.SCLAppearance(
-        kWindowWidth: UIScreen.mainScreen().bounds.width - 20
-    )
-
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var navItem: UINavigationItem!
     @IBOutlet var navBar: UINavigationBar!
@@ -104,7 +100,8 @@ class MapController: UIViewController, MKMapViewDelegate {
                     let bridges = JSON(result)["features"]
                     // Loop through bridges
                     for (_, bridge): (String, JSON) in bridges {
-                        if (!bridge["attributes"]["BRIDGE_TYPE"].stringValue.containsString("OVER ROAD")) {
+                        let bridgeType = bridge["attributes"]["BRIDGE_TYPE"].stringValue
+                        if (!(bridgeType.containsString("OVER ROAD") || bridgeType.containsString("PEDESTRIAN UNDERPASS"))) {
                             continue
                         }
                         if (bridge["attributes"]["MIN_CLEARANCE"].doubleValue <= 1) {
@@ -178,6 +175,16 @@ class MapController: UIViewController, MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             if (view.annotation is Geometries.BridgeAnnotation) {
                 let bridgeAnnotation = view.annotation as! Geometries.BridgeAnnotation
+                SCLAlertView(appearance: SCLAlertView.SCLAppearance(
+                    kWindowWidth: UIScreen.mainScreen().bounds.width - 20))
+                    .showTitle(
+                        bridgeAnnotation.title!,
+                        subTitle: bridgeAnnotation.alertSubtitle!,
+                        style: bridgeAnnotation.alertStyle!,
+                        closeButtonTitle: "Close",
+                        duration: 0,
+                        colorStyle: bridgeAnnotation.alertColor!,
+                        colorTextButton: 0xFFFFFF)
 
             }
         }
