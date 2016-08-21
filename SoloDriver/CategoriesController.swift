@@ -11,6 +11,7 @@ import UIKit
 class CategoriesController: UITableViewController {
 
     static let TITLE_HML = "HML Routes"
+    static let TITLE_HPFV = "HPFV Routes"
     static let TITLE_BRIDGE = "Bridge Clearances"
     static var currentCategory: String = TITLE_HML
 
@@ -21,13 +22,11 @@ class CategoriesController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 2
+        return 3
     }
 
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -39,16 +38,16 @@ class CategoriesController: UITableViewController {
         // Configure the cell...
         switch indexPath.row {
         case 0:
-            cell.imageView!.image = UIImage(named: "Shipped Filled-100")
-            cell.textLabel!.text = CategoriesController.TITLE_HML
-            break
-        case 1:
-            cell.imageView!.image = UIImage(named: "Walking Bridge Filled-100")
+            cell.imageView!.image = UIImage(named: "bridge-on-avenue-perspective")
             cell.textLabel!.text = CategoriesController.TITLE_BRIDGE
             break
+        case 1:
+            cell.imageView!.image = UIImage(named: "frontal-truck")
+            cell.textLabel!.text = CategoriesController.TITLE_HML
+            break
         case 2:
-            cell.imageView!.image = UIImage(named: "Road Closure Filled-100")
-            // cell.textLabel!.text = CategoriesController.TITLE_ROADWORK
+            cell.imageView!.image = UIImage(named: "truck")
+            cell.textLabel!.text = CategoriesController.TITLE_HPFV
             break
         default:
             break

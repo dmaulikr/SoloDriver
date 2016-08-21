@@ -9,8 +9,13 @@
 import UIKit
 import MapKit
 import SwiftyJSON
+import SCLAlertView
 
 class MapController: UIViewController, MKMapViewDelegate {
+
+    static let alertAppearance = SCLAlertView.SCLAppearance(
+        kWindowWidth: UIScreen.mainScreen().bounds.width - 20
+    )
 
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var navItem: UINavigationItem!
@@ -63,6 +68,25 @@ class MapController: UIViewController, MKMapViewDelegate {
                     for (_, road): (String, JSON) in roads {
                         // let attributes = road["attributes"]
                         let roadPolyline = Geometries.createHMLPolylineFrom(road)
+                        if (thisTask != self.currentTask) {
+                            break
+                        }
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.mapView.addOverlay(roadPolyline)
+                        })
+                    }
+                })
+            }
+            break
+        case CategoriesController.TITLE_HPFV:
+            PublicDataService.getHPFVRoute(mapView) { (result) in
+                // Draw lines in background
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                    let roads = JSON(result)["features"]
+                    // Loop through roads
+                    for (_, road): (String, JSON) in roads {
+                        // let attributes = road["attributes"]
+                        let roadPolyline = Geometries.createHPFVPolylineFrom(road)
                         if (thisTask != self.currentTask) {
                             break
                         }
@@ -143,6 +167,7 @@ class MapController: UIViewController, MKMapViewDelegate {
             }
             let bridgeAnnotation = annotation as! Geometries.BridgeAnnotation
             (bridgeAnnotationView! as! MKPinAnnotationView).pinTintColor = bridgeAnnotation.color
+            bridgeAnnotationView!.rightCalloutAccessoryView!.tintColor = bridgeAnnotation.color
             return bridgeAnnotationView
         }
         return nil
@@ -153,7 +178,7 @@ class MapController: UIViewController, MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             if (view.annotation is Geometries.BridgeAnnotation) {
                 let bridgeAnnotation = view.annotation as! Geometries.BridgeAnnotation
-                // TODO
+
             }
         }
     }
