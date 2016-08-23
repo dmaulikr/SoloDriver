@@ -66,14 +66,38 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     func handleTap(gestureReconizer: UITapGestureRecognizer) {
         let location = gestureReconizer.locationInView(mapView)
         let tapCoordinate = mapView.convertPoint(location, toCoordinateFromView: mapView)
-        PublicDataService.getHMLPoint(tapCoordinate) { (result) in
-            let roads = JSON(result)["features"]
-            if (roads.count == 0) {
-                return
+        let tapMapPoint = MKMapPointForCoordinate(tapCoordinate)
+        switch CategoriesController.currentCategory {
+        case CategoriesController.TITLE_HML:
+            PublicDataService.getHMLPoint(tapCoordinate) { (result) in
+                let roads = JSON(result)["features"]
+                if (roads.count == 0) {
+                    return
+                }
+                let polyline = Geometries.createHMLPolylineFrom(roads[0])
+                let closestPoint = Geometries.getClosestPoint(tapMapPoint, poly: polyline)
+                let annotation = Geometries.createHMLAnnotationFrom(roads[0], coordinate: closestPoint)
+                self.mapView.addAnnotation(annotation)
+                self.mapView.selectAnnotation(annotation, animated: true)
             }
-            let attributes = roads[0]["attributes"]
-            
+            break
+        case CategoriesController.TITLE_HPFV:
+            PublicDataService.getHPFVPoint(tapCoordinate) { (result) in
+                let roads = JSON(result)["features"]
+                if (roads.count == 0) {
+                    return
+                }
+                let polyline = Geometries.createHPFVPolylineFrom(roads[0])
+                let closestPoint = Geometries.getClosestPoint(tapMapPoint, poly: polyline)
+                let annotation = Geometries.createHPFVAnnotationFrom(roads[0], coordinate: closestPoint)
+                self.mapView.addAnnotation(annotation)
+                self.mapView.selectAnnotation(annotation, animated: true)
+            }
+            break
+        default:
+            break
         }
+
     }
 
     @IBAction func searchThisArea(sender: UIButton) {
@@ -185,6 +209,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
                 bridgeAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
                 bridgeAnnotationView!.canShowCallout = true
                 bridgeAnnotationView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+                bridgeAnnotationView!.userInteractionEnabled = false
             } else {
                 bridgeAnnotationView!.annotation = annotation
             }
@@ -194,37 +219,51 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
             return bridgeAnnotationView
         } else if (annotation is Geometries.HMLAnnotation) {
             let reuseId = "HML"
-            var hmlAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-            if (hmlAnnotationView == nil) {
-                hmlAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                hmlAnnotationView!.canShowCallout = true
-                hmlAnnotationView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            if (annotationView == nil) {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                annotationView!.canShowCallout = true
+                annotationView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+
             } else {
-                hmlAnnotationView!.annotation = annotation
+                annotationView!.annotation = annotation
             }
-            let hmlAnnotation = annotation as! Geometries.HMLAnnotation
-            hmlAnnotationView!.rightCalloutAccessoryView!.tintColor = hmlAnnotation.color
-            return hmlAnnotationView
+            let annotation = annotation as! Geometries.HMLAnnotation
+            annotationView!.rightCalloutAccessoryView!.tintColor = annotation.color
+            return annotationView
+        } else if (annotation is Geometries.HPFVAnnotation) {
+            let reuseId = "HPFV"
+            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
+            if (annotationView == nil) {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                annotationView!.canShowCallout = true
+                annotationView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+
+            } else {
+                annotationView!.annotation = annotation
+            }
+            let annotation = annotation as! Geometries.HPFVAnnotation
+            annotationView!.rightCalloutAccessoryView!.tintColor = annotation.color
+            return annotationView
         }
         return nil
     }
 
     // Annotation View Callout
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            if (view.annotation is Geometries.AlertViewAnnotation) {
-                let annotation = view.annotation as! Geometries.AlertViewAnnotation
-                SCLAlertView(appearance: SCLAlertView.SCLAppearance(
-                    kWindowWidth: UIScreen.mainScreen().bounds.width - 50))
-                    .showTitle(
-                        annotation.title!,
-                        subTitle: annotation.alertSubtitle!,
-                        style: annotation.alertStyle!,
-                        closeButtonTitle: "Close",
-                        duration: 0,
-                        colorStyle: annotation.alertColor!,
-                        colorTextButton: 0xFFFFFF)
-            }
+        if (view.annotation is Geometries.AlertViewAnnotation) {
+            let annotation = view.annotation as! Geometries.AlertViewAnnotation
+            SCLAlertView(appearance: SCLAlertView.SCLAppearance(
+                kWindowWidth: UIScreen.mainScreen().bounds.width - 50))
+                .showTitle(
+                    annotation.title!,
+                    subTitle: annotation.alertSubtitle!,
+                    style: annotation.alertStyle!,
+                    closeButtonTitle: "Close",
+                    duration: 0,
+                    colorStyle: annotation.alertColor!,
+                    colorTextButton: 0xFFFFFF)
+
         }
     }
 }

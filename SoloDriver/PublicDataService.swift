@@ -14,7 +14,6 @@ import MapKit
 
 public class PublicDataService: NSObject {
 
-    private static let ENVELOPE_RADIUS: Double = 0.1
     private static let baseUrlHMLPoint = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_Route/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
     private static let baseUrlHMLRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_NETWORK/FeatureServer/"
     private static let queryParamsHMLRoute = "/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
@@ -61,7 +60,7 @@ public class PublicDataService: NSObject {
     public static func getBridgeStructures(mapView: MKMapView, completion: (result: AnyObject) -> Void) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = baseUrlBridgeStructures + Geometries.getVisibleAreaEnvelope(mapView)
-        // print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
+        print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
         Alamofire.request(.GET, url).validate().responseJSON { response in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             switch response.result {
@@ -78,7 +77,24 @@ public class PublicDataService: NSObject {
     public static func getHPFVRoute(mapView: MKMapView, completion: (result: AnyObject) -> Void) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let url = baseUrlHPFVRoute + Geometries.getVisibleAreaEnvelope(mapView)
-        // print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
+        print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
+        Alamofire.request(.GET, url).validate().responseJSON { response in
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            switch response.result {
+            case .Success:
+                if let value = response.result.value {
+                    completion(result: value)
+                }
+            case .Failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    public static func getHPFVPoint(coordinate: CLLocationCoordinate2D, completion: (result: AnyObject) -> Void) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let url = baseUrlHPFVRoute + Geometries.getTapEnvelope(coordinate)
+        print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
         Alamofire.request(.GET, url).validate().responseJSON { response in
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
             switch response.result {

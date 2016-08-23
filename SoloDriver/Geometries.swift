@@ -21,7 +21,7 @@ class Geometries: NSObject {
     static let GREEN_CODE = 0x52A352 as UInt
     static let BLUE = UIColor(red: 0.00, green: 0.27, blue: 0.80, alpha: 1.0)
     static let BLUE_CODE = 0x0045CC as UInt
-    static let TAP_RADIUS = 0.0001
+    static let TAP_RADIUS = 0.001
 
     class ColorPolyline: MKPolyline {
         var color: UIColor?
@@ -48,6 +48,10 @@ class Geometries: NSObject {
     }
 
     class HMLAnnotation: AlertViewAnnotation {
+
+    }
+
+    class HPFVAnnotation: AlertViewAnnotation {
 
     }
 
@@ -101,12 +105,7 @@ class Geometries: NSObject {
         return roadPolyline
     }
 
-    static func createHMLAnnotationsFrom(road: JSON) -> [HMLAnnotation] {
-        if (road["attributes"]["HVR_HML"].stringValue != "Conditionally Approved") {
-            return []
-        }
-        var annotations: [HMLAnnotation] = []
-        let paths = road["geometry"]["paths"][0]
+    static func createHMLAnnotationFrom(road: JSON, coordinate: CLLocationCoordinate2D) -> HMLAnnotation {
         let attributes = road["attributes"]
         // Set annotation
         let title = attributes["SUBJECT_PREF_RDNAME"].stringValue
@@ -145,20 +144,17 @@ class Geometries: NSObject {
             alertColor = 0xFFFFFF
             alertStyle = SCLAlertViewStyle.Error
         }
-        // Loop road points
-        for (_, point): (String, JSON) in paths {
-            let coordinate = CLLocationCoordinate2D(latitude: point[1].doubleValue, longitude: point[0].doubleValue)
-            let annotation = HMLAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = title
-            annotation.subtitle = subtitle
-            annotation.color = color
-            annotation.alertSubtitle = alertSubtitle
-            annotation.alertColor = alertColor
-            annotation.alertStyle = alertStyle
-            annotations += [annotation]
-        }
-        return annotations
+
+        let coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let annotation = HMLAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = title
+        annotation.subtitle = subtitle
+        annotation.color = color
+        annotation.alertSubtitle = alertSubtitle
+        annotation.alertColor = alertColor
+        annotation.alertStyle = alertStyle
+        return annotation
     }
 
     static func createHPFVPolylineFrom(road: JSON) -> HMLPolyLine {
@@ -188,6 +184,56 @@ class Geometries: NSObject {
             roadPolyline.color = UIColor.clearColor()
         }
         return roadPolyline
+    }
+
+    static func createHPFVAnnotationFrom(road: JSON, coordinate: CLLocationCoordinate2D) -> HPFVAnnotation {
+        let attributes = road["attributes"]
+        // Set annotation
+        let title = attributes["SUBJECT_PREF_RDNAME"].stringValue
+        let subtitle = attributes["HVR_HPFV_MASS"].stringValue
+        var alertSubtitle = attributes["HVR_HPFV_MASS_COMM"].stringValue
+        alertSubtitle += "\n\nROAD CLASS: " + attributes["LRS_RMACLASS"].stringValue
+        alertSubtitle += "\nLOCALITY: " + attributes["LOCALITIES"].stringValue
+        let alertColor: UInt
+        let color: UIColor
+        let alertStyle: SCLAlertViewStyle
+        // Set annotation alert view
+        switch subtitle {
+        case "Approved":
+            color = Geometries.GREEN
+            alertColor = Geometries.GREEN_CODE
+            alertStyle = SCLAlertViewStyle.Success
+            break
+        case "Conditionally Approved":
+            color = Geometries.ORANGE
+            alertColor = Geometries.ORANGE_CODE
+            alertStyle = SCLAlertViewStyle.Info
+            break
+        case "Restricted":
+            color = Geometries.RED
+            alertColor = Geometries.RED_CODE
+            alertStyle = SCLAlertViewStyle.Error
+            break
+        case "Funded improvements":
+            color = Geometries.BLUE
+            alertColor = Geometries.BLUE_CODE
+            alertStyle = SCLAlertViewStyle.Info
+            break
+        default:
+            color = UIColor.clearColor()
+            alertColor = 0xFFFFFF
+            alertStyle = SCLAlertViewStyle.Error
+        }
+        let coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let annotation = HPFVAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = title
+        annotation.subtitle = subtitle
+        annotation.color = color
+        annotation.alertSubtitle = alertSubtitle
+        annotation.alertColor = alertColor
+        annotation.alertStyle = alertStyle
+        return annotation
     }
 
     static func createBridgeAnnotationFrom(bridge: JSON) -> BridgeAnnotation {
@@ -258,5 +304,41 @@ class Geometries: NSObject {
             distance = min(distance, MKMetersBetweenMapPoints(ptClosest, pt))
         }
         return distance
+    }
+
+    // Get closest line ppoint between a point and a line
+    static func getClosestPoint(pt: MKMapPoint, poly: MKPolyline) -> CLLocationCoordinate2D {
+        var distance: Double = Double(MAXFLOAT)
+        var closestPoint = pt
+        var linePoints: [MKMapPoint] = []
+        // var polyPoints = UnsafeMutablePointer<MKMapPoint>.alloc(poly.pointCount)
+        for point in UnsafeBufferPointer(start: poly.points(), count: poly.pointCount) {
+            linePoints.append(point)
+            // print("point: \(point.x),\(point.y)")
+        }
+        for n in 0...linePoints.count - 2 {
+            let ptA = linePoints[n]
+            let ptB = linePoints[n + 1]
+            let xDelta = ptB.x - ptA.x
+            let yDelta = ptB.y - ptA.y
+            if (xDelta == 0.0 && yDelta == 0.0) {
+                // Points must not be equal
+                continue
+            }
+            let u: Double = ((pt.x - ptA.x) * xDelta + (pt.y - ptA.y) * yDelta) / (xDelta * xDelta + yDelta * yDelta)
+            var ptClosest = MKMapPoint()
+            if (u < 0.0) {
+                ptClosest = ptA
+            } else if (u > 1.0) {
+                ptClosest = ptB
+            } else {
+                ptClosest = MKMapPointMake(ptA.x + u * xDelta, ptA.y + u * yDelta);
+            }
+            if (MKMetersBetweenMapPoints(ptClosest, pt) < distance) {
+                closestPoint = ptClosest
+                distance = MKMetersBetweenMapPoints(ptClosest, pt)
+            }
+        }
+        return MKCoordinateForMapPoint(closestPoint)
     }
 }
