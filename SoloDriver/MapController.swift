@@ -11,7 +11,7 @@ import MapKit
 import SwiftyJSON
 import SCLAlertView
 
-class MapController: UIViewController, MKMapViewDelegate {
+class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var navItem: UINavigationItem!
@@ -40,6 +40,17 @@ class MapController: UIViewController, MKMapViewDelegate {
         }
         camera = MKMapCamera(lookingAtCenterCoordinate: lastLocation!.coordinate, fromEyeCoordinate: lastLocation!.coordinate, eyeAltitude: 50000)
         mapView.setCamera(camera, animated: false)
+
+        // Register tap event
+        let singleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapController.handleTap(_:)))
+        singleTapRecognizer.numberOfTapsRequired = 1
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MapController.handleTap(_:)))
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        singleTapRecognizer.requireGestureRecognizerToFail(doubleTapRecognizer)
+        singleTapRecognizer.delegate = self
+        doubleTapRecognizer.delegate = self
+        mapView.addGestureRecognizer(singleTapRecognizer)
+        mapView.addGestureRecognizer(doubleTapRecognizer)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -48,6 +59,20 @@ class MapController: UIViewController, MKMapViewDelegate {
             self.title = CategoriesController.currentCategory
             mapView.removeOverlays(mapView.overlays)
             mapView.removeAnnotations(mapView.annotations)
+        }
+    }
+
+    // Handle tap event
+    func handleTap(gestureReconizer: UITapGestureRecognizer) {
+        let location = gestureReconizer.locationInView(mapView)
+        let tapCoordinate = mapView.convertPoint(location, toCoordinateFromView: mapView)
+        PublicDataService.getHMLPoint(tapCoordinate) { (result) in
+            let roads = JSON(result)["features"]
+            if (roads.count == 0) {
+                return
+            }
+            let attributes = roads[0]["attributes"]
+            
         }
     }
 
@@ -64,13 +89,13 @@ class MapController: UIViewController, MKMapViewDelegate {
                     for (_, road): (String, JSON) in roads {
                         // let attributes = road["attributes"]
                         let roadPolyline = Geometries.createHMLPolylineFrom(road)
-                        let roadAnnotations = Geometries.createHMLAnnotationsFrom(road)
+                        // let roadAnnotations = Geometries.createHMLAnnotationsFrom(road)
                         if (thisTask != self.currentTask) {
                             break
                         }
                         dispatch_async(dispatch_get_main_queue(), {
                             self.mapView.addOverlay(roadPolyline)
-                            self.mapView.addAnnotations(roadAnnotations)
+                            // self.mapView.addAnnotations(roadAnnotations)
                         })
                     }
                 })
@@ -177,7 +202,6 @@ class MapController: UIViewController, MKMapViewDelegate {
             } else {
                 hmlAnnotationView!.annotation = annotation
             }
-            print(annotation)
             let hmlAnnotation = annotation as! Geometries.HMLAnnotation
             hmlAnnotationView!.rightCalloutAccessoryView!.tintColor = hmlAnnotation.color
             return hmlAnnotationView

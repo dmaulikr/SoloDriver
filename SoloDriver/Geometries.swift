@@ -21,6 +21,7 @@ class Geometries: NSObject {
     static let GREEN_CODE = 0x52A352 as UInt
     static let BLUE = UIColor(red: 0.00, green: 0.27, blue: 0.80, alpha: 1.0)
     static let BLUE_CODE = 0x0045CC as UInt
+    static let TAP_RADIUS = 0.0001
 
     class ColorPolyline: MKPolyline {
         var color: UIColor?
@@ -48,6 +49,15 @@ class Geometries: NSObject {
 
     class HMLAnnotation: AlertViewAnnotation {
 
+    }
+
+    static func getTapEnvelope(coordinate: CLLocationCoordinate2D) -> String {
+        let xmin = coordinate.longitude - Geometries.TAP_RADIUS
+        let ymin = coordinate.latitude - Geometries.TAP_RADIUS
+        let xmax = coordinate.longitude + Geometries.TAP_RADIUS
+        let ymax = coordinate.latitude + Geometries.TAP_RADIUS
+        let geometry = JSON(["xmin": xmin, "xmax": xmax, "ymin": ymin, "ymax": ymax])
+        return geometry.rawString()!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
     }
 
     static func getVisibleAreaEnvelope(mapView: MKMapView) -> String {
@@ -216,5 +226,37 @@ class Geometries: NSObject {
             bridgeAnnotation.alertStyle = SCLAlertViewStyle.Success
         }
         return bridgeAnnotation
+    }
+
+    // Calculate distance between a point and a line
+    static func distanceOfPointAndLine(pt: MKMapPoint, poly: MKPolyline) -> Double {
+        var distance: Double = Double(MAXFLOAT)
+        var linePoints: [MKMapPoint] = []
+        // var polyPoints = UnsafeMutablePointer<MKMapPoint>.alloc(poly.pointCount)
+        for point in UnsafeBufferPointer(start: poly.points(), count: poly.pointCount) {
+            linePoints.append(point)
+            // print("point: \(point.x),\(point.y)")
+        }
+        for n in 0...linePoints.count - 2 {
+            let ptA = linePoints[n]
+            let ptB = linePoints[n + 1]
+            let xDelta = ptB.x - ptA.x
+            let yDelta = ptB.y - ptA.y
+            if (xDelta == 0.0 && yDelta == 0.0) {
+                // Points must not be equal
+                continue
+            }
+            let u: Double = ((pt.x - ptA.x) * xDelta + (pt.y - ptA.y) * yDelta) / (xDelta * xDelta + yDelta * yDelta)
+            var ptClosest = MKMapPoint()
+            if (u < 0.0) {
+                ptClosest = ptA
+            } else if (u > 1.0) {
+                ptClosest = ptB
+            } else {
+                ptClosest = MKMapPointMake(ptA.x + u * xDelta, ptA.y + u * yDelta);
+            }
+            distance = min(distance, MKMetersBetweenMapPoints(ptClosest, pt))
+        }
+        return distance
     }
 }
