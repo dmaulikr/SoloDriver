@@ -7,6 +7,7 @@ target 'SoloDriver' do
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
   pod 'SCLAlertView'
+  pod 'Instructions', '~> 0.4'
 
   # Pods for SoloDriver
 

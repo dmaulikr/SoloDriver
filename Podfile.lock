@@ -1,18 +1,21 @@
 PODS:
   - Alamofire (3.4.0)
+  - Instructions (0.4.0)
   - SCLAlertView (0.5.8)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
+  - Instructions (~> 0.4)
   - SCLAlertView
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  Instructions: 7283d009379714e8ff667153014cd62b6e4f4eb9
   SCLAlertView: 653e84d1f9fd95333bc54671fbadb7d0c47fce49
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 5657d9b51bb54cdb653d9031fc6e67f34c65cf48
+PODFILE CHECKSUM: 8de9e821da73696c73436cf01380cc789595ac7a
 
 COCOAPODS: 1.0.1
