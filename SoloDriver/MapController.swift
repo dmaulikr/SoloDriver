@@ -10,8 +10,11 @@ import UIKit
 import MapKit
 import SwiftyJSON
 import SCLAlertView
+import Instructions
 
-class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
+class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+
+    let coachMarksController = CoachMarksController()
 
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var navItem: UINavigationItem!
@@ -21,7 +24,12 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = CategoriesController.currentCategory
+
+        self.navigationItem.title = CategoriesController.currentCategory
+        // Instructions
+        self.coachMarksController.dataSource = self
+        self.coachMarksController.overlayBackgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
+        // Maps
         self.mapView.delegate = self
         // Add current location button
         let currentLocationItem = MKUserTrackingBarButtonItem(mapView: mapView)
@@ -52,14 +60,49 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         mapView.addGestureRecognizer(singleTapRecognizer)
         mapView.addGestureRecognizer(doubleTapRecognizer)
     }
-
+ 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if (self.title != CategoriesController.currentCategory) {
-            self.title = CategoriesController.currentCategory
+        if (self.navigationItem.title != CategoriesController.currentCategory) {
+            self.navigationItem.title = CategoriesController.currentCategory
             mapView.removeOverlays(mapView.overlays)
             mapView.removeAnnotations(mapView.annotations)
         }
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.coachMarksController.startOn(self)
+    }
+
+    // For instructions
+    func numberOfCoachMarksForCoachMarksController(coachMarkController: CoachMarksController)
+        -> Int {
+            return 0
+    }
+
+    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex: Int)
+        -> CoachMark {
+            switch (coachMarksForIndex) {
+            case 0:
+                let leftBarButton = self.navigationItem.leftBarButtonItem! as UIBarButtonItem
+                let viewLeft = leftBarButton.valueForKey("view") as! UIView
+                return coachMarksController.coachMarkForView(viewLeft)
+            case 1:
+                let rightBarButton = self.navigationItem.rightBarButtonItem! as UIBarButtonItem
+                let viewRight = rightBarButton.valueForKey("view") as! UIView
+                return coachMarksController.coachMarkForView(viewRight)
+            default:
+                return coachMarksController.coachMarkForView()
+            }
+    }
+
+    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex: Int, coachMark: CoachMark)
+        -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+            coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
+            coachViews.bodyView.nextLabel.text = "Ok!"
+            return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 
     // Handle tap event
@@ -103,7 +146,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     @IBAction func searchThisArea(sender: UIButton) {
         currentTask = (currentTask + 1) % 1024
         let thisTask = currentTask
-        switch self.title! {
+        switch self.navigationItem.title! {
         case CategoriesController.TITLE_HML:
             PublicDataService.getHMLRoute(mapView) { (result) in
                 // Draw lines in background
@@ -181,7 +224,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         switch segue.identifier! {
         case "CategoriesSeque":
             mapView.removeOverlays(mapView.overlays)
-            CategoriesController.currentCategory = self.title!
+            CategoriesController.currentCategory = self.navigationItem.title!
             break
         default:
             return

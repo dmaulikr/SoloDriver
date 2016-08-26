@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4142D22F097C3AE8DEEAC1E2 /* Pods_SoloDriverTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BA15B3473D9F6AA4AC4796 /* Pods_SoloDriverTests.framework */; };
+		4F0A959D1D70196F0036CA39 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A959C1D70196F0036CA39 /* SettingsController.swift */; };
 		4F21A7B51D5F178D00EA66B5 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F21A7B41D5F178D00EA66B5 /* LocationService.swift */; };
 		4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083C1D5EF9E0006F980A /* AppDelegate.swift */; };
 		4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083E1D5EF9E0006F980A /* MapController.swift */; };
-		4F5208411D5EF9E0006F980A /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5208401D5EF9E0006F980A /* SecondViewController.swift */; };
 		4F5208441D5EF9E0006F980A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208421D5EF9E0006F980A /* Main.storyboard */; };
 		4F5208491D5EF9E0006F980A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208471D5EF9E0006F980A /* LaunchScreen.storyboard */; };
 		4F5208541D5EF9E0006F980A /* SoloDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5208531D5EF9E0006F980A /* SoloDriverTests.swift */; };
@@ -19,7 +19,7 @@
 		4FF7B63D1D62AE5F0098470F /* Geometries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B63C1D62AE5F0098470F /* Geometries.swift */; };
 		4FF7B6411D63FAA60098470F /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B6401D63FAA60098470F /* CategoriesController.swift */; };
 		4FF7B6431D642A850098470F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7B6421D642A850098470F /* Assets.xcassets */; };
-		4FF7B6451D6547030098470F /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B6441D6547030098470F /* AboutController.swift */; };
+		4FF7B6451D6547030098470F /* HelpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B6441D6547030098470F /* HelpController.swift */; };
 		DC2BE3CC0EE73AA6519CF15D /* Pods_SoloDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2205E36CEB74CA392FAB298F /* Pods_SoloDriver.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,11 +39,11 @@
 		3E7B30651BED94DAC91114BF /* Pods-SoloDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriver/Pods-SoloDriver.debug.xcconfig"; sourceTree = "<group>"; };
 		47BA15B3473D9F6AA4AC4796 /* Pods_SoloDriverTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoloDriverTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A4CBA006268E6CA9B33116A /* Pods-SoloDriverTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriverTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriverTests/Pods-SoloDriverTests.release.xcconfig"; sourceTree = "<group>"; };
+		4F0A959C1D70196F0036CA39 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		4F21A7B41D5F178D00EA66B5 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		4F5208391D5EF9E0006F980A /* SoloDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoloDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F52083C1D5EF9E0006F980A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F52083E1D5EF9E0006F980A /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
-		4F5208401D5EF9E0006F980A /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		4F5208431D5EF9E0006F980A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F5208481D5EF9E0006F980A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F52084A1D5EF9E0006F980A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		4FF7B63C1D62AE5F0098470F /* Geometries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometries.swift; sourceTree = "<group>"; };
 		4FF7B6401D63FAA60098470F /* CategoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
 		4FF7B6421D642A850098470F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4FF7B6441D6547030098470F /* AboutController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
+		4FF7B6441D6547030098470F /* HelpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpController.swift; sourceTree = "<group>"; };
 		A6F816D8F06860C9C75CB4C1 /* Pods-SoloDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriver/Pods-SoloDriver.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +78,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F0A959A1D6FE4130036CA39 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4F0A959C1D70196F0036CA39 /* SettingsController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		4F0A959B1D7006790036CA39 /* Specification */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Specification;
+			sourceTree = "<group>";
+		};
 		4F21A7B21D5F0DE400EA66B5 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,9 +138,10 @@
 				4FF7B6461D65470B0098470F /* Common */,
 				4F21A7B31D5F16AE00EA66B5 /* Service */,
 				4F21A7B21D5F0DE400EA66B5 /* Map */,
-				4F52083C1D5EF9E0006F980A /* AppDelegate.swift */,
-				4F5208401D5EF9E0006F980A /* SecondViewController.swift */,
+				4F0A959B1D7006790036CA39 /* Specification */,
+				4F0A959A1D6FE4130036CA39 /* Settings */,
 				4FF7B6421D642A850098470F /* Assets.xcassets */,
+				4F52083C1D5EF9E0006F980A /* AppDelegate.swift */,
 				4F5208421D5EF9E0006F980A /* Main.storyboard */,
 				4F5208471D5EF9E0006F980A /* LaunchScreen.storyboard */,
 				4F52084A1D5EF9E0006F980A /* Info.plist */,
@@ -145,7 +161,7 @@
 		4FF7B6461D65470B0098470F /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				4FF7B6441D6547030098470F /* AboutController.swift */,
+				4FF7B6441D6547030098470F /* HelpController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -371,14 +387,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F5208411D5EF9E0006F980A /* SecondViewController.swift in Sources */,
+				4F0A959D1D70196F0036CA39 /* SettingsController.swift in Sources */,
 				4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */,
 				4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */,
 				4F21A7B51D5F178D00EA66B5 /* LocationService.swift in Sources */,
 				4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */,
 				4FF7B63D1D62AE5F0098470F /* Geometries.swift in Sources */,
 				4FF7B6411D63FAA60098470F /* CategoriesController.swift in Sources */,
-				4FF7B6451D6547030098470F /* AboutController.swift in Sources */,
+				4FF7B6451D6547030098470F /* HelpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +533,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haoboji.SoloDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a73e7efe-f2cf-405e-b616-e03fda53b3c1";
 			};
 			name = Debug;
 		};
@@ -531,7 +547,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haoboji.SoloDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "a73e7efe-f2cf-405e-b616-e03fda53b3c1";
 			};
 			name = Release;
 		};

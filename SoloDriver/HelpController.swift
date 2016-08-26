@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AboutController: UIViewController, UIWebViewDelegate {
+class HelpController: UIViewController, UIWebViewDelegate {
 
     @IBOutlet var webView: UIWebView!
     static let URL_ABOUT = "https://docs.google.com/document/d/12VEs0wMTe4USIcaBZFPEDMT0xYGPSHr5xOhIXlUGkFk/pub"
@@ -23,11 +23,11 @@ class AboutController: UIViewController, UIWebViewDelegate {
         let url: NSURL
         switch CategoriesController.currentCategory {
         case CategoriesController.TITLE_HML:
-            url = NSURL (string: AboutController.URL_HML)!;
+            url = NSURL (string: HelpController.URL_HML)!;
         case CategoriesController.TITLE_HPFV:
-            url = NSURL (string: AboutController.URL_HPFV)!;
+            url = NSURL (string: HelpController.URL_HPFV)!;
         case CategoriesController.TITLE_BRIDGE:
-            url = NSURL (string: AboutController.URL_BRIDGE)!;
+            url = NSURL (string: HelpController.URL_BRIDGE)!;
         default:
             url = NSURL()
         }
