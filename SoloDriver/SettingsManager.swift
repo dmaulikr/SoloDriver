@@ -14,6 +14,14 @@ class SettingsManager: NSObject {
     static let shared = SettingsManager()
 
     let file = "Settings.json"
+    var cachedSettings: JSON?
+
+    func getCachedSettings() -> JSON {
+        if (cachedSettings == nil) {
+            cachedSettings = getSettings()
+        }
+        return cachedSettings!
+    }
 
     func getSettings() -> JSON {
         var settings: JSON = [:]
@@ -31,6 +39,7 @@ class SettingsManager: NSObject {
     }
 
     func saveSettings(settings: JSON) {
+        cachedSettings = settings
         if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
             let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file)
             do {

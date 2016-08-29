@@ -17,8 +17,8 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     let coachMarksController = CoachMarksController()
 
     @IBOutlet var mapView: MKMapView!
-    @IBOutlet var navItem: UINavigationItem!
-    @IBOutlet var navBar: UINavigationBar!
+
+    @IBOutlet var toolbar: UIToolbar!
 
     var currentTask: Int = 0
 
@@ -31,13 +31,15 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         self.coachMarksController.overlayBackgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
         // Maps
         self.mapView.delegate = self
-        // Add current location button
-        let currentLocationItem = MKUserTrackingBarButtonItem(mapView: mapView)
-        navBar.topItem!.rightBarButtonItem = currentLocationItem
-        navBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        navBar.shadowImage = UIImage()
-        navBar.translucent = true
-        navBar.backgroundColor = UIColor.clearColor()
+        // Add bar buttons
+        let trackingButton = MKUserTrackingBarButtonItem(mapView: mapView)
+        let emptySpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: .None, action: nil)
+        let modeButton = UIBarButtonItem(image: UIImage(named: "Info-111"), style: .Plain, target: .None, action: nil)
+        toolbar.setItems([trackingButton, emptySpace, modeButton], animated: true)
+        toolbar.translucent = true
+        toolbar.setShadowImage(UIImage(), forToolbarPosition: .Any)
+        toolbar.backgroundColor = UIColor.clearColor()
+        toolbar.setBackgroundImage(UIImage(), forToolbarPosition: .Any, barMetrics: .Default)
 
         // Set map camera
         var lastLocation = LocationService.shared.getLastLocation()
@@ -60,7 +62,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         mapView.addGestureRecognizer(singleTapRecognizer)
         mapView.addGestureRecognizer(doubleTapRecognizer)
     }
- 
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if (self.navigationItem.title != CategoriesController.currentCategory) {
@@ -75,7 +77,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         self.coachMarksController.startOn(self)
     }
 
-    // For instructions
+// For instructions
     func numberOfCoachMarksForCoachMarksController(coachMarkController: CoachMarksController)
         -> Int {
             return 0
@@ -105,7 +107,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
             return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 
-    // Handle tap event
+// Handle tap event
     func handleTap(gestureReconizer: UITapGestureRecognizer) {
         let location = gestureReconizer.locationInView(mapView)
         let tapCoordinate = mapView.convertPoint(location, toCoordinateFromView: mapView)
@@ -231,7 +233,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         }
     }
 
-    // MARK:- MapViewDelegate methods
+// MARK:- MapViewDelegate methods
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is Geometries.ColorPolyline {
             let colorOverlay = overlay as! Geometries.ColorPolyline
@@ -243,7 +245,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         return MKPolylineRenderer()
     }
 
-    // Annotation View
+// Annotation View
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if (annotation is Geometries.BridgeAnnotation) {
             let reuseId = "bridge"
@@ -292,7 +294,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         return nil
     }
 
-    // Annotation View Callout
+// Annotation View Callout
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if (view.annotation is Geometries.AlertViewAnnotation) {
             let annotation = view.annotation as! Geometries.AlertViewAnnotation

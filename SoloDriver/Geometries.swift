@@ -258,18 +258,32 @@ class Geometries: NSObject {
         subtitle += "\nBRIDGE WIDTH: " + String(attributes["OVERALL_WIDTH"].doubleValue)
         subtitle += "\nBRIDGE LENGTH: " + String(attributes["OVERALL_LENGTH"].doubleValue)
         bridgeAnnotation.alertSubtitle = subtitle
-        if (clearance < 4) {
-            bridgeAnnotation.color = Geometries.RED
-            bridgeAnnotation.alertColor = Geometries.RED_CODE
-            bridgeAnnotation.alertStyle = SCLAlertViewStyle.Info
-        } else if (clearance < 5) {
-            bridgeAnnotation.color = Geometries.ORANGE
-            bridgeAnnotation.alertColor = Geometries.ORANGE_CODE
-            bridgeAnnotation.alertStyle = SCLAlertViewStyle.Info
+        // Set color based on settings
+        let settings = SettingsManager.shared.getCachedSettings()
+        if (settings["Height (m)"].double == nil) {
+            if (clearance < 4) {
+                bridgeAnnotation.color = Geometries.RED
+                bridgeAnnotation.alertColor = Geometries.RED_CODE
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Info
+            } else if (clearance < 5) {
+                bridgeAnnotation.color = Geometries.ORANGE
+                bridgeAnnotation.alertColor = Geometries.ORANGE_CODE
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Info
+            } else {
+                bridgeAnnotation.color = Geometries.GREEN
+                bridgeAnnotation.alertColor = Geometries.GREEN_CODE
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Success
+            }
         } else {
-            bridgeAnnotation.color = Geometries.GREEN
-            bridgeAnnotation.alertColor = Geometries.GREEN_CODE
-            bridgeAnnotation.alertStyle = SCLAlertViewStyle.Success
+            if (clearance < settings["Height (m)"].doubleValue) {
+                bridgeAnnotation.color = Geometries.RED
+                bridgeAnnotation.alertColor = Geometries.RED_CODE
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Error
+            } else {
+                bridgeAnnotation.color = Geometries.GREEN
+                bridgeAnnotation.alertColor = Geometries.GREEN_CODE
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Success
+            }
         }
         return bridgeAnnotation
     }
