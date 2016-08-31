@@ -1,4 +1,5 @@
 # SoloDriver
+https://itunes.apple.com/us/app/solodriver/id1143751450
 
 The Project aims at developing a sustainable handy solution for heavy vehicle drivers that can keep a track of driver’s location and an alarm system to provide them with regular alerts regarding environmental conditions and health benefits to help maintain the safety while they are on roads. A large number of people in Australia are into the profession of driving Trucks. Drivers have the responsibility to drive massive long vehicles for days together covering few thousands of kilometres. Hence, these drivers are more susceptible to incidents involving road rage, robbery, road accidents, falling asleep while driving, vehicle breakdown and health issues like back injuries, lack of rest and nutrition.
 
