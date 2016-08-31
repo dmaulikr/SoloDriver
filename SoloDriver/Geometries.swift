@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 import SwiftyJSON
 import SCLAlertView
+import Polyline
 
 class Geometries: NSObject {
 
@@ -35,6 +36,10 @@ class Geometries: NSObject {
 
     }
 
+    class PlanPolyline: ColorPolyline {
+
+    }
+
     class AlertViewAnnotation: MKPointAnnotation {
         var color: UIColor?
         var alertTitle: String?
@@ -52,6 +57,10 @@ class Geometries: NSObject {
     }
 
     class HPFVAnnotation: AlertViewAnnotation {
+
+    }
+
+    class WayPointAnnotation: MKPointAnnotation {
 
     }
 
@@ -354,5 +363,13 @@ class Geometries: NSObject {
             }
         }
         return MKCoordinateForMapPoint(closestPoint)
+    }
+
+    static func createPlanPolyline(overview_polyline: String) -> PlanPolyline {
+        var coordinates: [CLLocationCoordinate2D] = decodePolyline(overview_polyline)!
+        let count = coordinates.count
+        let planPolyline = PlanPolyline(coordinates: &coordinates, count: count)
+        planPolyline.color = BLUE
+        return planPolyline
     }
 }

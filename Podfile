@@ -8,6 +8,7 @@ target 'SoloDriver' do
   pod 'SwiftyJSON'
   pod 'SCLAlertView'
   pod 'Instructions', '~> 0.4'
+  pod 'Polyline', '~> 3.0'
 
   # Pods for SoloDriver
 

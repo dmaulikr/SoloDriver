@@ -11,7 +11,6 @@
 		4F0A959F1D714E660036CA39 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A959E1D714E660036CA39 /* SettingsController.swift */; };
 		4F0A95A11D71C3D80036CA39 /* EditTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A95A01D71C3D80036CA39 /* EditTextController.swift */; };
 		4F0A95A31D72913F0036CA39 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A95A21D72913F0036CA39 /* SettingsManager.swift */; };
-		4F0A95D91D74606A0036CA39 /* UserTrackingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0A95D81D74606A0036CA39 /* UserTrackingButton.swift */; };
 		4F21A7B51D5F178D00EA66B5 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F21A7B41D5F178D00EA66B5 /* LocationService.swift */; };
 		4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083C1D5EF9E0006F980A /* AppDelegate.swift */; };
 		4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083E1D5EF9E0006F980A /* MapController.swift */; };
@@ -45,7 +44,6 @@
 		4F0A959E1D714E660036CA39 /* SettingsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		4F0A95A01D71C3D80036CA39 /* EditTextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTextController.swift; sourceTree = "<group>"; };
 		4F0A95A21D72913F0036CA39 /* SettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
-		4F0A95D81D74606A0036CA39 /* UserTrackingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTrackingButton.swift; sourceTree = "<group>"; };
 		4F21A7B41D5F178D00EA66B5 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		4F5208391D5EF9E0006F980A /* SoloDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoloDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F52083C1D5EF9E0006F980A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,17 +91,9 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		4F0A959B1D7006790036CA39 /* Specification */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Specification;
-			sourceTree = "<group>";
-		};
 		4F0A95D71D7460360036CA39 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				4F0A95D81D74606A0036CA39 /* UserTrackingButton.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -155,7 +145,6 @@
 				4FF7B6461D65470B0098470F /* Common */,
 				4F21A7B31D5F16AE00EA66B5 /* Service */,
 				4F21A7B21D5F0DE400EA66B5 /* Map */,
-				4F0A959B1D7006790036CA39 /* Specification */,
 				4F0A959A1D6FE4130036CA39 /* Settings */,
 				4FF7B6421D642A850098470F /* Assets.xcassets */,
 				4F52083C1D5EF9E0006F980A /* AppDelegate.swift */,
@@ -405,7 +394,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F0A959F1D714E660036CA39 /* SettingsController.swift in Sources */,
-				4F0A95D91D74606A0036CA39 /* UserTrackingButton.swift in Sources */,
 				4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */,
 				4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */,
 				4F0A95A11D71C3D80036CA39 /* EditTextController.swift in Sources */,

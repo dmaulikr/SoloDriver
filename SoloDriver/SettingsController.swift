@@ -26,7 +26,6 @@ class SettingsController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         let settings = SettingsManager.shared.getSettings()
-        print(settings)
         if (settings["Height (m)"].double == nil) {
             height.detailTextLabel?.text = "--"
         } else {
