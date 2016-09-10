@@ -14,13 +14,41 @@ class SettingsManager: NSObject {
     static let shared = SettingsManager()
 
     let file = "Settings.json"
-    var cachedSettings: JSON?
+    var settings: JSON = [:]
+
+    override init() {
+        super.init()
+        settings = getSettings()
+    }
+
+    func loadSettings() {
+        if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+            let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file)
+
+            // reading
+            let settingsData = NSData(contentsOfURL: path)
+            if (settingsData != nil) {
+                settings = JSON(data: settingsData!)
+            }
+        }
+    }
+
+    func saveSettings() {
+        // print(self.settings)
+        // Save settings in the background
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+                let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(self.file)
+                do {
+                    try self.settings.rawString()!.writeToURL(path, atomically: false, encoding: NSUTF8StringEncoding)
+                }
+                catch { /* error handling here */ }
+            }
+        })
+    }
 
     func getCachedSettings() -> JSON {
-        if (cachedSettings == nil) {
-            cachedSettings = getSettings()
-        }
-        return cachedSettings!
+        return settings
     }
 
     func getSettings() -> JSON {
@@ -39,7 +67,7 @@ class SettingsManager: NSObject {
     }
 
     func saveSettings(settings: JSON) {
-        cachedSettings = settings
+        self.settings = settings
         if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
             let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file)
             do {

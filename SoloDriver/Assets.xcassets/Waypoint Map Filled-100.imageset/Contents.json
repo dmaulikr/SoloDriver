@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Waypoint Map Filled-100.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "User Groups Filled-50.png",
       "scale" : "2x"
     },
     {

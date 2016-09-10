@@ -35,4 +35,11 @@ class MasterController: UIViewController {
         }
     }
 
+    @IBAction func fiterItem(sender: AnyObject) {
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("FilterNavigationController")
+        controller.modalPresentationStyle = .FormSheet
+        controller.modalTransitionStyle = .CoverVertical
+        presentViewController(controller, animated: true) { }
+    }
+
 }

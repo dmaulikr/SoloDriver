@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "london-bridge.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Waypoint Map-50.png",
       "scale" : "2x"
     },
     {
