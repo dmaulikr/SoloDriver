@@ -18,7 +18,7 @@ class SettingsManager: NSObject {
 
     override init() {
         super.init()
-        settings = getSettings()
+        loadSettings()
     }
 
     func loadSettings() {
@@ -29,6 +29,9 @@ class SettingsManager: NSObject {
             let settingsData = NSData(contentsOfURL: path)
             if (settingsData != nil) {
                 settings = JSON(data: settingsData!)
+                if (settings["Routes"].string == nil || settings["Routes"].string == "") {
+                    settings["Routes"].string = "None"
+                }
             }
         }
     }

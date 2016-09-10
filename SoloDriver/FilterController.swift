@@ -14,6 +14,13 @@ class FilterController: UITableViewController {
         super.viewDidLoad()
     }
 
+    @IBOutlet var routesTitle: UILabel!
+
+    override func viewWillAppear(animated: Bool) {
+        routesTitle.text = SettingsManager.shared.settings["Routes"].stringValue
+        super.viewWillAppear(animated)
+    }
+
     @IBAction func done(sender: AnyObject) {
         dismissViewControllerAnimated(true) { }
     }
@@ -29,87 +36,59 @@ class FilterController: UITableViewController {
         SettingsManager.shared.saveSettings()
     }
 
-    @IBOutlet var sRoadworks: UISwitch! {
+    @IBOutlet var sRoadwork: UISwitch! {
         didSet {
-            sRoadworks.on = SettingsManager.shared.settings["Roadworks"].boolValue
+            sRoadwork.on = SettingsManager.shared.settings["Roadwork"].boolValue
         }
     }
 
-    @IBAction func aRoadworks(sender: UISwitch) {
-        SettingsManager.shared.settings["Roadworks"].bool = sender.on
+    @IBAction func aRoadwork(sender: UISwitch) {
+        SettingsManager.shared.settings["Roadwork"].bool = sender.on
         SettingsManager.shared.saveSettings()
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 6
-        case 1:
-            return 1
-        default:
-            return 0
+    @IBOutlet var sEvent: UISwitch! {
+        didSet {
+            sEvent.on = SettingsManager.shared.settings["Event"].boolValue
         }
     }
 
-    /*
-     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+    @IBAction func aEvent(sender: UISwitch) {
+        SettingsManager.shared.settings["Event"].bool = sender.on
+        SettingsManager.shared.saveSettings()
+    }
 
-     // Configure the cell...
+    @IBOutlet var sTowAllocation: UISwitch! {
+        didSet {
+            sTowAllocation.on = SettingsManager.shared.settings["Tow Allocation"].boolValue
+        }
+    }
 
-     return cell
-     }
-     */
+    @IBAction func aTowAllocation(sender: UISwitch) {
+        SettingsManager.shared.settings["Tow Allocation"].bool = sender.on
+        SettingsManager.shared.saveSettings()
+    }
 
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
+    @IBOutlet var sTrafficAlert: UISwitch! {
+        didSet {
+            sTrafficAlert.on = SettingsManager.shared.settings["Traffic Alert"].boolValue
+        }
+    }
 
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+    @IBAction func aTrafficAlert(sender: UISwitch) {
+        SettingsManager.shared.settings["Traffic Alert"].bool = sender.on
+        SettingsManager.shared.saveSettings()
+    }
 
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+    @IBOutlet var sRoadClosed: UISwitch! {
+        didSet {
+            sRoadClosed.on = SettingsManager.shared.settings["Road Closed"].boolValue
+        }
+    }
 
-     }
-     */
-
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    @IBAction func aRoadClosed(sender: UISwitch) {
+        SettingsManager.shared.settings["Road Closed"].bool = sender.on
+        SettingsManager.shared.saveSettings()
+    }
 
 }
