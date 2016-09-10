@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bKj-7z-STt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,26 +7,40 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Map-->
-        <scene sceneID="hNz-n2-bh7">
+        <!--Title-->
+        <scene sceneID="cgx-tL-Igi">
             <objects>
-                <viewController title="Support" id="9pv-A4-QxB" userLabel="Map" customClass="MasterController" customModule="SoloDriver" customModuleProvider="target" sceneMemberID="viewController">
-                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="eFw-eG-Dhe">
+                <viewController id="iO4-Su-K6r" sceneMemberID="viewController">
+                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="yoX-vH-Bjs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <connections>
-                            <outlet property="delegate" destination="9pv-A4-QxB" id="AGC-lK-FhF"/>
-                        </connections>
                     </mapView>
-                    <navigationItem key="navigationItem" title="Title" id="unF-0f-EIu">
-                        <barButtonItem key="leftBarButtonItem" image="Bulleted List Filled-44" id="x9m-SR-aRt"/>
-                        <barButtonItem key="rightBarButtonItem" title="Help" id="Qit-yg-Za4"/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="fixedSpace" id="lqv-ng-0ce"/>
+                        <barButtonItem title="Item" id="5By-n2-kfj"/>
+                        <barButtonItem systemItem="flexibleSpace" id="Wu7-DC-6ez"/>
+                        <barButtonItem title="Search Map Area" id="6zP-aA-3gB">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="tt1-fx-tQ4"/>
+                        <barButtonItem systemItem="compose" id="ajd-Ed-73Q">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Title" id="otO-0O-MUs">
+                        <barButtonItem key="leftBarButtonItem" image="Bulleted List Filled-44" id="4gH-A2-n4y">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="Settings Filled-44" id="Jeq-by-r2Q">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NXt-CW-rtz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1561.5" y="-320.25"/>
+            <point key="canvasLocation" x="1561" y="-320"/>
         </scene>
         <!--Features-->
         <scene sceneID="23A-iG-btg">
@@ -63,25 +77,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3w-zu-dcO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1561" y="549"/>
-        </scene>
-        <!--Maps-->
-        <scene sceneID="eN2-po-TZY">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bKj-7z-STt" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Maps" image="Waypoint Map-50" selectedImage="Waypoint Map Filled-50" id="acW-dT-cKf"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aIY-Yz-mvH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="3Zq-bU-WR4"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0gg-y8-FgI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
         </scene>
         <!--Settings-->
         <scene sceneID="X5V-VO-azX">
@@ -441,13 +436,30 @@
             </objects>
             <point key="canvasLocation" x="750" y="1416.75"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gso-dm-ADQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rZX-Tr-lWX" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="83d-K3-v1x">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="iO4-Su-K6r" kind="relationship" relationship="rootViewController" id="Bhr-DQ-4Se"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TvL-mG-aqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="-320"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Bulleted List Filled-44" width="22" height="22"/>
+        <image name="Settings Filled-44" width="22" height="22"/>
         <image name="Settings Filled-50" width="25" height="25"/>
         <image name="Settings-50" width="25" height="25"/>
-        <image name="Waypoint Map Filled-50" width="25" height="25"/>
-        <image name="Waypoint Map-50" width="25" height="25"/>
     </resources>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
 </document>
