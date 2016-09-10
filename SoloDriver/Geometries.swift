@@ -268,7 +268,7 @@ class Geometries: NSObject {
         subtitle += "\nBRIDGE LENGTH: " + String(attributes["OVERALL_LENGTH"].doubleValue)
         bridgeAnnotation.alertSubtitle = subtitle
         // Set color based on settings
-        let settings = SettingsManager.shared.getCachedSettings()
+        let settings = SettingsManager.shared.settings
         if (settings["Height (m)"].double == nil) {
             if (clearance < 4) {
                 bridgeAnnotation.color = Geometries.RED

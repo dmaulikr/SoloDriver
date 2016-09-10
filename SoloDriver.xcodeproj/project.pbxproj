@@ -111,7 +111,6 @@
 				4F21A7B21D5F0DE400EA66B5 /* Map */,
 				4F52083E1D5EF9E0006F980A /* MapController.swift */,
 				4FF7B6401D63FAA60098470F /* CategoriesController.swift */,
-				4F0A959A1D6FE4130036CA39 /* Settings */,
 			);
 			name = Deprecated;
 			sourceTree = "<group>";
@@ -157,6 +156,7 @@
 				4F876DF81D839FE10086C042 /* Service */,
 				4F876DF21D8394170086C042 /* Map */,
 				4F876DF91D83A03C0086C042 /* Filter */,
+				4F0A959A1D6FE4130036CA39 /* Settings */,
 				4FF7B6421D642A850098470F /* Assets.xcassets */,
 				4F52083C1D5EF9E0006F980A /* AppDelegate.swift */,
 				4F5208421D5EF9E0006F980A /* Main.storyboard */,

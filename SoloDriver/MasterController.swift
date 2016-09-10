@@ -42,4 +42,11 @@ class MasterController: UIViewController {
         presentViewController(controller, animated: true) { }
     }
 
+    @IBAction func settingsItem(sender: AnyObject) {
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("SettingsNavigationController")
+        controller.modalPresentationStyle = .FormSheet
+        controller.modalTransitionStyle = .CoverVertical
+        presentViewController(controller, animated: true) { }
+    }
+
 }

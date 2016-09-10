@@ -49,35 +49,4 @@ class SettingsManager: NSObject {
             }
         })
     }
-
-    func getCachedSettings() -> JSON {
-        return settings
-    }
-
-    func getSettings() -> JSON {
-        var settings: JSON = [:]
-
-        if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file)
-
-            // reading
-            let settingsData = NSData(contentsOfURL: path)
-            if (settingsData != nil) {
-                settings = JSON(data: settingsData!)
-            }
-        }
-        return settings
-    }
-
-    func saveSettings(settings: JSON) {
-        self.settings = settings
-        if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file)
-            do {
-                print(settings.rawString())
-                try settings.rawString()!.writeToURL(path, atomically: false, encoding: NSUTF8StringEncoding)
-            }
-            catch { /* error handling here */ }
-        }
-    }
 }

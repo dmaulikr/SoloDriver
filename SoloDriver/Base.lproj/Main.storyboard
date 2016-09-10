@@ -36,6 +36,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Settings Filled-44" id="Jeq-by-r2Q">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="settingsItem:" destination="iO4-Su-K6r" id="C5K-L6-adW"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -63,11 +66,11 @@
                                         <rect key="frame" x="0.0" y="99" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eqS-15-p6O" id="pvm-Fn-Ih6">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="None" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6D5-oW-d6B">
-                                                    <rect key="frame" x="15" y="0.0" width="570" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -739,7 +742,13 @@
                             <outlet property="delegate" destination="NFL-yw-Xfe" id="NV2-mX-zFB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="T6J-VP-HCo"/>
+                    <navigationItem key="navigationItem" title="Settings" id="T6J-VP-HCo">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="fM5-Sa-HJo">
+                            <connections>
+                                <action selector="done:" destination="NFL-yw-Xfe" id="YZQ-JB-OKs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="height" destination="7pt-qL-Fy6" id="eB0-9p-jo4"/>
                         <outlet property="length" destination="yCz-kR-X0C" id="Efo-fq-bBg"/>
@@ -763,7 +772,7 @@
                             <tableViewSection id="tOB-My-Chr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="Yz9-OG-hgJ">
-                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="35" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yz9-OG-hgJ" id="MdG-bR-pg5">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -853,7 +862,7 @@
         <!--SettingsNavigation-->
         <scene sceneID="Pbm-CS-FPS">
             <objects>
-                <navigationController title="SettingsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="aaS-xU-FeU" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SettingsNavigationController" title="SettingsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="aaS-xU-FeU" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="Settings-50" selectedImage="Settings Filled-50" id="eNc-l6-PjM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="e9z-Uq-Qpv">
@@ -863,7 +872,6 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="NFL-yw-Xfe" kind="relationship" relationship="rootViewController" id="Ngt-bX-cC2"/>
-                        <segue destination="jfF-zM-d0g" kind="show" id="FRx-Rj-V7I"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HiF-d6-8UZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
