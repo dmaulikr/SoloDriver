@@ -25,6 +25,9 @@
                         <barButtonItem systemItem="flexibleSpace" id="tt1-fx-tQ4"/>
                         <barButtonItem systemItem="compose" id="ajd-Ed-73Q">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="actionItem:" destination="iO4-Su-K6r" id="cTe-sp-ByA"/>
+                            </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Title" id="otO-0O-MUs">

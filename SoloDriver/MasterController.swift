@@ -49,4 +49,18 @@ class MasterController: UIViewController {
         presentViewController(controller, animated: true) { }
     }
 
+    @IBAction func actionItem(sender: AnyObject) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        actionSheet.view.tintColor = view.tintColor
+        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let clearMap = UIAlertAction(title: "Clear Map", style: .Default) { (action) in
+            self.mapView.removeOverlays(self.mapView.overlays)
+            self.mapView.removeAnnotations(self.mapView.annotations)
+        }
+        cancel
+        actionSheet.addAction(cancel)
+        actionSheet.addAction(clearMap)
+        presentViewController(actionSheet, animated: true) { }
+    }
+
 }

@@ -19,6 +19,7 @@
 		4F5208541D5EF9E0006F980A /* SoloDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5208531D5EF9E0006F980A /* SoloDriverTests.swift */; };
 		4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F656DB41D606987009FA6B2 /* PublicDataService.swift */; };
 		4F81D2AD1D83D5750007B5C4 /* RoutesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2AC1D83D5750007B5C4 /* RoutesController.swift */; };
+		4F81D2AF1D83F4840007B5C4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2AE1D83F4840007B5C4 /* Config.swift */; };
 		4F876DF41D8394C80086C042 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F876DF31D8394C80086C042 /* MasterController.swift */; };
 		4F876DF71D839E7F0086C042 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F876DF61D839E7F0086C042 /* LocationManager.swift */; };
 		4F876DFB1D83A05D0086C042 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F876DFA1D83A05D0086C042 /* FilterController.swift */; };
@@ -60,6 +61,7 @@
 		4F5208551D5EF9E0006F980A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F656DB41D606987009FA6B2 /* PublicDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicDataService.swift; sourceTree = "<group>"; };
 		4F81D2AC1D83D5750007B5C4 /* RoutesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesController.swift; sourceTree = "<group>"; };
+		4F81D2AE1D83F4840007B5C4 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		4F876DF31D8394C80086C042 /* MasterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterController.swift; sourceTree = "<group>"; };
 		4F876DF61D839E7F0086C042 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		4F876DFA1D83A05D0086C042 /* FilterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				4F876DF61D839E7F0086C042 /* LocationManager.swift */,
 				4F0A95A21D72913F0036CA39 /* SettingsManager.swift */,
+				4F81D2AE1D83F4840007B5C4 /* Config.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 			files = (
 				4F0A959F1D714E660036CA39 /* SettingsController.swift in Sources */,
 				4F876DF41D8394C80086C042 /* MasterController.swift in Sources */,
+				4F81D2AF1D83F4840007B5C4 /* Config.swift in Sources */,
 				4F876DFB1D83A05D0086C042 /* FilterController.swift in Sources */,
 				4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */,
 				4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */,
