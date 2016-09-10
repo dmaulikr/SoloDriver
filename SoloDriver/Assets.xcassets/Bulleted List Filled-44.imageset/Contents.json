@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "AppIconWhite.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Bulleted List Filled-44.png",
       "scale" : "2x"
     },
     {
