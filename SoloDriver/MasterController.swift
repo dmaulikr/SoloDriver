@@ -7,29 +7,32 @@
 //
 
 import UIKit
+import MapKit
 
 class MasterController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // tracking button
+        toolbarItems![0].width = -10
+        toolbarItems![1] = MKUserTrackingBarButtonItem(mapView: mapView)
+        toolbarItems![1].customView?.tintColor = view.tintColor
+        navigationController?.toolbarHidden = false
 
-        // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBOutlet var mapView: MKMapView! {
+        didSet {
+            // Set map camera
+            var lastLocation = LocationService.shared.getLastLocation()
+            var camera: MKMapCamera
+            // Default location - Melbourne
+            if (lastLocation == nil) {
+                lastLocation = CLLocation(latitude: -37.768356, longitude: 144.9663673)
+            }
+            camera = MKMapCamera(lookingAtCenterCoordinate: lastLocation!.coordinate, fromEyeCoordinate: lastLocation!.coordinate, eyeAltitude: 50000)
+            mapView.setCamera(camera, animated: false)
+        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
