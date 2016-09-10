@@ -20,4 +20,7 @@ class Config: NSObject {
     static let BLUE_CODE = 0x0045CC as UInt
     static let TAP_RADIUS = 0.001
 
+    static let RED_BRIDGE = UIImage(named: "bridgeRed")
+    static let GREEN_BRIDGE = UIImage(named: "bridgeGreen")
+    static let ORANGE_BRIDGE = UIImage(named: "bridgeOrange")
 }

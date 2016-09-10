@@ -20,10 +20,18 @@
 		4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F656DB41D606987009FA6B2 /* PublicDataService.swift */; };
 		4F81D2AD1D83D5750007B5C4 /* RoutesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2AC1D83D5750007B5C4 /* RoutesController.swift */; };
 		4F81D2AF1D83F4840007B5C4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2AE1D83F4840007B5C4 /* Config.swift */; };
+		4F81D2B11D83F9910007B5C4 /* MapDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2B01D83F9910007B5C4 /* MapDelegateExtension.swift */; };
+		4F81D2B31D83FA690007B5C4 /* SearchFeatureExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2B21D83FA690007B5C4 /* SearchFeatureExtension.swift */; };
+		4F81D2B51D83FA810007B5C4 /* SearchDestinationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2B41D83FA810007B5C4 /* SearchDestinationExtension.swift */; };
+		4F81D2B71D8400990007B5C4 /* ArcGISService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2B61D8400990007B5C4 /* ArcGISService.swift */; };
+		4F81D2BA1D8402D30007B5C4 /* Objects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2B91D8402D30007B5C4 /* Objects.swift */; };
+		4F81D2BC1D8404DF0007B5C4 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2BB1D8404DF0007B5C4 /* Geometry.swift */; };
 		4F876DF41D8394C80086C042 /* MasterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F876DF31D8394C80086C042 /* MasterController.swift */; };
 		4F876DF71D839E7F0086C042 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F876DF61D839E7F0086C042 /* LocationManager.swift */; };
 		4F876DFB1D83A05D0086C042 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F876DFA1D83A05D0086C042 /* FilterController.swift */; };
-		4FF7B63D1D62AE5F0098470F /* Geometries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B63C1D62AE5F0098470F /* Geometries.swift */; };
+		4FA643221D84285800C0DDA2 /* VicTrafficService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA643211D84285800C0DDA2 /* VicTrafficService.swift */; };
+		4FA643241D84286E00C0DDA2 /* GoogleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA643231D84286E00C0DDA2 /* GoogleService.swift */; };
+		4FF7B63D1D62AE5F0098470F /* GeometriesD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */; };
 		4FF7B6411D63FAA60098470F /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B6401D63FAA60098470F /* CategoriesController.swift */; };
 		4FF7B6431D642A850098470F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7B6421D642A850098470F /* Assets.xcassets */; };
 		4FF7B6451D6547030098470F /* HelpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B6441D6547030098470F /* HelpController.swift */; };
@@ -62,10 +70,18 @@
 		4F656DB41D606987009FA6B2 /* PublicDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicDataService.swift; sourceTree = "<group>"; };
 		4F81D2AC1D83D5750007B5C4 /* RoutesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesController.swift; sourceTree = "<group>"; };
 		4F81D2AE1D83F4840007B5C4 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		4F81D2B01D83F9910007B5C4 /* MapDelegateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDelegateExtension.swift; sourceTree = "<group>"; };
+		4F81D2B21D83FA690007B5C4 /* SearchFeatureExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFeatureExtension.swift; sourceTree = "<group>"; };
+		4F81D2B41D83FA810007B5C4 /* SearchDestinationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDestinationExtension.swift; sourceTree = "<group>"; };
+		4F81D2B61D8400990007B5C4 /* ArcGISService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcGISService.swift; sourceTree = "<group>"; };
+		4F81D2B91D8402D30007B5C4 /* Objects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objects.swift; sourceTree = "<group>"; };
+		4F81D2BB1D8404DF0007B5C4 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		4F876DF31D8394C80086C042 /* MasterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterController.swift; sourceTree = "<group>"; };
 		4F876DF61D839E7F0086C042 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		4F876DFA1D83A05D0086C042 /* FilterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
-		4FF7B63C1D62AE5F0098470F /* Geometries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometries.swift; sourceTree = "<group>"; };
+		4FA643211D84285800C0DDA2 /* VicTrafficService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicTrafficService.swift; sourceTree = "<group>"; };
+		4FA643231D84286E00C0DDA2 /* GoogleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleService.swift; sourceTree = "<group>"; };
+		4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometriesD.swift; sourceTree = "<group>"; };
 		4FF7B6401D63FAA60098470F /* CategoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
 		4FF7B6421D642A850098470F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FF7B6441D6547030098470F /* HelpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpController.swift; sourceTree = "<group>"; };
@@ -109,7 +125,7 @@
 				4F21A7B31D5F16AE00EA66B5 /* Service */,
 				4F21A7B41D5F178D00EA66B5 /* LocationService.swift */,
 				4F656DB41D606987009FA6B2 /* PublicDataService.swift */,
-				4FF7B63C1D62AE5F0098470F /* Geometries.swift */,
+				4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */,
 				4F21A7B21D5F0DE400EA66B5 /* Map */,
 				4F52083E1D5EF9E0006F980A /* MapController.swift */,
 				4FF7B6401D63FAA60098470F /* CategoriesController.swift */,
@@ -156,8 +172,8 @@
 			children = (
 				4F876DF51D839E570086C042 /* Common */,
 				4F876DF81D839FE10086C042 /* Service */,
+				4F81D2B81D8401FE0007B5C4 /* Geometries */,
 				4F876DF21D8394170086C042 /* Map */,
-				4F876DF91D83A03C0086C042 /* Filter */,
 				4F0A959A1D6FE4130036CA39 /* Settings */,
 				4FF7B6421D642A850098470F /* Assets.xcassets */,
 				4F52083C1D5EF9E0006F980A /* AppDelegate.swift */,
@@ -178,10 +194,23 @@
 			path = SoloDriverTests;
 			sourceTree = "<group>";
 		};
+		4F81D2B81D8401FE0007B5C4 /* Geometries */ = {
+			isa = PBXGroup;
+			children = (
+				4F81D2B91D8402D30007B5C4 /* Objects.swift */,
+				4F81D2BB1D8404DF0007B5C4 /* Geometry.swift */,
+			);
+			name = Geometries;
+			sourceTree = "<group>";
+		};
 		4F876DF21D8394170086C042 /* Map */ = {
 			isa = PBXGroup;
 			children = (
 				4F876DF31D8394C80086C042 /* MasterController.swift */,
+				4F81D2B01D83F9910007B5C4 /* MapDelegateExtension.swift */,
+				4F81D2B21D83FA690007B5C4 /* SearchFeatureExtension.swift */,
+				4F876DF91D83A03C0086C042 /* Filter */,
+				4F81D2B41D83FA810007B5C4 /* SearchDestinationExtension.swift */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -199,6 +228,9 @@
 		4F876DF81D839FE10086C042 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				4F81D2B61D8400990007B5C4 /* ArcGISService.swift */,
+				4FA643211D84285800C0DDA2 /* VicTrafficService.swift */,
+				4FA643231D84286E00C0DDA2 /* GoogleService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -447,13 +479,21 @@
 				4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */,
 				4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */,
 				4F81D2AD1D83D5750007B5C4 /* RoutesController.swift in Sources */,
+				4FA643241D84286E00C0DDA2 /* GoogleService.swift in Sources */,
 				4F0A95A11D71C3D80036CA39 /* EditTextController.swift in Sources */,
+				4F81D2B71D8400990007B5C4 /* ArcGISService.swift in Sources */,
+				4F81D2B11D83F9910007B5C4 /* MapDelegateExtension.swift in Sources */,
+				4F81D2B31D83FA690007B5C4 /* SearchFeatureExtension.swift in Sources */,
 				4F21A7B51D5F178D00EA66B5 /* LocationService.swift in Sources */,
 				4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */,
 				4F0A95A31D72913F0036CA39 /* SettingsManager.swift in Sources */,
 				4F876DF71D839E7F0086C042 /* LocationManager.swift in Sources */,
-				4FF7B63D1D62AE5F0098470F /* Geometries.swift in Sources */,
+				4F81D2BA1D8402D30007B5C4 /* Objects.swift in Sources */,
+				4FA643221D84285800C0DDA2 /* VicTrafficService.swift in Sources */,
+				4FF7B63D1D62AE5F0098470F /* GeometriesD.swift in Sources */,
 				4FF7B6411D63FAA60098470F /* CategoriesController.swift in Sources */,
+				4F81D2BC1D8404DF0007B5C4 /* Geometry.swift in Sources */,
+				4F81D2B51D83FA810007B5C4 /* SearchDestinationExtension.swift in Sources */,
 				4FF7B6451D6547030098470F /* HelpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

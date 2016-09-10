@@ -11,6 +11,8 @@ import MapKit
 
 class MasterController: UIViewController {
 
+    var currentTask: Int = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // tracking button
@@ -35,21 +37,21 @@ class MasterController: UIViewController {
         }
     }
 
-    @IBAction func fiterItem(sender: AnyObject) {
+    @IBAction func didClickFilter(sender: AnyObject) {
         let controller = storyboard!.instantiateViewControllerWithIdentifier("FilterNavigationController")
         controller.modalPresentationStyle = .FormSheet
         controller.modalTransitionStyle = .CoverVertical
         presentViewController(controller, animated: true) { }
     }
 
-    @IBAction func settingsItem(sender: AnyObject) {
+    @IBAction func didClickSettings(sender: AnyObject) {
         let controller = storyboard!.instantiateViewControllerWithIdentifier("SettingsNavigationController")
         controller.modalPresentationStyle = .FormSheet
         controller.modalTransitionStyle = .CoverVertical
         presentViewController(controller, animated: true) { }
     }
 
-    @IBAction func actionItem(sender: AnyObject) {
+    @IBAction func didClickAction(sender: AnyObject) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         actionSheet.view.tintColor = view.tintColor
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -57,10 +59,21 @@ class MasterController: UIViewController {
             self.mapView.removeOverlays(self.mapView.overlays)
             self.mapView.removeAnnotations(self.mapView.annotations)
         }
-        cancel
+        let searchMap = UIAlertAction(title: "Search Map Area", style: .Default) { (action) in
+            self.titleItem.title = action.title
+            self.searchFeatures()
+        }
         actionSheet.addAction(cancel)
         actionSheet.addAction(clearMap)
+        actionSheet.addAction(searchMap)
         presentViewController(actionSheet, animated: true) { }
+    }
+
+    @IBOutlet var titleItem: UIBarButtonItem!
+    @IBAction func didClickTitle(sender: AnyObject) {
+        if (titleItem.title == "Search Map Area") {
+            searchFeatures()
+        }
     }
 
 }
