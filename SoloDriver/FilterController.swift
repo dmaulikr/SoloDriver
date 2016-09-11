@@ -91,4 +91,14 @@ class FilterController: UITableViewController {
         SettingsManager.shared.saveSettings()
     }
 
+    @IBOutlet var sRestArea: UISwitch! {
+        didSet {
+            sRestArea.on = SettingsManager.shared.settings["Rest Area"].boolValue
+        }
+    }
+
+    @IBAction func aRestArea(sender: UISwitch!) {
+        SettingsManager.shared.settings["Rest Area"].bool = sender.on
+        SettingsManager.shared.saveSettings()
+    }
 }
