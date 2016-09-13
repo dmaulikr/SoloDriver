@@ -20,6 +20,8 @@ class MasterController: UIViewController {
         toolbarItems![1] = MKUserTrackingBarButtonItem(mapView: mapView)
         toolbarItems![1].customView?.tintColor = view.tintColor
         navigationController?.toolbarHidden = false
+        // Add search bar
+        addSearchBar()
 
     }
 
