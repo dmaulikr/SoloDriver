@@ -38,4 +38,24 @@ public class LocationManager: NSObject, CLLocationManagerDelegate {
     public func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // print(manager.location!.timestamp)
     }
+
+    // Adapted from https://www.thorntech.com/2016/01/how-to-search-for-location-using-apples-mapkit/
+    func parseAddress(selectedItem: CLPlacemark) -> String {
+        // put a space between "4" and "Melrose Place"
+        let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
+        // put a comma between street and city/state
+        let comma = (selectedItem.subThoroughfare != nil || selectedItem.thoroughfare != nil) && (selectedItem.subAdministrativeArea != nil || selectedItem.administrativeArea != nil) ? ", " : ""
+        let addressLine = String(
+            format: "%@%@%@%@%@",
+            // street number
+            selectedItem.subThoroughfare ?? "",
+            firstSpace,
+            // street name
+            selectedItem.thoroughfare ?? "",
+            comma,
+            // city
+            selectedItem.locality ?? ""
+        )
+        return addressLine
+    }
 }

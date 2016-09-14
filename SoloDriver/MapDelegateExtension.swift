@@ -32,7 +32,11 @@ extension MasterController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if (annotation is BridgeAnnotation) {
             let thisAnnotation = annotation as! BridgeAnnotation
-            let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(thisAnnotation.reuseId) as? MKPinAnnotationView
+            let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(thisAnnotation.reuseId)
+            return thisAnnotation.createPinView(pinView)
+        } else if (annotation is DestinationAnnotation) {
+            let thisAnnotation = annotation as! DestinationAnnotation
+            let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(thisAnnotation.reuseId)
             return thisAnnotation.createPinView(pinView)
         }
         return nil

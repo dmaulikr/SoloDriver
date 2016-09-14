@@ -12,6 +12,7 @@ import MapKit
 class MasterController: UIViewController {
 
     var currentTask: Int = 0
+    var resultSearchController: UISearchController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,7 @@ class MasterController: UIViewController {
         toolbarItems![1].customView?.tintColor = view.tintColor
         navigationController?.toolbarHidden = false
         // Add search bar
-        addSearchBar()
+        initDirection()
 
     }
 

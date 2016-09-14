@@ -14,7 +14,7 @@ import UIKit
 import MapKit
 
 protocol HandleMapSearch {
-    func addAnnotationFromSearch(annotation: MKPointAnnotation)
+    func addDestinationAnnotationFromSearch(annotation: MKPointAnnotation)
 }
 
 class LocationSearchTableController: UITableViewController, UISearchResultsUpdating {
@@ -42,7 +42,7 @@ class LocationSearchTableController: UITableViewController, UISearchResultsUpdat
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
         let selectedItem = matchingItems[indexPath.row].placemark
         cell.textLabel?.text = selectedItem.name
-        // cell.detailTextLabel?.text = LocationManager.shared.parseAddress(selectedItem)
+        cell.detailTextLabel?.text = LocationManager.shared.parseAddress(selectedItem)
         return cell
     }
 
@@ -54,11 +54,11 @@ class LocationSearchTableController: UITableViewController, UISearchResultsUpdat
         let subtitle = cell?.detailTextLabel?.text
         let selectedItem = matchingItems[indexPath.row].placemark
         let coordinate = selectedItem.coordinate
-        let annotation = MKPointAnnotation()
+        let annotation = DestinationAnnotation()
         annotation.coordinate = coordinate
         annotation.title = title
         annotation.subtitle = subtitle
-        handleMapSearchDelegate?.addAnnotationFromSearch(annotation)
+        handleMapSearchDelegate?.addDestinationAnnotationFromSearch(annotation)
         dismissViewControllerAnimated(true, completion: nil)
     }
 
