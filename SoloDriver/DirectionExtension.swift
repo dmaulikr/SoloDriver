@@ -50,8 +50,31 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         mapView.addGestureRecognizer(longTapRecognizer)
     }
 
+    // Select one direction route
     func tapHandler(gestureRecognizer: UITapGestureRecognizer) {
         self.navigationController?.view.endEditing(true)
+        let tapPosition = gestureRecognizer.locationInView(mapView)
+        let tapCoordinate = mapView.convertPoint(tapPosition, toCoordinateFromView: mapView)
+        let tapMapPoint = MKMapPointForCoordinate(tapCoordinate)
+        // Check which route is picked
+        for i in 0..<mapView.overlays.count {
+            if (mapView.overlays[i] is DirectionPolyline) {
+                let pickedPolyline = mapView.overlays[i] as! DirectionPolyline
+                if Geometry.distanceOfPointAndLine(tapMapPoint, poly: pickedPolyline) > tapRadius() {
+                    continue
+                }
+                // Colorize
+                for j in 0..<mapView.overlays.count {
+                    let polyline = mapView.overlays[j] as! DirectionPolyline
+                    if (j == i) {
+                        polyline.renderer.strokeColor = UIColor.blackColor().colorWithAlphaComponent(0.9)
+                    } else {
+                        polyline.renderer.strokeColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
+                    }
+                }
+                break
+            }
+        }
     }
 
     func longTapHandler(gestureRecognizer: UILongPressGestureRecognizer) {
@@ -96,5 +119,51 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         mapView.setRegion(region, animated: true)
     }
 
+    func getDirection(annotation: MKAnnotation) {
+        // Clear existing directions
+        for overlay in mapView.overlays {
+            if overlay is DirectionPolyline {
+                mapView.removeOverlay(overlay)
+            }
+        }
+        // Get directions
+        let destination = annotation.coordinate
+        let request: MKDirectionsRequest = MKDirectionsRequest()
+        if (LocationManager.shared.getLastLocation() == nil) {
+            return
+        }
+        request.source = coordinateToMapItem(LocationManager.shared.getLastLocation()!.coordinate)
+        request.destination = coordinateToMapItem(destination)
+        request.requestsAlternateRoutes = true
+        request.transportType = .Automobile
+        let directions = MKDirections(request: request)
+        directions.calculateDirectionsWithCompletionHandler ({
+            (response: MKDirectionsResponse?, error: NSError?) in
+            if let routes = response?.routes {
+                for i in 0..<routes.count {
+                    let polyline = DirectionPolyline(route: routes[i])
+                    if (i == 0) {
+                        polyline.color = UIColor.blackColor().colorWithAlphaComponent(0.9)
+                    } else {
+                        polyline.color = UIColor.blackColor().colorWithAlphaComponent(0.3)
+                    }
+                    self.mapView.addOverlay(polyline)
+                }
+            } else if let _ = error {
+
+            }
+        })
+    }
+
+    func coordinateToMapItem(coordinate: CLLocationCoordinate2D) -> MKMapItem {
+        return MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary: nil))
+    }
+
+    func tapRadius() -> Double {
+        let mapRect = mapView.visibleMapRect;
+        let metersPerMapPoint = MKMetersPerMapPointAtLatitude(mapView.centerCoordinate.latitude)
+        let metersPerPixel = metersPerMapPoint * mapRect.size.width / Double(mapView.bounds.size.width)
+        return metersPerPixel * 10
+    }
 }
 

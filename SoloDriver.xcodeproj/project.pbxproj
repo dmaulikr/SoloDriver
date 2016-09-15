@@ -15,6 +15,7 @@
 		4F4BDC1A1D866BB600932795 /* LocationSearchTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BDC191D866BB600932795 /* LocationSearchTableController.swift */; };
 		4F4BDC1C1D894F1400932795 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BDC1B1D894F1400932795 /* Bridge.swift */; };
 		4F4BDC1E1D894FBE00932795 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BDC1D1D894FBE00932795 /* Direction.swift */; };
+		4F4BDC201D895BC700932795 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BDC1F1D895BC700932795 /* NavigationExtension.swift */; };
 		4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083C1D5EF9E0006F980A /* AppDelegate.swift */; };
 		4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083E1D5EF9E0006F980A /* MapController.swift */; };
 		4F5208441D5EF9E0006F980A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208421D5EF9E0006F980A /* Main.storyboard */; };
@@ -63,6 +64,7 @@
 		4F4BDC191D866BB600932795 /* LocationSearchTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTableController.swift; sourceTree = "<group>"; };
 		4F4BDC1B1D894F1400932795 /* Bridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		4F4BDC1D1D894FBE00932795 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		4F4BDC1F1D895BC700932795 /* NavigationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
 		4F5208391D5EF9E0006F980A /* SoloDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoloDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F52083C1D5EF9E0006F980A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F52083E1D5EF9E0006F980A /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				4F4BDC191D866BB600932795 /* LocationSearchTableController.swift */,
 				4F876DF31D8394C80086C042 /* MasterController.swift */,
 				4F81D2B01D83F9910007B5C4 /* MapDelegateExtension.swift */,
+				4F4BDC1F1D895BC700932795 /* NavigationExtension.swift */,
 				4F81D2B21D83FA690007B5C4 /* FeatureExtension.swift */,
 				4F81D2B41D83FA810007B5C4 /* DirectionExtension.swift */,
 			);
@@ -483,6 +486,7 @@
 				4F4BDC1A1D866BB600932795 /* LocationSearchTableController.swift in Sources */,
 				4F876DF41D8394C80086C042 /* MasterController.swift in Sources */,
 				4F81D2AF1D83F4840007B5C4 /* Config.swift in Sources */,
+				4F4BDC201D895BC700932795 /* NavigationExtension.swift in Sources */,
 				4F876DFB1D83A05D0086C042 /* FilterController.swift in Sources */,
 				4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */,
 				4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */,

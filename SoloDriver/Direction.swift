@@ -11,14 +11,8 @@ import MapKit
 import SwiftyJSON
 import SCLAlertView
 
-class DirectionPolyline: ColorPolyline {
-    override init() {
-        super.init()
-        color = UIColor.blackColor()
-    }
-}
-
 class DestinationAnnotation: MKPointAnnotation {
+
     let reuseId = "Destination"
     func createPinView(oldPinView: MKAnnotationView?) -> MKPinAnnotationView {
         if (oldPinView == nil) {
@@ -43,4 +37,15 @@ class DestinationAnnotation: MKPointAnnotation {
 
 class WayPointAnnotation: MKPointAnnotation {
 
+}
+
+class DirectionPolyline: ColorPolyline {
+
+    convenience init(route: MKRoute) {
+        self.init()
+        self.init(points: route.polyline.points(), count: route.polyline.pointCount)
+        self.route = route
+    }
+
+    var route: MKRoute?
 }

@@ -14,16 +14,9 @@ extension MasterController: MKMapViewDelegate {
 
     // MARK:- MapViewDelegate methods, Polyline view
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        if overlay is Geometries.ColorPolyline {
-            let colorOverlay = overlay as! Geometries.ColorPolyline
-            let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-            polylineRenderer.strokeColor = colorOverlay.color
-            if (overlay is Geometries.PlanPolyline) {
-                polylineRenderer.lineWidth = 5
-            } else {
-                polylineRenderer.lineWidth = 2
-            }
-            return polylineRenderer
+        if overlay is ColorPolyline {
+            let colorOverlay = overlay as! ColorPolyline
+            return colorOverlay.renderer
         }
         return MKPolylineRenderer()
     }
@@ -57,6 +50,9 @@ extension MasterController: MKMapViewDelegate {
                     colorStyle: annotation.alertColor!,
                     colorTextButton: 0xFFFFFF)
 
+        } else if (view.annotation is DestinationAnnotation) {
+            let annotation = view.annotation as! DestinationAnnotation
+            getDirection(annotation)
         }
     }
 }
