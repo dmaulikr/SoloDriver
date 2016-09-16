@@ -21,27 +21,27 @@ class EditTextController: UITableViewController {
         input.text = editText
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         input.becomeFirstResponder()
     }
 
-    @IBAction func save(sender: UIBarButtonItem) {
+    @IBAction func save(_ sender: UIBarButtonItem) {
         if let inputValue = Double(input.text!) {
             if (inputValue > 0) {
                 SettingsManager.shared.settings[titleString!].double = inputValue
                 SettingsManager.shared.saveSettings()
-                self.navigationController?.popViewControllerAnimated(true)
+                self.navigationController?.popViewController(animated: true)
                 return
             }
         }
         let errorDialog = UIAlertController(
             title: "Invalid Input",
             message: "Please enter a decimal number.",
-            preferredStyle: UIAlertControllerStyle.Alert)
+            preferredStyle: UIAlertControllerStyle.alert)
         errorDialog.addAction(UIAlertAction(
             title: "Ok",
-            style: UIAlertActionStyle.Default,
+            style: UIAlertActionStyle.default,
             handler: nil))
-        self.presentViewController(errorDialog, animated: false, completion: nil)
+        self.present(errorDialog, animated: false, completion: nil)
     }
 }

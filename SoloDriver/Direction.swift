@@ -14,19 +14,19 @@ import SCLAlertView
 class DestinationAnnotation: MKPointAnnotation {
 
     let reuseId = "Destination"
-    func createPinView(oldPinView: MKAnnotationView?) -> MKPinAnnotationView {
+    func createPinView(_ oldPinView: MKAnnotationView?) -> MKPinAnnotationView {
         if (oldPinView == nil) {
             let pinView = MKPinAnnotationView(annotation: self, reuseIdentifier: reuseId)
-            let rightButton = UIButton(type: .System)
-            rightButton.frame = CGRectMake(0, 0, 110, 50)
-            rightButton.backgroundColor = UIColor.blackColor()
-            rightButton.setTitle("Get Direction", forState: .Normal)
-            rightButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            let rightButton = UIButton(type: .system)
+            rightButton.frame = CGRect(x: 0, y: 0, width: 110, height: 50)
+            rightButton.backgroundColor = UIColor.black
+            rightButton.setTitle("Get Direction", for: UIControlState())
+            rightButton.setTitleColor(UIColor.white, for: UIControlState())
             pinView.rightCalloutAccessoryView = rightButton as UIView
-            pinView.userInteractionEnabled = true
+            pinView.isUserInteractionEnabled = true
             pinView.canShowCallout = true
-            pinView.pinTintColor = UIColor.blackColor()
-            pinView.rightCalloutAccessoryView!.tintColor = UIColor.blackColor()
+            pinView.pinTintColor = UIColor.black
+            pinView.rightCalloutAccessoryView!.tintColor = UIColor.black
             return pinView
         } else {
             oldPinView!.annotation = self

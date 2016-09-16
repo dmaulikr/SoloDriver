@@ -13,7 +13,7 @@ import SCLAlertView
 extension MasterController: MKMapViewDelegate {
 
     // MARK:- MapViewDelegate methods, Polyline view
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is ColorPolyline {
             let colorOverlay = overlay as! ColorPolyline
             return colorOverlay.renderer
@@ -22,25 +22,25 @@ extension MasterController: MKMapViewDelegate {
     }
 
     // MARK:- MapViewDelegate methods, Annotation View
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if (annotation is BridgeAnnotation) {
             let thisAnnotation = annotation as! BridgeAnnotation
-            let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(thisAnnotation.reuseId)
+            let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: thisAnnotation.reuseId)
             return thisAnnotation.createPinView(pinView)
         } else if (annotation is DestinationAnnotation) {
             let thisAnnotation = annotation as! DestinationAnnotation
-            let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(thisAnnotation.reuseId)
+            let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: thisAnnotation.reuseId)
             return thisAnnotation.createPinView(pinView)
         }
         return nil
     }
 
     // MARK:- MapViewDelegate methods, Annotation View Callout
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if (view.annotation is AlertViewAnnotation) {
             let annotation = view.annotation as! AlertViewAnnotation
             SCLAlertView(appearance: SCLAlertView.SCLAppearance(
-                kWindowWidth: UIScreen.mainScreen().bounds.width - 50))
+                kWindowWidth: UIScreen.main.bounds.width - 50))
                 .showTitle(
                     annotation.title!,
                     subTitle: annotation.alertSubtitle!,

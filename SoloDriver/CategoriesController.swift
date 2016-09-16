@@ -15,28 +15,28 @@ class CategoriesController: UITableViewController {
     static let TITLE_BRIDGE = "Bridge Clearances"
     static var currentCategory: String = TITLE_HML
 
-    @IBAction func cancel(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true) { }
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true) { }
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
 
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.separatorInset = UIEdgeInsetsZero
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.separatorInset = UIEdgeInsets.zero
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         // Configure the cell...
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
         case 0:
             cell.imageView!.image = UIImage(named: "bridge-on-avenue-perspective")
             cell.textLabel!.text = CategoriesController.TITLE_BRIDGE
@@ -53,15 +53,15 @@ class CategoriesController: UITableViewController {
             break
         }
         if (cell.textLabel!.text == CategoriesController.currentCategory) {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         }
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        CategoriesController.currentCategory = tableView.cellForRowAtIndexPath(indexPath)!.textLabel!.text!
-        self.dismissViewControllerAnimated(true) { }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        CategoriesController.currentCategory = tableView.cellForRow(at: indexPath)!.textLabel!.text!
+        self.dismiss(animated: true) { }
     }
 
 }

@@ -23,12 +23,12 @@ extension MasterController {
         if (SettingsManager.shared.settings["Bridge Clearance"].boolValue) {
             ArcGISService.getBridgeStructures(mapView, completion: { (result) in
                 // Draw annotations in background
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
                     let bridges = JSON(result)["features"]
                     // Loop through bridges
                     for (_, bridge): (String, JSON) in bridges {
                         let bridgeType = bridge["attributes"]["BRIDGE_TYPE"].stringValue
-                        if (!(bridgeType.containsString("OVER ROAD") || bridgeType.containsString("PEDESTRIAN UNDERPASS"))) {
+                        if (!(bridgeType.contains("OVER ROAD") || bridgeType.contains("PEDESTRIAN UNDERPASS"))) {
                             continue
                         }
                         if (bridge["attributes"]["MIN_CLEARANCE"].doubleValue <= 1) {
@@ -39,7 +39,7 @@ extension MasterController {
                         if (thisTask != self.currentTask) {
                             break
                         }
-                        dispatch_async(dispatch_get_main_queue(), {
+                        DispatchQueue.main.async(execute: {
                             self.mapView.addAnnotation(annotationView.annotation!)
                         })
                     }

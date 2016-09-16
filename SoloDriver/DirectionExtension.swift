@@ -21,14 +21,14 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
 
     func addSearchBar() {
         // Search result list under serach bar
-        let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTableController
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTableController
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController!.searchResultsUpdater = locationSearchTable
         // Setup search bar
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Search for Destination"
-        searchBar.searchBarStyle = .Minimal
+        searchBar.searchBarStyle = .minimal
         searchBar.showsCancelButton = false
         navigationItem.titleView = resultSearchController!.searchBar
         resultSearchController!.hidesNavigationBarDuringPresentation = false
@@ -51,10 +51,10 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
     }
 
     // Select one direction route
-    func tapHandler(gestureRecognizer: UITapGestureRecognizer) {
+    func tapHandler(_ gestureRecognizer: UITapGestureRecognizer) {
         self.navigationController?.view.endEditing(true)
-        let tapPosition = gestureRecognizer.locationInView(mapView)
-        let tapCoordinate = mapView.convertPoint(tapPosition, toCoordinateFromView: mapView)
+        let tapPosition = gestureRecognizer.location(in: mapView)
+        let tapCoordinate = mapView.convert(tapPosition, toCoordinateFrom: mapView)
         let tapMapPoint = MKMapPointForCoordinate(tapCoordinate)
         // Check which route is picked
         for i in 0..<mapView.overlays.count {
@@ -67,9 +67,9 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
                 for j in 0..<mapView.overlays.count {
                     let polyline = mapView.overlays[j] as! DirectionPolyline
                     if (j == i) {
-                        polyline.renderer.strokeColor = UIColor.blackColor().colorWithAlphaComponent(0.9)
+                        polyline.renderer.strokeColor = UIColor.black.withAlphaComponent(0.9)
                     } else {
-                        polyline.renderer.strokeColor = UIColor.blackColor().colorWithAlphaComponent(0.3)
+                        polyline.renderer.strokeColor = UIColor.black.withAlphaComponent(0.3)
                     }
                 }
                 break
@@ -77,13 +77,13 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         }
     }
 
-    func longTapHandler(gestureRecognizer: UILongPressGestureRecognizer) {
+    func longTapHandler(_ gestureRecognizer: UILongPressGestureRecognizer) {
         self.navigationController?.view.endEditing(true)
-        if (gestureRecognizer.state != .Began) {
+        if (gestureRecognizer.state != .began) {
             return
         }
-        let tapPosition = gestureRecognizer.locationInView(mapView)
-        let tapCoordinate = mapView.convertPoint(tapPosition, toCoordinateFromView: mapView)
+        let tapPosition = gestureRecognizer.location(in: mapView)
+        let tapCoordinate = mapView.convert(tapPosition, toCoordinateFrom: mapView)
         let tapLocation = CLLocation(latitude: tapCoordinate.latitude, longitude: tapCoordinate.longitude)
         // Parse coordinate to address
         CLGeocoder().reverseGeocodeLocation(tapLocation) { (placemarks, error) in
@@ -100,7 +100,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
     }
 
     // Add annotation to map
-    func addDestinationAnnotation(annotation: MKPointAnnotation) {
+    func addDestinationAnnotation(_ annotation: MKPointAnnotation) {
         // clear existing pins
         for annotation in mapView.annotations {
             if annotation is DestinationAnnotation {
@@ -112,18 +112,18 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
     }
 
     // Add annotation from search result
-    func addDestinationAnnotationFromSearch(annotation: MKPointAnnotation) {
+    func addDestinationAnnotationFromSearch(_ annotation: MKPointAnnotation) {
         addDestinationAnnotation(annotation)
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(annotation.coordinate, span)
         mapView.setRegion(region, animated: true)
     }
 
-    func getDirection(annotation: MKAnnotation) {
+    func getDirection(_ annotation: MKAnnotation) {
         // Clear existing directions
         for overlay in mapView.overlays {
             if overlay is DirectionPolyline {
-                mapView.removeOverlay(overlay)
+                mapView.remove(overlay)
             }
         }
         // Get directions
@@ -135,27 +135,27 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         request.source = coordinateToMapItem(LocationManager.shared.getLastLocation()!.coordinate)
         request.destination = coordinateToMapItem(destination)
         request.requestsAlternateRoutes = true
-        request.transportType = .Automobile
+        request.transportType = .automobile
         let directions = MKDirections(request: request)
-        directions.calculateDirectionsWithCompletionHandler ({
+        directions.calculate (completionHandler: {
             (response: MKDirectionsResponse?, error: NSError?) in
             if let routes = response?.routes {
                 for i in 0..<routes.count {
                     let polyline = DirectionPolyline(route: routes[i])
                     if (i == 0) {
-                        polyline.color = UIColor.blackColor().colorWithAlphaComponent(0.9)
+                        polyline.color = UIColor.black.withAlphaComponent(0.9)
                     } else {
-                        polyline.color = UIColor.blackColor().colorWithAlphaComponent(0.3)
+                        polyline.color = UIColor.black.withAlphaComponent(0.3)
                     }
-                    self.mapView.addOverlay(polyline)
+                    self.mapView.add(polyline)
                 }
             } else if let _ = error {
 
             }
-        })
+        } as! MKDirectionsHandler)
     }
 
-    func coordinateToMapItem(coordinate: CLLocationCoordinate2D) -> MKMapItem {
+    func coordinateToMapItem(_ coordinate: CLLocationCoordinate2D) -> MKMapItem {
         return MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary: nil))
     }
 

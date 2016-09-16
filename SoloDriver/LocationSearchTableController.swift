@@ -14,7 +14,7 @@ import UIKit
 import MapKit
 
 protocol HandleMapSearch {
-    func addDestinationAnnotationFromSearch(annotation: MKPointAnnotation)
+    func addDestinationAnnotationFromSearch(_ annotation: MKPointAnnotation)
 }
 
 class LocationSearchTableController: UITableViewController, UISearchResultsUpdating {
@@ -29,18 +29,18 @@ class LocationSearchTableController: UITableViewController, UISearchResultsUpdat
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return matchingItems.count
     }
 
     // Cell view
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
-        let selectedItem = matchingItems[indexPath.row].placemark
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        let selectedItem = matchingItems[(indexPath as NSIndexPath).row].placemark
         cell.textLabel?.text = selectedItem.name
         cell.detailTextLabel?.text = LocationManager.shared.parseAddress(selectedItem)
         return cell
@@ -48,23 +48,23 @@ class LocationSearchTableController: UITableViewController, UISearchResultsUpdat
 
     // did select
     // Adapted from https://www.thorntech.com/2016/01/how-to-search-for-location-using-apples-mapkit/
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
         let title = cell?.textLabel?.text
         let subtitle = cell?.detailTextLabel?.text
-        let selectedItem = matchingItems[indexPath.row].placemark
+        let selectedItem = matchingItems[(indexPath as NSIndexPath).row].placemark
         let coordinate = selectedItem.coordinate
         let annotation = DestinationAnnotation()
         annotation.coordinate = coordinate
         annotation.title = title
         annotation.subtitle = subtitle
         handleMapSearchDelegate?.addDestinationAnnotationFromSearch(annotation)
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     // Mark: UISearchResultsUpdating
     // Adapted from https://www.thorntech.com/2016/01/how-to-search-for-location-using-apples-mapkit/
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         // Set up the API call for map search
         guard let mapView = mapView,
             let searchBarText = searchController.searchBar.text else { return }
@@ -72,7 +72,7 @@ class LocationSearchTableController: UITableViewController, UISearchResultsUpdat
         request.naturalLanguageQuery = searchBarText
         request.region = mapView.region
         let search = MKLocalSearch(request: request)
-        search.startWithCompletionHandler { response, _ in
+        search.start { response, _ in
             guard let response = response else {
                 return
             }

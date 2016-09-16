@@ -16,38 +16,38 @@ class HelpController: UIViewController, UIWebViewDelegate {
     static let URL_HPFV = "https://docs.google.com/document/d/1xbJcEowR0rhpsbCB7KdWcK6tZv1oce8mtY58qMYQAnI/pub?embedded=true"
     static let URL_BRIDGE = "https://docs.google.com/document/d/1xwkfgzvQo4fIYaqLp5w_XsShcmXf8OgnDjHvdUmcYEo/pub?embedded=true"
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = CategoriesController.currentCategory
         // Set url
-        let url: NSURL
+        let url: URL
         switch CategoriesController.currentCategory {
         case CategoriesController.TITLE_HML:
-            url = NSURL (string: HelpController.URL_HML)!;
+            url = URL (string: HelpController.URL_HML)!;
         case CategoriesController.TITLE_HPFV:
-            url = NSURL (string: HelpController.URL_HPFV)!;
+            url = URL (string: HelpController.URL_HPFV)!;
         case CategoriesController.TITLE_BRIDGE:
-            url = NSURL (string: HelpController.URL_BRIDGE)!;
+            url = URL (string: HelpController.URL_BRIDGE)!;
         default:
-            url = NSURL()
+            url = URL(string: "")!
         }
-        let requestObj = NSURLRequest(URL: url);
+        let requestObj = URLRequest(url: url);
         webView.delegate = self
         webView.loadRequest(requestObj);
     }
 
-    @IBAction func done(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true) { }
+    @IBAction func done(_ sender: AnyObject) {
+        self.dismiss(animated: true) { }
     }
 
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if let newURL = request.URL {
-            if (newURL.absoluteString.containsString("https://docs.google.com/document")) {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if let newURL = request.url {
+            if (newURL.absoluteString.contains("https://docs.google.com/document")) {
                 return true
             }
-            if UIApplication.sharedApplication().canOpenURL(newURL) {
+            if UIApplication.shared.canOpenURL(newURL) {
                 print("canOpenURL")
-                if UIApplication.sharedApplication().openURL(newURL) {
+                if UIApplication.shared.openURL(newURL) {
                     print("redirected to browser")
                     self.viewWillAppear(false)
                     return false // no need to open this url in your app

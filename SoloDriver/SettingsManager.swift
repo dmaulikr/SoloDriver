@@ -22,11 +22,11 @@ class SettingsManager: NSObject {
     }
 
     func loadSettings() {
-        if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-            let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file)
+        if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first {
+            let path = URL(fileURLWithPath: dir).appendingPathComponent(file)
 
             // reading
-            let settingsData = NSData(contentsOfURL: path)
+            let settingsData = try? Data(contentsOf: path)
             if (settingsData != nil) {
                 settings = JSON(data: settingsData!)
                 if (settings["Routes"].string == nil || settings["Routes"].string == "") {
@@ -39,11 +39,11 @@ class SettingsManager: NSObject {
     func saveSettings() {
         // print(self.settings)
         // Save settings in the background
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-                let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(self.file)
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+            if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first {
+                let path = URL(fileURLWithPath: dir).appendingPathComponent(self.file)
                 do {
-                    try self.settings.rawString()!.writeToURL(path, atomically: false, encoding: NSUTF8StringEncoding)
+                    try self.settings.rawString()!.write(to: path, atomically: false, encoding: String.Encoding.utf8)
                 }
                 catch { /* error handling here */ }
             }

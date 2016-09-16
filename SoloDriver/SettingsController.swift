@@ -24,11 +24,11 @@ class SettingsController: UITableViewController {
         (self.view as! UIScrollView).showsVerticalScrollIndicator = false
     }
 
-    @IBAction func done(sender: AnyObject) {
-        dismissViewControllerAnimated(true) { }
+    @IBAction func done(_ sender: AnyObject) {
+        dismiss(animated: true) { }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         let settings = SettingsManager.shared.settings
         if (settings["Height (m)"].double == nil) {
             height.detailTextLabel?.text = "--"
@@ -52,12 +52,12 @@ class SettingsController: UITableViewController {
         }
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        switch indexPath.section {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch (indexPath as NSIndexPath).section {
         case MY_TRUCK:
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
-            let destination = storyboard!.instantiateViewControllerWithIdentifier("EditTextController") as! EditTextController
+            let cell = tableView.cellForRow(at: indexPath)
+            let destination = storyboard!.instantiateViewController(withIdentifier: "EditTextController") as! EditTextController
             destination.titleString = cell?.textLabel?.text
             destination.editText = cell?.detailTextLabel?.text
             self.navigationController?.pushViewController(destination, animated: true)

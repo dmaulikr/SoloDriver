@@ -31,16 +31,16 @@ class AlertViewAnnotation: MKPointAnnotation {
 
 class Geometry: NSObject {
 
-    static func getTapEnvelope(coordinate: CLLocationCoordinate2D) -> String {
-        let xmin = coordinate.longitude - Geometries.TAP_RADIUS
-        let ymin = coordinate.latitude - Geometries.TAP_RADIUS
-        let xmax = coordinate.longitude + Geometries.TAP_RADIUS
-        let ymax = coordinate.latitude + Geometries.TAP_RADIUS
+    static func getTapEnvelope(_ coordinate: CLLocationCoordinate2D) -> String {
+        let xmin = coordinate.longitude - Config.TAP_RADIUS
+        let ymin = coordinate.latitude - Config.TAP_RADIUS
+        let xmax = coordinate.longitude + Config.TAP_RADIUS
+        let ymax = coordinate.latitude + Config.TAP_RADIUS
         let geometry = JSON(["xmin": xmin, "xmax": xmax, "ymin": ymin, "ymax": ymax])
-        return geometry.rawString()!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        return geometry.rawString()!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
     }
 
-    static func getVisibleAreaEnvelope(mapView: MKMapView) -> String {
+    static func getVisibleAreaEnvelope(_ mapView: MKMapView) -> String {
         let mRect = mapView.visibleMapRect
         let xmin = MKMapRectGetMinX(mRect)
         let ymin = MKMapRectGetMinY(mRect)
@@ -49,11 +49,11 @@ class Geometry: NSObject {
         let min = MKCoordinateForMapPoint(MKMapPointMake(xmin, ymin))
         let max = MKCoordinateForMapPoint(MKMapPointMake(xmax, ymax))
         let geometry = JSON(["xmin": min.longitude, "xmax": max.longitude, "ymin": min.latitude, "ymax": max.latitude])
-        return geometry.rawString()!.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        return geometry.rawString()!.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
     }
 
     // Calculate distance between a point and a line
-    static func distanceOfPointAndLine(pt: MKMapPoint, poly: MKPolyline) -> Double {
+    static func distanceOfPointAndLine(_ pt: MKMapPoint, poly: MKPolyline) -> Double {
         var distance: Double = Double(MAXFLOAT)
         var linePoints: [MKMapPoint] = []
         // var polyPoints = UnsafeMutablePointer<MKMapPoint>.alloc(poly.pointCount)
@@ -85,7 +85,7 @@ class Geometry: NSObject {
     }
 
     // Get closest line ppoint between a point and a line
-    static func getClosestPoint(pt: MKMapPoint, poly: MKPolyline) -> CLLocationCoordinate2D {
+    static func getClosestPoint(_ pt: MKMapPoint, poly: MKPolyline) -> CLLocationCoordinate2D {
         var distance: Double = Double(MAXFLOAT)
         var closestPoint = pt
         var linePoints: [MKMapPoint] = []

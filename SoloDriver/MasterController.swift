@@ -20,7 +20,7 @@ class MasterController: UIViewController {
         toolbarItems![0].width = -10
         toolbarItems![1] = MKUserTrackingBarButtonItem(mapView: mapView)
         toolbarItems![1].customView?.tintColor = view.tintColor
-        navigationController?.toolbarHidden = false
+        navigationController?.isToolbarHidden = false
         // Add search bar
         initDirection()
 
@@ -35,49 +35,49 @@ class MasterController: UIViewController {
             if (lastLocation == nil) {
                 lastLocation = CLLocation(latitude: -37.768356, longitude: 144.9663673)
             }
-            camera = MKMapCamera(lookingAtCenterCoordinate: lastLocation!.coordinate, fromEyeCoordinate: lastLocation!.coordinate, eyeAltitude: 50000)
+            camera = MKMapCamera(lookingAtCenter: lastLocation!.coordinate, fromEyeCoordinate: lastLocation!.coordinate, eyeAltitude: 50000)
             mapView.setCamera(camera, animated: false)
         }
     }
 
-    @IBAction func didClickFilter(sender: AnyObject) {
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("FilterNavigationController")
-        controller.modalPresentationStyle = .FormSheet
-        controller.modalTransitionStyle = .CoverVertical
-        presentViewController(controller, animated: true) { }
+    @IBAction func didClickFilter(_ sender: AnyObject) {
+        let controller = storyboard!.instantiateViewController(withIdentifier: "FilterNavigationController")
+        controller.modalPresentationStyle = .formSheet
+        controller.modalTransitionStyle = .coverVertical
+        present(controller, animated: true) { }
     }
 
-    @IBAction func didClickSettings(sender: AnyObject) {
-        let controller = storyboard!.instantiateViewControllerWithIdentifier("SettingsNavigationController")
-        controller.modalPresentationStyle = .FormSheet
-        controller.modalTransitionStyle = .CoverVertical
-        presentViewController(controller, animated: true) { }
+    @IBAction func didClickSettings(_ sender: AnyObject) {
+        let controller = storyboard!.instantiateViewController(withIdentifier: "SettingsNavigationController")
+        controller.modalPresentationStyle = .formSheet
+        controller.modalTransitionStyle = .coverVertical
+        present(controller, animated: true) { }
     }
 
-    @IBAction func didClickAction(sender: AnyObject) {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+    @IBAction func didClickAction(_ sender: AnyObject) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.view.tintColor = view.tintColor
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let clearMap = UIAlertAction(title: "Clear Map", style: .Default) { (action) in
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let clearMap = UIAlertAction(title: "Clear Map", style: .default) { (action) in
             self.mapView.removeOverlays(self.mapView.overlays)
             self.mapView.removeAnnotations(self.mapView.annotations)
         }
-        let searchMap = UIAlertAction(title: "Search Map Area", style: .Default) { (action) in
+        let searchMap = UIAlertAction(title: "Search Map Area", style: .default) { (action) in
             self.titleItem.title = action.title
             self.searchFeatures()
         }
-        let addWaypoint = UIAlertAction(title: "Add Waypoint", style: .Default) { (action) in
+        let addWaypoint = UIAlertAction(title: "Add Waypoint", style: .default) { (action) in
             // TODO
         }
         actionSheet.addAction(cancel)
         actionSheet.addAction(clearMap)
         actionSheet.addAction(addWaypoint)
         actionSheet.addAction(searchMap)
-        presentViewController(actionSheet, animated: true) { }
+        present(actionSheet, animated: true) { }
     }
 
     @IBOutlet var titleItem: UIBarButtonItem!
-    @IBAction func didClickTitle(sender: AnyObject) {
+    @IBAction func didClickTitle(_ sender: AnyObject) {
         if (titleItem.title == "Search Map Area") {
             searchFeatures()
         }

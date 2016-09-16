@@ -13,11 +13,11 @@ import SCLAlertView
 
 class BridgeAnnotation: AlertViewAnnotation {
     var reuseId = "BridgeAnnotation"
-    func createPinView(oldPinView: MKAnnotationView?) -> MKAnnotationView {
+    func createPinView(_ oldPinView: MKAnnotationView?) -> MKAnnotationView {
         if (oldPinView == nil) {
             let pinView = MKAnnotationView(annotation: self, reuseIdentifier: reuseId)
-            pinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
-            pinView.userInteractionEnabled = true
+            pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+            pinView.isUserInteractionEnabled = true
             pinView.canShowCallout = true
             pinView.image = image
             pinView.tintColor = color
@@ -34,7 +34,7 @@ class BridgeAnnotation: AlertViewAnnotation {
 
 extension Geometry {
 
-    static func createBridgeAnnotationFrom(bridge: JSON) -> BridgeAnnotation {
+    static func createBridgeAnnotationFrom(_ bridge: JSON) -> BridgeAnnotation {
         let geometry = bridge["geometry"]
         let attributes = bridge["attributes"]
         let clearance = attributes["MIN_CLEARANCE"].doubleValue
@@ -43,16 +43,16 @@ extension Geometry {
         let bridgeAnnotation = BridgeAnnotation()
         bridgeAnnotation.coordinate = coordinate
         bridgeAnnotation.title = attributes["FEATURE_CROSSED"].stringValue
-            .stringByReplacingOccurrencesOfString("RAILWAY OVER ", withString: "")
-            .stringByReplacingOccurrencesOfString("RAILWAY LINE OVER ", withString: "")
-            .stringByTrimmingCharactersInSet(NSCharacterSet.decimalDigitCharacterSet())
-            .stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            .replacingOccurrences(of: "RAILWAY OVER ", with: "")
+            .replacingOccurrences(of: "RAILWAY LINE OVER ", with: "")
+            .trimmingCharacters(in: CharacterSet.decimalDigits)
+            .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         bridgeAnnotation.subtitle = "CLEARANCE: " + String(clearance)
         // For alert view
         var subtitle = "CLEARANCE: " + String(clearance)
         subtitle += "\nBRIDGE TYPE: " + attributes["BRIDGE_TYPE"].stringValue
-            .stringByReplacingOccurrencesOfString("(GRADE SEPARATION)", withString: "")
-            .stringByReplacingOccurrencesOfString("(RAIL OVERPASS)", withString: "")
+            .replacingOccurrences(of: "(GRADE SEPARATION)", with: "")
+            .replacingOccurrences(of: "(RAIL OVERPASS)", with: "")
         subtitle += "\nBRIDGE WIDTH: " + String(attributes["OVERALL_WIDTH"].doubleValue)
         subtitle += "\nBRIDGE LENGTH: " + String(attributes["OVERALL_LENGTH"].doubleValue)
         bridgeAnnotation.alertSubtitle = subtitle
@@ -63,28 +63,28 @@ extension Geometry {
                 bridgeAnnotation.color = Config.RED
                 bridgeAnnotation.image = Config.RED_BRIDGE
                 bridgeAnnotation.alertColor = Config.RED_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Info
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
             } else if (clearance < 5) {
                 bridgeAnnotation.color = Config.ORANGE
                 bridgeAnnotation.image = Config.ORANGE_BRIDGE
                 bridgeAnnotation.alertColor = Config.ORANGE_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Info
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
             } else {
                 bridgeAnnotation.color = Config.GREEN
                 bridgeAnnotation.alertColor = Config.GREEN_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Success
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.success
             }
         } else {
             if (clearance < settings["Height (m)"].doubleValue) {
                 bridgeAnnotation.color = Config.RED
                 bridgeAnnotation.image = Config.RED_BRIDGE
                 bridgeAnnotation.alertColor = Config.RED_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Error
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.error
             } else {
                 bridgeAnnotation.color = Config.GREEN
                 bridgeAnnotation.image = Config.GREEN_BRIDGE
                 bridgeAnnotation.alertColor = Config.GREEN_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.Success
+                bridgeAnnotation.alertStyle = SCLAlertViewStyle.success
             }
         }
         return bridgeAnnotation
