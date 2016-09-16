@@ -66,8 +66,12 @@ class MasterController: UIViewController {
             self.titleItem.title = action.title
             self.searchFeatures()
         }
+        let addWaypoint = UIAlertAction(title: "Add Waypoint", style: .Default) { (action) in
+            // TODO
+        }
         actionSheet.addAction(cancel)
         actionSheet.addAction(clearMap)
+        actionSheet.addAction(addWaypoint)
         actionSheet.addAction(searchMap)
         presentViewController(actionSheet, animated: true) { }
     }

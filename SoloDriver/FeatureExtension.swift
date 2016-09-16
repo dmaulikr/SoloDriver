@@ -47,49 +47,58 @@ extension MasterController {
             })
         }
 
-        switch SettingsManager.shared.settings["Routes"].stringValue {
-        case CategoriesController.TITLE_HML:
-            PublicDataService.getHMLRoute(mapView) { (result) in
-                // Draw lines in background
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                    let roads = JSON(result)["features"]
-                    // Loop through roads
-                    for (_, road): (String, JSON) in roads {
-                        // let attributes = road["attributes"]
-                        let roadPolyline = Geometries.createHMLPolylineFrom(road)
-                        // let roadAnnotations = Geometries.createHMLAnnotationsFrom(road)
-                        if (thisTask != self.currentTask) {
-                            break
-                        }
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.mapView.addOverlay(roadPolyline)
-                            // self.mapView.addAnnotations(roadAnnotations)
-                        })
-                    }
-                })
+        // VicTraffic
+        VicTrafficService.getVicTrafficFeatures { (result) in
+            if let json = VicTrafficService.parseVicTrafficFeatures(result) {
+                let incidents = json["incidents"]
             }
-            break
-        case CategoriesController.TITLE_HPFV:
-            PublicDataService.getHPFVRoute(mapView) { (result) in
-                // Draw lines in background
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                    let roads = JSON(result)["features"]
-                    // Loop through roads
-                    for (_, road): (String, JSON) in roads {
-                        let roadPolyline = Geometries.createHPFVPolylineFrom(road)
-                        if (thisTask != self.currentTask) {
-                            break
-                        }
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.mapView.addOverlay(roadPolyline)
-                        })
-                    }
-                })
-            }
-            break
-        default:
-            break
         }
+
+        // Routes
+
+//        switch SettingsManager.shared.settings["Routes"].stringValue {
+//        case CategoriesController.TITLE_HML:
+//            PublicDataService.getHMLRoute(mapView) { (result) in
+//                // Draw lines in background
+//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//                    let roads = JSON(result)["features"]
+//                    // Loop through roads
+//                    for (_, road): (String, JSON) in roads {
+//                        // let attributes = road["attributes"]
+//                        let roadPolyline = Geometries.createHMLPolylineFrom(road)
+//                        // let roadAnnotations = Geometries.createHMLAnnotationsFrom(road)
+//                        if (thisTask != self.currentTask) {
+//                            break
+//                        }
+//                        dispatch_async(dispatch_get_main_queue(), {
+//                            self.mapView.addOverlay(roadPolyline)
+//                            // self.mapView.addAnnotations(roadAnnotations)
+//                        })
+//                    }
+//                })
+//            }
+//            break
+//        case CategoriesController.TITLE_HPFV:
+//            PublicDataService.getHPFVRoute(mapView) { (result) in
+//                // Draw lines in background
+//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+//                    let roads = JSON(result)["features"]
+//                    // Loop through roads
+//                    for (_, road): (String, JSON) in roads {
+//                        let roadPolyline = Geometries.createHPFVPolylineFrom(road)
+//                        if (thisTask != self.currentTask) {
+//                            break
+//                        }
+//                        dispatch_async(dispatch_get_main_queue(), {
+//                            self.mapView.addOverlay(roadPolyline)
+//                        })
+//                    }
+//                })
+//            }
+//            break
+//        default:
+//            break
+//        }
         mapView.removeOverlays(mapView.overlays)
         mapView.removeAnnotations(mapView.annotations)
     }

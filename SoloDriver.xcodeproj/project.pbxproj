@@ -33,7 +33,6 @@
 		4F876DF71D839E7F0086C042 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F876DF61D839E7F0086C042 /* LocationManager.swift */; };
 		4F876DFB1D83A05D0086C042 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F876DFA1D83A05D0086C042 /* FilterController.swift */; };
 		4FA643221D84285800C0DDA2 /* VicTrafficService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA643211D84285800C0DDA2 /* VicTrafficService.swift */; };
-		4FA643241D84286E00C0DDA2 /* GoogleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA643231D84286E00C0DDA2 /* GoogleService.swift */; };
 		4FF7B63D1D62AE5F0098470F /* GeometriesD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */; };
 		4FF7B6411D63FAA60098470F /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B6401D63FAA60098470F /* CategoriesController.swift */; };
 		4FF7B6431D642A850098470F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7B6421D642A850098470F /* Assets.xcassets */; };
@@ -86,7 +85,6 @@
 		4F876DF61D839E7F0086C042 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		4F876DFA1D83A05D0086C042 /* FilterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		4FA643211D84285800C0DDA2 /* VicTrafficService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicTrafficService.swift; sourceTree = "<group>"; };
-		4FA643231D84286E00C0DDA2 /* GoogleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleService.swift; sourceTree = "<group>"; };
 		4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometriesD.swift; sourceTree = "<group>"; };
 		4FF7B6401D63FAA60098470F /* CategoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
 		4FF7B6421D642A850098470F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -239,7 +237,6 @@
 			children = (
 				4F81D2B61D8400990007B5C4 /* ArcGISService.swift */,
 				4FA643211D84285800C0DDA2 /* VicTrafficService.swift */,
-				4FA643231D84286E00C0DDA2 /* GoogleService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -491,7 +488,6 @@
 				4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */,
 				4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */,
 				4F81D2AD1D83D5750007B5C4 /* RoutesController.swift in Sources */,
-				4FA643241D84286E00C0DDA2 /* GoogleService.swift in Sources */,
 				4F0A95A11D71C3D80036CA39 /* EditTextController.swift in Sources */,
 				4F81D2B71D8400990007B5C4 /* ArcGISService.swift in Sources */,
 				4F81D2B11D83F9910007B5C4 /* MapDelegateExtension.swift in Sources */,
