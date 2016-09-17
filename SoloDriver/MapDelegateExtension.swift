@@ -52,7 +52,7 @@ extension MasterController: MKMapViewDelegate {
 
         } else if (view.annotation is DestinationAnnotation) {
             let annotation = view.annotation as! DestinationAnnotation
-            getDirection(annotation)
+            getDirection(annotation: annotation)
         }
     }
 }

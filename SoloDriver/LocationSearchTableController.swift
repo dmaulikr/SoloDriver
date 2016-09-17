@@ -14,7 +14,7 @@ import UIKit
 import MapKit
 
 protocol HandleMapSearch {
-    func addDestinationAnnotationFromSearch(_ annotation: MKPointAnnotation)
+    func addDestinationAnnotationFromSearch(annotation: MKPointAnnotation)
 }
 
 class LocationSearchTableController: UITableViewController, UISearchResultsUpdating {
@@ -58,7 +58,7 @@ class LocationSearchTableController: UITableViewController, UISearchResultsUpdat
         annotation.coordinate = coordinate
         annotation.title = title
         annotation.subtitle = subtitle
-        handleMapSearchDelegate?.addDestinationAnnotationFromSearch(annotation)
+        handleMapSearchDelegate?.addDestinationAnnotationFromSearch(annotation: annotation)
         dismiss(animated: true, completion: nil)
     }
 

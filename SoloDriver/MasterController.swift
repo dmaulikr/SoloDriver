@@ -23,6 +23,8 @@ class MasterController: UIViewController {
         navigationController?.isToolbarHidden = false
         // Add search bar
         initDirection()
+        // Taps on map
+        registerTapGestures()
 
     }
 
