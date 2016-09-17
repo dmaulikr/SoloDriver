@@ -17,6 +17,9 @@ class FilterController: UITableViewController {
     @IBOutlet var routesTitle: UILabel!
 
     override func viewWillAppear(_ animated: Bool) {
+        if (SettingsManager.shared.settings["Routes"].stringValue == "") {
+            SettingsManager.shared.settings["Routes"].string = "None"
+        }
         routesTitle.text = SettingsManager.shared.settings["Routes"].stringValue
         super.viewWillAppear(animated)
     }

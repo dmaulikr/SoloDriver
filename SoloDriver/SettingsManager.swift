@@ -29,9 +29,6 @@ class SettingsManager: NSObject {
             let settingsData = try? Data(contentsOf: path)
             if (settingsData != nil) {
                 settings = JSON(data: settingsData!)
-                if (settings["Routes"].string == nil || settings["Routes"].string == "") {
-                    settings["Routes"].string = "None"
-                }
             }
         }
     }
