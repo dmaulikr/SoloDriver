@@ -26,14 +26,13 @@ class ArcGISService: NSObject {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let url = baseUrlBridgeStructures + Geometry.getVisibleAreaEnvelope(mapView)
         // print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
-        Alamofire.request(url).validate().responseJSON { response in
+        Alamofire.request(url).validate().responseString { response in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            
             if (response.result.isFailure) {
                 return
             }
             if let value = response.result.value {
-                completion(value as! String)
+                completion(value)
             }
         }
     }

@@ -23,7 +23,8 @@ extension MasterController {
         if (SettingsManager.shared.settings["Bridge Clearance"].boolValue) {
             ArcGISService.getBridgeStructures(mapView, completion: { (result) in
                 // Draw annotations in background
-                DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+                
+                DispatchQueue.global(qos: .userInteractive).async{
                     let bridges = JSON(result)["features"]
                     // Loop through bridges
                     for (_, bridge): (String, JSON) in bridges {
@@ -39,11 +40,11 @@ extension MasterController {
                         if (thisTask != self.currentTask) {
                             break
                         }
-                        DispatchQueue.main.async(execute: {
+                        DispatchQueue.main.async {
                             self.mapView.addAnnotation(annotationView.annotation!)
-                        })
+                        }
                     }
-                })
+                }
             })
         }
 
@@ -51,6 +52,7 @@ extension MasterController {
         VicTrafficService.getVicTrafficFeatures { (result) in
             if let json = VicTrafficService.parseVicTrafficFeatures(result) {
                 let incidents = json["incidents"]
+                print(incidents)
             }
         }
 

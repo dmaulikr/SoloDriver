@@ -39,7 +39,7 @@ extension MasterController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if (view.annotation is AlertViewAnnotation) {
             let annotation = view.annotation as! AlertViewAnnotation
-            SCLAlertView(appearance: SCLAlertView.SCLAppearance(
+            _ = SCLAlertView(appearance: SCLAlertView.SCLAppearance(
                 kWindowWidth: UIScreen.main.bounds.width - 50))
                 .showTitle(
                     annotation.title!,

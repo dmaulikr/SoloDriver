@@ -39,7 +39,7 @@ class SettingsManager: NSObject {
     func saveSettings() {
         // print(self.settings)
         // Save settings in the background
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+        DispatchQueue.global(qos: .background).async {
             if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first {
                 let path = URL(fileURLWithPath: dir).appendingPathComponent(self.file)
                 do {
@@ -47,6 +47,6 @@ class SettingsManager: NSObject {
                 }
                 catch { /* error handling here */ }
             }
-        })
+        }
     }
 }

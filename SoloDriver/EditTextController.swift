@@ -30,7 +30,7 @@ class EditTextController: UITableViewController {
             if (inputValue > 0) {
                 SettingsManager.shared.settings[titleString!].double = inputValue
                 SettingsManager.shared.saveSettings()
-                self.navigationController?.popViewController(animated: true)
+                _ = self.navigationController?.popViewController(animated: true)
                 return
             }
         }

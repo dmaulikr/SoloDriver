@@ -55,6 +55,8 @@
 		<string>armv7</string>
 		<string>location-services</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
 		<key>UINavigationBar</key>
