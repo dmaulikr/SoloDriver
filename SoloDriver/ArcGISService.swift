@@ -25,7 +25,6 @@ class ArcGISService: NSObject {
     static func getBridgeStructures(_ mapView: MKMapView, completion: @escaping (_ result: String) -> Void) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         let url = baseUrlBridgeStructures + Geometry.getVisibleAreaEnvelope(mapView)
-        // print(url.stringByReplacingOccurrencesOfString("f=pjson&", withString: ""))
         Alamofire.request(url).validate().responseString { response in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if (response.result.isFailure) {

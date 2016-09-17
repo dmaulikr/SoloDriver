@@ -58,35 +58,35 @@ extension Geometry {
         bridgeAnnotation.alertSubtitle = subtitle
         // Set color based on settings
         let settings = SettingsManager.shared.settings
-        if (settings["Height (m)"].double == nil) {
-            if (clearance < 4) {
-                bridgeAnnotation.color = Config.RED
-                bridgeAnnotation.image = Config.RED_BRIDGE
-                bridgeAnnotation.alertColor = Config.RED_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
-            } else if (clearance < 5) {
-                bridgeAnnotation.color = Config.ORANGE
-                bridgeAnnotation.image = Config.ORANGE_BRIDGE
-                bridgeAnnotation.alertColor = Config.ORANGE_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
-            } else {
-                bridgeAnnotation.color = Config.GREEN
-                bridgeAnnotation.alertColor = Config.GREEN_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.success
-            }
-        } else {
-            if (clearance < settings["Height (m)"].doubleValue) {
-                bridgeAnnotation.color = Config.RED
-                bridgeAnnotation.image = Config.RED_BRIDGE
-                bridgeAnnotation.alertColor = Config.RED_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.error
-            } else {
-                bridgeAnnotation.color = Config.GREEN
-                bridgeAnnotation.image = Config.GREEN_BRIDGE
-                bridgeAnnotation.alertColor = Config.GREEN_CODE
-                bridgeAnnotation.alertStyle = SCLAlertViewStyle.success
-            }
-        }
+//        if (settings["Height (m)"].double == nil) {
+//            if (clearance < 4) {
+//                bridgeAnnotation.color = Config.RED
+//                bridgeAnnotation.image = Config.RED_BRIDGE
+//                bridgeAnnotation.alertColor = Config.RED_CODE
+//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
+//            } else if (clearance < 5) {
+//                bridgeAnnotation.color = Config.ORANGE
+//                bridgeAnnotation.image = Config.ORANGE_BRIDGE
+//                bridgeAnnotation.alertColor = Config.ORANGE_CODE
+//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
+//            } else {
+//                bridgeAnnotation.color = Config.GREEN
+//                bridgeAnnotation.alertColor = Config.GREEN_CODE
+//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.success
+//            }
+//        } else {
+//            if (clearance < settings["Height (m)"].doubleValue) {
+//                bridgeAnnotation.color = Config.RED
+//                bridgeAnnotation.image = Config.RED_BRIDGE
+//                bridgeAnnotation.alertColor = Config.RED_CODE
+//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.error
+//            } else {
+//                bridgeAnnotation.color = Config.GREEN
+//                bridgeAnnotation.image = Config.GREEN_BRIDGE
+//                bridgeAnnotation.alertColor = Config.GREEN_CODE
+//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.success
+//            }
+//        }
         return bridgeAnnotation
     }
 }
