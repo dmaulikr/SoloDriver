@@ -57,6 +57,7 @@ class MasterController: UIViewController {
     @IBAction func didClickAction(_ sender: AnyObject) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.view.tintColor = view.tintColor
+        actionSheet.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let clearMap = UIAlertAction(title: "Clear Map", style: .default) { (action) in
             self.mapView.removeOverlays(self.mapView.overlays)
