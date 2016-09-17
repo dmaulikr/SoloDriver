@@ -18,9 +18,9 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         // Long tap to mark destination
         registerTapGestures()
     }
-
+    
     func addSearchBar() {
-        // Search result list under serach bar
+        // Search result list under search bar
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTableController
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController!.searchResultsUpdater = locationSearchTable
@@ -38,7 +38,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         locationSearchTable.mapView = mapView
         locationSearchTable.handleMapSearchDelegate = self
     }
-
+    
     // Register tap gesture for searching destination
     func registerTapGestures() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapHandler(_:)))
@@ -49,7 +49,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         longTapRecognizer.delegate = self
         mapView.addGestureRecognizer(longTapRecognizer)
     }
-
+    
     // Select one direction route
     func tapHandler(_ gestureRecognizer: UITapGestureRecognizer) {
         self.navigationController?.view.endEditing(true)
@@ -76,7 +76,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
             }
         }
     }
-
+    
     func longTapHandler(_ gestureRecognizer: UILongPressGestureRecognizer) {
         self.navigationController?.view.endEditing(true)
         if (gestureRecognizer.state != .began) {
@@ -98,7 +98,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
             self.addDestinationAnnotation(annotation)
         }
     }
-
+    
     // Add annotation to map
     func addDestinationAnnotation(_ annotation: MKPointAnnotation) {
         // clear existing pins
@@ -110,7 +110,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
     }
-
+    
     // Add annotation from search result
     func addDestinationAnnotationFromSearch(_ annotation: MKPointAnnotation) {
         addDestinationAnnotation(annotation)
@@ -118,7 +118,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         let region = MKCoordinateRegionMake(annotation.coordinate, span)
         mapView.setRegion(region, animated: true)
     }
-
+    
     func getDirection(_ annotation: MKAnnotation) {
         // Clear existing directions
         for overlay in mapView.overlays {
@@ -132,13 +132,15 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         if (LocationManager.shared.getLastLocation() == nil) {
             return
         }
-        request.source = coordinateToMapItem(LocationManager.shared.getLastLocation()!.coordinate)
-        request.destination = coordinateToMapItem(destination)
+        request.source = coordinateToMapItem(coordinate: LocationManager.shared.getLastLocation()!.coordinate)
+        request.destination = coordinateToMapItem(coordinate: destination)
         request.requestsAlternateRoutes = true
         request.transportType = .automobile
         let directions = MKDirections(request: request)
-        directions.calculate (completionHandler: {
-            (response: MKDirectionsResponse?, error: NSError?) in
+        directions.calculate { (response, error) in
+            if (error != nil) {
+                return
+            }
             if let routes = response?.routes {
                 for i in 0..<routes.count {
                     let polyline = DirectionPolyline(route: routes[i])
@@ -149,16 +151,14 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
                     }
                     self.mapView.add(polyline)
                 }
-            } else if let _ = error {
-
             }
-        } as! MKDirectionsHandler)
+        }
     }
-
-    func coordinateToMapItem(_ coordinate: CLLocationCoordinate2D) -> MKMapItem {
+    
+    func coordinateToMapItem(coordinate: CLLocationCoordinate2D) -> MKMapItem {
         return MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary: nil))
     }
-
+    
     func tapRadius() -> Double {
         let mapRect = mapView.visibleMapRect;
         let metersPerMapPoint = MKMetersPerMapPointAtLatitude(mapView.centerCoordinate.latitude)
@@ -166,4 +166,3 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         return metersPerPixel * 10
     }
 }
-
