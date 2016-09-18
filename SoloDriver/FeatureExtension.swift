@@ -23,7 +23,7 @@ extension MasterController {
         let settings = SettingsManager.shared.settings
         
         // Bridge Clearance
-        if (SettingsManager.shared.settings["Bridge Clearance"].boolValue) {
+        if (settings["Bridge Clearance"].boolValue) {
             ArcGISService.getBridgeStructures(mapView, completion: { (result) in
                 // Draw annotations in background
                 DispatchQueue.global(qos: .userInteractive).async{
@@ -93,6 +93,9 @@ extension MasterController {
                     }
                     let annotation = Geometry.createVicTrafficAnnotationFrom(json: incident)
                     let annotationView = annotation.createPinView(nil)
+                    if (thisTask != self.currentTask) {
+                        break
+                    }
                     DispatchQueue.main.async {
                         self.mapView.addAnnotation(annotationView.annotation!)
                     }
@@ -100,6 +103,35 @@ extension MasterController {
                 }
             }
             
+        }
+        
+        // Rest Area
+        if (settings["Rest Area"].boolValue) {
+            YQLService.getRestArea(completion: { (result) in
+                // Draw annotations in background
+                DispatchQueue.global(qos: .userInteractive).async{
+                    var restAreas: JSON
+                    if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
+                        restAreas = JSON(data: dataFromString)["query"]["results"]["row"]
+                    } else {
+                        return
+                    }
+                    for i in 1..<restAreas.count {
+                        let restArea = restAreas[i]
+                        if (!restArea["RestAreaType"].stringValue.contains("TRUCKS")) {
+                            continue
+                        }
+                        let annotation = Geometry.createRestAreaAnnotationFrom(json: restArea)
+                        let annotationView = annotation.createPinView(nil)
+                        if (thisTask != self.currentTask) {
+                            break
+                        }
+                        DispatchQueue.main.async {
+                            self.mapView.addAnnotation(annotationView.annotation!)
+                        }
+                    }
+                }
+            })
         }
         
         // Routes

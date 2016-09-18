@@ -31,7 +31,7 @@ class MasterController: UIViewController {
     @IBOutlet var mapView: MKMapView! {
         didSet {
             // Set map camera
-            var lastLocation = LocationService.shared.getLastLocation()
+            var lastLocation = LocationManager.shared.getLastLocation()
             var camera: MKMapCamera
             // Default location - Melbourne
             if (lastLocation == nil) {
