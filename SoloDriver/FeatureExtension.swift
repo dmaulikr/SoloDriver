@@ -135,6 +135,27 @@ extension MasterController {
         }
         
         // Routes
+        ArcGISService.getRoutes(mapView: mapView, route: settings["Routes"].stringValue) { (result) in
+            DispatchQueue.global(qos: .userInteractive).async {
+                var routes: JSON
+                if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
+                    routes = JSON(data: dataFromString)["features"]
+                } else {
+                    return
+                }
+                for (_, route): (String, JSON) in routes {
+                    let polyline = Geometry.createRoutesPolylineFrom(json: route)
+                    if (thisTask != self.currentTask) {
+                        break
+                    }
+                    DispatchQueue.main.async {
+                        self.mapView.add(polyline)
+                    }
+                }
+            }
+        }
+        
+        
         
         //        switch SettingsManager.shared.settings["Routes"].stringValue {
         //        case CategoriesController.TITLE_HML:

@@ -16,7 +16,11 @@ extension MasterController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is ColorPolyline {
             let colorOverlay = overlay as! ColorPolyline
-            return colorOverlay.renderer
+            let renderer = colorOverlay.renderer
+            if (overlay is DirectionPolyline) {
+                renderer.lineWidth = 5
+            }
+            return renderer
         }
         return MKPolylineRenderer()
     }

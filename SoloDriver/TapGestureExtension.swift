@@ -36,11 +36,12 @@ extension MasterController {
                 }
                 // Colorize
                 for j in 0..<mapView.overlays.count {
-                    let polyline = mapView.overlays[j] as! DirectionPolyline
-                    if (j == i) {
-                        polyline.renderer.strokeColor = UIColor.black.withAlphaComponent(0.9)
-                    } else {
-                        polyline.renderer.strokeColor = UIColor.black.withAlphaComponent(0.3)
+                    if let polyline = mapView.overlays[j] as? DirectionPolyline {
+                        if (j == i) {
+                            polyline.renderer.strokeColor = UIColor.black.withAlphaComponent(0.9)
+                        } else {
+                            polyline.renderer.strokeColor = UIColor.black.withAlphaComponent(0.3)
+                        }
                     }
                 }
                 // Did find a direction route

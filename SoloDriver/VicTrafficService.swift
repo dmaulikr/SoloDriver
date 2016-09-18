@@ -22,7 +22,13 @@ class VicTrafficService: NSObject {
                 return
             }
             if let value = response.result.value {
-                completion(value)
+                if (value.contains("{\"incidents\":[{\"id\":")){
+                    completion(value)
+                } else {
+                    getVicTrafficFeatures({ (newResult) in
+                        completion(newResult)
+                    })
+                }
             }
         }
     }

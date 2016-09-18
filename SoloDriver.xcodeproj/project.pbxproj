@@ -36,6 +36,7 @@
 		4FB519391D8E336D00CFBB6D /* YQLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB519381D8E336D00CFBB6D /* YQLService.swift */; };
 		4FB5193B1D8E560200CFBB6D /* VicTraffic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB5193A1D8E560200CFBB6D /* VicTraffic.swift */; };
 		4FB5193D1D8E7FC700CFBB6D /* RestArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB5193C1D8E7FC700CFBB6D /* RestArea.swift */; };
+		4FB5193F1D8EB09E00CFBB6D /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB5193E1D8EB09E00CFBB6D /* Route.swift */; };
 		4FF7B63D1D62AE5F0098470F /* GeometriesD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */; };
 		4FF7B6431D642A850098470F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7B6421D642A850098470F /* Assets.xcassets */; };
 		DC2BE3CC0EE73AA6519CF15D /* Pods_SoloDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2205E36CEB74CA392FAB298F /* Pods_SoloDriver.framework */; };
@@ -89,6 +90,7 @@
 		4FB519381D8E336D00CFBB6D /* YQLService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQLService.swift; sourceTree = "<group>"; };
 		4FB5193A1D8E560200CFBB6D /* VicTraffic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicTraffic.swift; sourceTree = "<group>"; };
 		4FB5193C1D8E7FC700CFBB6D /* RestArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestArea.swift; sourceTree = "<group>"; };
+		4FB5193E1D8EB09E00CFBB6D /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometriesD.swift; sourceTree = "<group>"; };
 		4FF7B6421D642A850098470F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6F816D8F06860C9C75CB4C1 /* Pods-SoloDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriver/Pods-SoloDriver.release.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				4FB5193A1D8E560200CFBB6D /* VicTraffic.swift */,
 				4F4BDC1D1D894FBE00932795 /* Direction.swift */,
 				4FB5193C1D8E7FC700CFBB6D /* RestArea.swift */,
+				4FB5193E1D8EB09E00CFBB6D /* Route.swift */,
 			);
 			name = Geometries;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				4F81D2B11D83F9910007B5C4 /* MapDelegateExtension.swift in Sources */,
 				4F81D2B31D83FA690007B5C4 /* FeatureExtension.swift in Sources */,
 				4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */,
+				4FB5193F1D8EB09E00CFBB6D /* Route.swift in Sources */,
 				4F4BDC1E1D894FBE00932795 /* Direction.swift in Sources */,
 				4F0A95A31D72913F0036CA39 /* SettingsManager.swift in Sources */,
 				4F876DF71D839E7F0086C042 /* LocationManager.swift in Sources */,

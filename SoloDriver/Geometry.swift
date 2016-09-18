@@ -16,6 +16,7 @@ class ColorPolyline: MKPolyline {
     lazy var renderer: MKPolylineRenderer = {
         let renderer = MKPolylineRenderer(overlay: self)
         renderer.strokeColor = self.color
+        renderer.lineWidth = 2
         return renderer
     }()
 }
