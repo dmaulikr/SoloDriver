@@ -11,9 +11,9 @@ import Alamofire
 import SwiftyJSON
 
 class VicTrafficService: NSObject {
-
-    fileprivate static let url = "http://traffic.vicroads.vic.gov.au/maps.js"
-
+    
+    static let url = "http://traffic.vicroads.vic.gov.au/maps.js"
+    
     static func getVicTrafficFeatures(_ completion: @escaping (_ result: String) -> Void) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         Alamofire.request(url).validate().responseString { response in
@@ -26,7 +26,7 @@ class VicTrafficService: NSObject {
             }
         }
     }
-
+    
     static func parseVicTrafficFeatures(_ value: String) -> JSON? {
         let startIndex = value.range(of: "{\"incidents\":[{\"id\":")?.lowerBound
         let endIndex = value.range(of: "}]}]}")?.upperBound

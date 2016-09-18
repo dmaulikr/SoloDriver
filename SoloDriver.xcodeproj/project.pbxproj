@@ -34,6 +34,7 @@
 		4F876DFB1D83A05D0086C042 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F876DFA1D83A05D0086C042 /* FilterController.swift */; };
 		4FA643221D84285800C0DDA2 /* VicTrafficService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA643211D84285800C0DDA2 /* VicTrafficService.swift */; };
 		4FB519371D8E054000CFBB6D /* TapGestureExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB519361D8E054000CFBB6D /* TapGestureExtension.swift */; };
+		4FB519391D8E336D00CFBB6D /* YQLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB519381D8E336D00CFBB6D /* YQLService.swift */; };
 		4FF7B63D1D62AE5F0098470F /* GeometriesD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */; };
 		4FF7B6411D63FAA60098470F /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B6401D63FAA60098470F /* CategoriesController.swift */; };
 		4FF7B6431D642A850098470F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7B6421D642A850098470F /* Assets.xcassets */; };
@@ -86,6 +87,7 @@
 		4F876DFA1D83A05D0086C042 /* FilterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		4FA643211D84285800C0DDA2 /* VicTrafficService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicTrafficService.swift; sourceTree = "<group>"; };
 		4FB519361D8E054000CFBB6D /* TapGestureExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapGestureExtension.swift; sourceTree = "<group>"; };
+		4FB519381D8E336D00CFBB6D /* YQLService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQLService.swift; sourceTree = "<group>"; };
 		4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometriesD.swift; sourceTree = "<group>"; };
 		4FF7B6401D63FAA60098470F /* CategoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
 		4FF7B6421D642A850098470F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			children = (
 				4F81D2B61D8400990007B5C4 /* ArcGISService.swift */,
 				4FA643211D84285800C0DDA2 /* VicTrafficService.swift */,
+				4FB519381D8E336D00CFBB6D /* YQLService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				4F876DF71D839E7F0086C042 /* LocationManager.swift in Sources */,
 				4FA643221D84285800C0DDA2 /* VicTrafficService.swift in Sources */,
 				4FF7B63D1D62AE5F0098470F /* GeometriesD.swift in Sources */,
+				4FB519391D8E336D00CFBB6D /* YQLService.swift in Sources */,
 				4FF7B6411D63FAA60098470F /* CategoriesController.swift in Sources */,
 				4F81D2BC1D8404DF0007B5C4 /* Geometry.swift in Sources */,
 				4F81D2B51D83FA810007B5C4 /* DirectionExtension.swift in Sources */,
