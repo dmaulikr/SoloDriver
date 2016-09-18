@@ -42,7 +42,7 @@ extension MasterController: MKMapViewDelegate {
             _ = SCLAlertView(appearance: SCLAlertView.SCLAppearance(
                 kWindowWidth: UIScreen.main.bounds.width - 50))
                 .showTitle(
-                    annotation.title!,
+                    annotation.alertTitle!,
                     subTitle: annotation.alertSubtitle!,
                     style: annotation.alertStyle!,
                     closeButtonTitle: "Close",

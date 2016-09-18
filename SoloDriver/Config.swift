@@ -10,6 +10,7 @@ import UIKit
 
 class Config: NSObject {
 
+    // Color
     static let RED = UIColor(red: 0.74, green: 0.21, blue: 0.18, alpha: 1.0)
     static let RED_CODE = 0xBD362E as UInt
     static let ORANGE = UIColor(red: 0.97, green: 0.58, blue: 0.02, alpha: 1.0)
@@ -20,5 +21,19 @@ class Config: NSObject {
     static let BLUE_CODE = 0x0045CC as UInt
     static let TAP_RADIUS = 0.001
 
-    static let ICON_BRIDGE = UIImage(named: "bridgeRed")
+    // Size
+    static let ICON_SIZE: CGFloat = 24
+    static let ICON_BRIDGE = UIImage(named: "Bridge-96")?.resize(newWidth: ICON_SIZE)
+}
+
+extension UIImage {
+    func resize(newWidth: CGFloat) -> UIImage? {
+        let scale = newWidth / self.size.width
+        let newHeight = self.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
 }

@@ -25,7 +25,12 @@ extension MasterController {
                 // Draw annotations in background
                 
                 DispatchQueue.global(qos: .userInteractive).async{
-                    let bridges = JSON(result)["features"]
+                    var bridges: JSON
+                    if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
+                        bridges = JSON(data: dataFromString)["features"]
+                    } else {
+                        return
+                    }
                     // Loop through bridges
                     for (_, bridge): (String, JSON) in bridges {
                         let bridgeType = bridge["attributes"]["BRIDGE_TYPE"].stringValue
@@ -35,7 +40,7 @@ extension MasterController {
                         if (bridge["attributes"]["MIN_CLEARANCE"].doubleValue <= 1) {
                             continue
                         }
-                        let annotation = Geometry.createBridgeAnnotationFrom(bridge)
+                        let annotation = Geometry.createBridgeAnnotationFrom(bridge: bridge)
                         let annotationView = annotation.createPinView(nil)
                         if (thisTask != self.currentTask) {
                             break

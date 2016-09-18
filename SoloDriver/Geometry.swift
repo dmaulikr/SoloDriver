@@ -27,6 +27,25 @@ class AlertViewAnnotation: MKPointAnnotation {
     var alertSubtitle: String?
     var alertColor: UInt?
     var alertStyle: SCLAlertViewStyle?
+    
+    var reuseId: String = "AlertViewAnnotation"
+    func createPinView(_ oldPinView: MKAnnotationView?) -> MKAnnotationView {
+        if (oldPinView == nil) {
+            let pinView = MKAnnotationView(annotation: self, reuseIdentifier: reuseId)
+            pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
+            pinView.isUserInteractionEnabled = true
+            pinView.canShowCallout = true
+            pinView.image = image
+            pinView.tintColor = color
+            pinView.rightCalloutAccessoryView!.tintColor = color
+            return pinView
+        } else {
+            oldPinView!.annotation = self
+            oldPinView!.subviews.last?.tintColor = color
+            oldPinView!.rightCalloutAccessoryView!.tintColor = color
+            return oldPinView!
+        }
+    }
 }
 
 class Geometry: NSObject {

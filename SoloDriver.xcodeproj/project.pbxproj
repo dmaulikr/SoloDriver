@@ -213,11 +213,11 @@
 			children = (
 				4F4BDC191D866BB600932795 /* LocationSearchTableController.swift */,
 				4F876DF31D8394C80086C042 /* MasterController.swift */,
-				4FB519361D8E054000CFBB6D /* TapGestureExtension.swift */,
 				4F81D2B01D83F9910007B5C4 /* MapDelegateExtension.swift */,
-				4F4BDC1F1D895BC700932795 /* NavigationExtension.swift */,
+				4FB519361D8E054000CFBB6D /* TapGestureExtension.swift */,
 				4F81D2B21D83FA690007B5C4 /* FeatureExtension.swift */,
 				4F81D2B41D83FA810007B5C4 /* DirectionExtension.swift */,
+				4F4BDC1F1D895BC700932795 /* NavigationExtension.swift */,
 			);
 			name = Map;
 			sourceTree = "<group>";

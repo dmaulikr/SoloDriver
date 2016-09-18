@@ -12,29 +12,17 @@ import SwiftyJSON
 import SCLAlertView
 
 class BridgeAnnotation: AlertViewAnnotation {
-    var reuseId = "BridgeAnnotation"
-    func createPinView(_ oldPinView: MKAnnotationView?) -> MKAnnotationView {
-        if (oldPinView == nil) {
-            let pinView = MKAnnotationView(annotation: self, reuseIdentifier: reuseId)
-            pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure) as UIView
-            pinView.isUserInteractionEnabled = true
-            pinView.canShowCallout = true
-            pinView.image = image
-            pinView.tintColor = color
-            pinView.rightCalloutAccessoryView!.tintColor = color
-            return pinView
-        } else {
-            oldPinView!.annotation = self
-            oldPinView!.subviews.last?.tintColor = color
-            oldPinView!.rightCalloutAccessoryView!.tintColor = color
-            return oldPinView!
-        }
+    
+    override init() {
+        super.init()
+        reuseId = "BridgeAnnotation"
     }
+    
 }
 
 extension Geometry {
-
-    static func createBridgeAnnotationFrom(_ bridge: JSON) -> BridgeAnnotation {
+    
+    static func createBridgeAnnotationFrom(bridge: JSON) -> BridgeAnnotation {
         let geometry = bridge["geometry"]
         let attributes = bridge["attributes"]
         let clearance = attributes["MIN_CLEARANCE"].doubleValue
@@ -49,7 +37,10 @@ extension Geometry {
             .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         bridgeAnnotation.subtitle = "CLEARANCE: " + String(clearance)
         // For alert view
-        var subtitle = "CLEARANCE: " + String(clearance)
+        var subtitle = attributes["FEATURE_CROSSED"].stringValue
+            .trimmingCharacters(in: CharacterSet.decimalDigits)
+            .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        subtitle += "\nCLEARANCE: " + String(clearance)
         subtitle += "\nBRIDGE TYPE: " + attributes["BRIDGE_TYPE"].stringValue
             .replacingOccurrences(of: "(GRADE SEPARATION)", with: "")
             .replacingOccurrences(of: "(RAIL OVERPASS)", with: "")
@@ -58,35 +49,19 @@ extension Geometry {
         bridgeAnnotation.alertSubtitle = subtitle
         // Set color based on settings
         let settings = SettingsManager.shared.settings
-//        if (settings["Height (m)"].double == nil) {
-//            if (clearance < 4) {
-//                bridgeAnnotation.color = Config.RED
-//                bridgeAnnotation.image = Config.RED_BRIDGE
-//                bridgeAnnotation.alertColor = Config.RED_CODE
-//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
-//            } else if (clearance < 5) {
-//                bridgeAnnotation.color = Config.ORANGE
-//                bridgeAnnotation.image = Config.ORANGE_BRIDGE
-//                bridgeAnnotation.alertColor = Config.ORANGE_CODE
-//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
-//            } else {
-//                bridgeAnnotation.color = Config.GREEN
-//                bridgeAnnotation.alertColor = Config.GREEN_CODE
-//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.success
-//            }
-//        } else {
-//            if (clearance < settings["Height (m)"].doubleValue) {
-//                bridgeAnnotation.color = Config.RED
-//                bridgeAnnotation.image = Config.RED_BRIDGE
-//                bridgeAnnotation.alertColor = Config.RED_CODE
-//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.error
-//            } else {
-//                bridgeAnnotation.color = Config.GREEN
-//                bridgeAnnotation.image = Config.GREEN_BRIDGE
-//                bridgeAnnotation.alertColor = Config.GREEN_CODE
-//                bridgeAnnotation.alertStyle = SCLAlertViewStyle.success
-//            }
-//        }
+        if (settings["Height (m)"].doubleValue == 0) {
+            bridgeAnnotation.alertTitle = "ATTENTION"
+            bridgeAnnotation.color = Config.ORANGE
+            bridgeAnnotation.image = Config.ICON_BRIDGE
+            bridgeAnnotation.alertColor = Config.ORANGE_CODE
+            bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
+        } else if (settings["Height (m)"].doubleValue > clearance) {
+            bridgeAnnotation.alertTitle = "DANGER"
+            bridgeAnnotation.color = Config.RED
+            bridgeAnnotation.image = Config.ICON_BRIDGE
+            bridgeAnnotation.alertColor = Config.RED_CODE
+            bridgeAnnotation.alertStyle = SCLAlertViewStyle.error
+        }
         return bridgeAnnotation
     }
 }
