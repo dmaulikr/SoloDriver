@@ -23,8 +23,8 @@ extension MasterController: MKMapViewDelegate {
 
     // MARK:- MapViewDelegate methods, Annotation View
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if (annotation is BridgeAnnotation) {
-            let thisAnnotation = annotation as! BridgeAnnotation
+        if (annotation is AlertViewAnnotation) {
+            let thisAnnotation = annotation as! AlertViewAnnotation
             let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: thisAnnotation.reuseId)
             return thisAnnotation.createPinView(pinView)
         } else if (annotation is DestinationAnnotation) {

@@ -35,6 +35,7 @@
 		4FA643221D84285800C0DDA2 /* VicTrafficService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA643211D84285800C0DDA2 /* VicTrafficService.swift */; };
 		4FB519371D8E054000CFBB6D /* TapGestureExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB519361D8E054000CFBB6D /* TapGestureExtension.swift */; };
 		4FB519391D8E336D00CFBB6D /* YQLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB519381D8E336D00CFBB6D /* YQLService.swift */; };
+		4FB5193B1D8E560200CFBB6D /* VicTraffic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB5193A1D8E560200CFBB6D /* VicTraffic.swift */; };
 		4FF7B63D1D62AE5F0098470F /* GeometriesD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */; };
 		4FF7B6411D63FAA60098470F /* CategoriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B6401D63FAA60098470F /* CategoriesController.swift */; };
 		4FF7B6431D642A850098470F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7B6421D642A850098470F /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		4FA643211D84285800C0DDA2 /* VicTrafficService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicTrafficService.swift; sourceTree = "<group>"; };
 		4FB519361D8E054000CFBB6D /* TapGestureExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapGestureExtension.swift; sourceTree = "<group>"; };
 		4FB519381D8E336D00CFBB6D /* YQLService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YQLService.swift; sourceTree = "<group>"; };
+		4FB5193A1D8E560200CFBB6D /* VicTraffic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicTraffic.swift; sourceTree = "<group>"; };
 		4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometriesD.swift; sourceTree = "<group>"; };
 		4FF7B6401D63FAA60098470F /* CategoriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesController.swift; sourceTree = "<group>"; };
 		4FF7B6421D642A850098470F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			children = (
 				4F81D2BB1D8404DF0007B5C4 /* Geometry.swift */,
 				4F4BDC1B1D894F1400932795 /* Bridge.swift */,
+				4FB5193A1D8E560200CFBB6D /* VicTraffic.swift */,
 				4F4BDC1D1D894FBE00932795 /* Direction.swift */,
 			);
 			name = Geometries;
@@ -495,6 +498,7 @@
 				4F81D2AD1D83D5750007B5C4 /* RoutesController.swift in Sources */,
 				4F0A95A11D71C3D80036CA39 /* EditTextController.swift in Sources */,
 				4F81D2B71D8400990007B5C4 /* ArcGISService.swift in Sources */,
+				4FB5193B1D8E560200CFBB6D /* VicTraffic.swift in Sources */,
 				4FB519371D8E054000CFBB6D /* TapGestureExtension.swift in Sources */,
 				4F81D2B11D83F9910007B5C4 /* MapDelegateExtension.swift in Sources */,
 				4F81D2B31D83FA690007B5C4 /* FeatureExtension.swift in Sources */,

@@ -353,45 +353,8 @@
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="lPs-ZE-x0y">
-                                        <rect key="frame" x="0.0" y="252" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="lPs-ZE-x0y" id="FtA-Rd-kWk">
-                                            <frame key="frameInset" width="375" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tow Truck-96" translatesAutoresizingMaskIntoConstraints="NO" id="CU0-bY-qkr">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="32" id="0Iv-zC-oFG"/>
-                                                        <constraint firstAttribute="height" constant="32" id="qGl-QI-HpH"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tow Allocation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgS-fD-nUF">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1S3-c4-vCG">
-                                                    <connections>
-                                                        <action selector="aTowAllocation:" destination="90C-GJ-r3L" eventType="valueChanged" id="bxW-lb-jhN"/>
-                                                    </connections>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="1S3-c4-vCG" firstAttribute="centerY" secondItem="FtA-Rd-kWk" secondAttribute="centerY" id="P2y-qb-Hx5"/>
-                                                <constraint firstItem="qgS-fD-nUF" firstAttribute="leading" secondItem="CU0-bY-qkr" secondAttribute="trailing" constant="12" id="PUE-St-XGc"/>
-                                                <constraint firstItem="CU0-bY-qkr" firstAttribute="centerY" secondItem="FtA-Rd-kWk" secondAttribute="centerY" id="VOY-hV-LXA"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="qgS-fD-nUF" secondAttribute="bottom" id="beE-fu-oeT"/>
-                                                <constraint firstItem="CU0-bY-qkr" firstAttribute="leading" secondItem="FtA-Rd-kWk" secondAttribute="leadingMargin" id="dbH-VS-QXI"/>
-                                                <constraint firstItem="qgS-fD-nUF" firstAttribute="top" secondItem="FtA-Rd-kWk" secondAttribute="topMargin" id="fd7-yN-V4Y"/>
-                                                <constraint firstItem="1S3-c4-vCG" firstAttribute="leading" secondItem="qgS-fD-nUF" secondAttribute="trailing" constant="10" id="mJb-fq-uPr"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="1S3-c4-vCG" secondAttribute="trailing" id="rZT-PU-uDw"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="yUa-JH-R9F">
-                                        <rect key="frame" x="0.0" y="296" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="252" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="yUa-JH-R9F" id="jia-V8-rGW">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -428,7 +391,7 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="g7N-CB-0Je">
-                                        <rect key="frame" x="0.0" y="340" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="296" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="g7N-CB-0Je" id="rTE-yJ-LXh">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -465,7 +428,7 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kmu-2d-SlR">
-                                        <rect key="frame" x="0.0" y="384" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="340" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="kmu-2d-SlR" id="vEJ-yf-uSH">
                                             <frame key="frameInset" width="375" height="43"/>
@@ -508,7 +471,7 @@
                                 <string key="footerTitle">Routes will be displayed as polylines and mapped in four categories: approved (green), conditionally approved (orange), restricted (red) and funded improvements (blue).</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EJ8-St-Oze">
-                                        <rect key="frame" x="0.0" y="504" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="460" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="EJ8-St-Oze" id="4Pu-ZD-ikU">
                                             <frame key="frameInset" width="342" height="43"/>
@@ -561,7 +524,6 @@
                         <outlet property="sRestArea" destination="MMc-an-HFt" id="RP3-7o-YNX"/>
                         <outlet property="sRoadClosed" destination="bM7-vQ-sj7" id="GAH-5Y-LL1"/>
                         <outlet property="sRoadwork" destination="fWK-26-VkD" id="Ufk-Gg-2Gi"/>
-                        <outlet property="sTowAllocation" destination="1S3-c4-vCG" id="2dj-Io-40s"/>
                         <outlet property="sTrafficAlert" destination="1Ia-SK-eS1" id="gp3-dW-TMY"/>
                     </connections>
                 </tableViewController>
@@ -978,7 +940,6 @@
         <image name="Park Bench-96" width="96" height="96"/>
         <image name="Road Worker-96" width="96" height="96"/>
         <image name="Settings Filled-44" width="22" height="22"/>
-        <image name="Tow Truck-96" width="96" height="96"/>
         <image name="Waypoint Map-96" width="96" height="96"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

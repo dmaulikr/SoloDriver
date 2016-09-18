@@ -24,6 +24,11 @@ class Config: NSObject {
     // Size
     static let ICON_SIZE: CGFloat = 24
     static let ICON_BRIDGE = UIImage(named: "Bridge-96")?.resize(newWidth: ICON_SIZE)
+    static let ICON_ROADWORK = UIImage(named: "Road Worker-96")?.resize(newWidth: ICON_SIZE)
+    static let ICON_EVENT = UIImage(named: "Event Accepted Tentatively-96")?.resize(newWidth: ICON_SIZE)
+    static let ICON_TRAFFIC_ALERT = UIImage(named: "Error-96")?.resize(newWidth: ICON_SIZE)
+    static let ICON_ROAD_CLOSED = UIImage(named: "Cancel-96")?.resize(newWidth: ICON_SIZE)
+    static let ICON_REST_AREA = UIImage(named: "Park Bench-96")?.resize(newWidth: ICON_SIZE)
 }
 
 extension UIImage {

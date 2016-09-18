@@ -27,7 +27,7 @@ class VicTrafficService: NSObject {
         }
     }
     
-    static func parseVicTrafficFeatures(_ value: String) -> JSON? {
+    static func parseVicTrafficFeatures(value: String) -> String? {
         let startIndex = value.range(of: "{\"incidents\":[{\"id\":")?.lowerBound
         let endIndex = value.range(of: "}]}]}")?.upperBound
         // Guard
@@ -35,6 +35,6 @@ class VicTrafficService: NSObject {
             return nil
         }
         let json = value.substring(to: endIndex!).substring(from: startIndex!)
-        return JSON(json)
+        return json
     }
 }

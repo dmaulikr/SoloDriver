@@ -11,19 +11,21 @@ import MapKit
 import SwiftyJSON
 
 extension MasterController {
-
+    
     // Search features
     func searchFeatures() {
-
+        
         // Semaphore
         currentTask = (currentTask + 1) % 1024
         let thisTask = currentTask
-
+        
+        // Setting
+        let settings = SettingsManager.shared.settings
+        
         // Bridge Clearance
         if (SettingsManager.shared.settings["Bridge Clearance"].boolValue) {
             ArcGISService.getBridgeStructures(mapView, completion: { (result) in
                 // Draw annotations in background
-                
                 DispatchQueue.global(qos: .userInteractive).async{
                     var bridges: JSON
                     if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
@@ -52,60 +54,99 @@ extension MasterController {
                 }
             })
         }
-
+        
         // VicTraffic
         VicTrafficService.getVicTrafficFeatures { (result) in
-            if let json = VicTrafficService.parseVicTrafficFeatures(result) {
-                let incidents = json["incidents"]
-                print(incidents)
+            let json = VicTrafficService.parseVicTrafficFeatures(value: result)
+            DispatchQueue.global(qos: .userInteractive).async{
+                var incidents: JSON
+                if let dataFromString = json?.data(using: String.Encoding.utf8, allowLossyConversion: false) {
+                    incidents = JSON(data: dataFromString)["incidents"]
+                } else {
+                    return
+                }
+                for (_, incident): (String, JSON) in incidents {
+                    let closureType = incident["closure_type"].stringValue
+                    switch closureType {
+                    case "Road Construction", "Road Maintenance", "Utility Works":
+                        if (!settings["Roadwork"].boolValue) {
+                            continue
+                        }
+                        break
+                    case "Sporting/Social Event":
+                        if (!settings["Event"].boolValue) {
+                            continue
+                        }
+                        break
+                    case "Traffic Alert":
+                        if (!settings["Traffic Alert"].boolValue) {
+                            continue
+                        }
+                        break
+                    case "Road Closed":
+                        if (!settings["Road Closed"].boolValue) {
+                            continue
+                        }
+                        break
+                    default:
+                        break
+                    }
+                    let annotation = Geometry.createVicTrafficAnnotationFrom(json: incident)
+                    let annotationView = annotation.createPinView(nil)
+                    DispatchQueue.main.async {
+                        self.mapView.addAnnotation(annotationView.annotation!)
+                    }
+                    
+                }
             }
+            
         }
-
+        
         // Routes
-
-//        switch SettingsManager.shared.settings["Routes"].stringValue {
-//        case CategoriesController.TITLE_HML:
-//            PublicDataService.getHMLRoute(mapView) { (result) in
-//                // Draw lines in background
-//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-//                    let roads = JSON(result)["features"]
-//                    // Loop through roads
-//                    for (_, road): (String, JSON) in roads {
-//                        // let attributes = road["attributes"]
-//                        let roadPolyline = Geometries.createHMLPolylineFrom(road)
-//                        // let roadAnnotations = Geometries.createHMLAnnotationsFrom(road)
-//                        if (thisTask != self.currentTask) {
-//                            break
-//                        }
-//                        dispatch_async(dispatch_get_main_queue(), {
-//                            self.mapView.addOverlay(roadPolyline)
-//                            // self.mapView.addAnnotations(roadAnnotations)
-//                        })
-//                    }
-//                })
-//            }
-//            break
-//        case CategoriesController.TITLE_HPFV:
-//            PublicDataService.getHPFVRoute(mapView) { (result) in
-//                // Draw lines in background
-//                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-//                    let roads = JSON(result)["features"]
-//                    // Loop through roads
-//                    for (_, road): (String, JSON) in roads {
-//                        let roadPolyline = Geometries.createHPFVPolylineFrom(road)
-//                        if (thisTask != self.currentTask) {
-//                            break
-//                        }
-//                        dispatch_async(dispatch_get_main_queue(), {
-//                            self.mapView.addOverlay(roadPolyline)
-//                        })
-//                    }
-//                })
-//            }
-//            break
-//        default:
-//            break
-//        }
+        
+        //        switch SettingsManager.shared.settings["Routes"].stringValue {
+        //        case CategoriesController.TITLE_HML:
+        //            PublicDataService.getHMLRoute(mapView) { (result) in
+        //                // Draw lines in background
+        //                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        //                    let roads = JSON(result)["features"]
+        //                    // Loop through roads
+        //                    for (_, road): (String, JSON) in roads {
+        //                        // let attributes = road["attributes"]
+        //                        let roadPolyline = Geometries.createHMLPolylineFrom(road)
+        //                        // let roadAnnotations = Geometries.createHMLAnnotationsFrom(road)
+        //                        if (thisTask != self.currentTask) {
+        //                            break
+        //                        }
+        //                        dispatch_async(dispatch_get_main_queue(), {
+        //                            self.mapView.addOverlay(roadPolyline)
+        //                            // self.mapView.addAnnotations(roadAnnotations)
+        //                        })
+        //                    }
+        //                })
+        //            }
+        //            break
+        //        case CategoriesController.TITLE_HPFV:
+        //            PublicDataService.getHPFVRoute(mapView) { (result) in
+        //                // Draw lines in background
+        //                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        //                    let roads = JSON(result)["features"]
+        //                    // Loop through roads
+        //                    for (_, road): (String, JSON) in roads {
+        //                        let roadPolyline = Geometries.createHPFVPolylineFrom(road)
+        //                        if (thisTask != self.currentTask) {
+        //                            break
+        //                        }
+        //                        dispatch_async(dispatch_get_main_queue(), {
+        //                            self.mapView.addOverlay(roadPolyline)
+        //                        })
+        //                    }
+        //                })
+        //            }
+        //            break
+        //        default:
+        //            break
+        //        }
         mapView.removeOverlays(mapView.overlays)
         mapView.removeAnnotations(mapView.annotations)
     }
