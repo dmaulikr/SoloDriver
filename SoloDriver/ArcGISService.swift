@@ -18,13 +18,12 @@ class ArcGISService: NSObject {
     static let baseUrlHMLRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_NETWORK/FeatureServer/"
     static let queryParamsHMLRoute = "/query?f=pjson&outSR=4326&inSR=4326&outFields=*&orderByFields=SUBJECT_PREF_RDNAME&geometry="
     static let layersHMLRoute = [9, 8, 6, 5, 3, 2]
-    static let baseUrlBridgeStructures = "https://services2.arcgis.com/18ajPSI0b3ppsmMt/ArcGIS/rest/services/Bridge_Structures/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
+    static let urlBridgeStructures = "https://services2.arcgis.com/18ajPSI0b3ppsmMt/ArcGIS/rest/services/Bridge_Structures/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&where=1%3D1"
     static let baseUrlHPFVRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HPFV_Mass_Route/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
     
     static func getBridgeStructures(_ mapView: MKMapView, completion: @escaping (_ result: String) -> Void) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        let url = baseUrlBridgeStructures + Geometry.getVisibleAreaEnvelope(mapView)
-        Alamofire.request(url).validate().responseString { response in
+        Alamofire.request(urlBridgeStructures).validate().responseString { response in
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if (response.result.isFailure) {
                 return
