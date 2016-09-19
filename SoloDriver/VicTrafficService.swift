@@ -15,20 +15,23 @@ class VicTrafficService: NSObject {
     static let url = "http://traffic.vicroads.vic.gov.au/maps.js"
     
     static func getVicTrafficFeatures(_ completion: @escaping (_ result: String) -> Void) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        SettingsManager.shared.networkON()
         Alamofire.request(url).validate().responseString { response in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            if (response.result.isFailure) {
-                return
-            }
-            if let value = response.result.value {
-                if (value.contains("{\"incidents\":[{\"id\":")){
-                    completion(value)
-                } else {
-                    getVicTrafficFeatures({ (newResult) in
-                        completion(newResult)
-                    })
+            SettingsManager.shared.networkOff()
+            if (!response.result.isFailure) {
+                if let value = response.result.value {
+                    if (value.contains("{\"incidents\":[{\"id\":")){
+                        completion(value)
+                        return
+                    }
                 }
+            }
+            print(response.result.error!)
+            let deadlineTime = DispatchTime.now() + .seconds(1)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                getVicTrafficFeatures({ (newResult) in
+                    completion(newResult)
+                })
             }
         }
     }

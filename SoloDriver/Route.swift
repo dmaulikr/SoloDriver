@@ -14,6 +14,9 @@ import SCLAlertView
 extension Geometry {
     
     static func createRoutesPolylineFrom(name: String, json: JSON) -> ColorPolyline {
+        
+        print(json.rawString()!)
+        
         var pointsToUse: [CLLocationCoordinate2D] = []
         let paths = json["geometry"]["paths"][0]
         // Loop road points

@@ -34,7 +34,7 @@ class SettingsManager: NSObject {
     }
 
     func saveSettings() {
-        // print(self.settings)
+        print(self.settings)
         // Save settings in the background
         DispatchQueue.global(qos: .background).async {
             if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first {
@@ -44,6 +44,20 @@ class SettingsManager: NSObject {
                 }
                 catch { /* error handling here */ }
             }
+        }
+    }
+    
+    // WIFI Indicator
+    var semaphore: Int = 0
+    func networkON() {
+        semaphore += 1
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+
+    }
+    func networkOff() {
+        semaphore -= 1
+        if (semaphore == 0) {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
     }
 }

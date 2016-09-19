@@ -15,15 +15,16 @@ class ArcGISService: NSObject {
     static let baseUrlHMLPoint = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_Route/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
     static let baseUrlBDoubleRoute = "http://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/B_DOUBLE_NETWORK/FeatureServer/"
     static let baseUrlHMLRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_NETWORK/FeatureServer/"
+    static let baseUrlHPFVRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HPFV_Mass_Route/FeatureServer/0"
     static let queryParamsRoute = "/query?f=pjson&outSR=4326&inSR=4326&outFields=*&orderByFields=SUBJECT_PREF_RDNAME&geometry="
     static let layers = [9, 8, 6, 5, 3, 2]
-    static let urlBridgeStructures = "https://services2.arcgis.com/18ajPSI0b3ppsmMt/ArcGIS/rest/services/Bridge_Structures/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&where=MIN_CLEARANCE%3E1"
-    static let baseUrlHPFVRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HPFV_Mass_Route/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
+    static let urlBridgeStructures = "https://services2.arcgis.com/18ajPSI0b3ppsmMt/ArcGIS/rest/services/Bridge_Structures/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&where=MIN_CLEARANCE%3E1+AND+MIN_CLEARANCE%3C"
     
     static func getBridgeStructures(_ mapView: MKMapView, completion: @escaping (_ result: String) -> Void) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        Alamofire.request(urlBridgeStructures).validate().responseString { response in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        SettingsManager.shared.networkON()
+        let url = urlBridgeStructures + SettingsManager.shared.settings["Height (m)"].stringValue
+        Alamofire.request(url).validate().responseString { response in
+            SettingsManager.shared.networkOff()
             if (response.result.isFailure) {
                 getBridgeStructures(mapView, completion: { (newResult) in
                     completion(newResult)
@@ -41,20 +42,22 @@ class ArcGISService: NSObject {
         var name: String = ""
         switch route {
         case "B-Doubles Routes":
+            name = "B_DOUBLE"
             for layerId in layers {
                 let url = baseUrlBDoubleRoute + String(layerId) + queryParamsRoute + Geometry.getVisibleAreaEnvelope(mapView)
                 urls += [url]
             }
-            name = "B_DOUBLE"
             break
         case "HML Routes":
+            name = "HML"
             for layerId in layers {
                 let url = baseUrlHMLRoute + String(layerId) + queryParamsRoute + Geometry.getVisibleAreaEnvelope(mapView)
                 urls += [url]
             }
-            name = "HML"
             break
         case "HPFV Routes":
+            name = "HPFV_MASS"
+            urls = [baseUrlHPFVRoute + queryParamsRoute]
             break
         case "2 Axle SPV Routes":
             break
@@ -67,9 +70,9 @@ class ArcGISService: NSObject {
         }
         // execute
         for url in urls {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            SettingsManager.shared.networkON()
             Alamofire.request(url).validate().responseString { response in
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                SettingsManager.shared.networkOff()
                 if (response.result.isFailure) {
                     return
                 }
