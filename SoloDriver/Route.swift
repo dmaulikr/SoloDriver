@@ -11,12 +11,13 @@ import MapKit
 import SwiftyJSON
 import SCLAlertView
 
+class RoutePolyline: ColorPolyline {
+    
+}
+
 extension Geometry {
     
-    static func createRoutesPolylineFrom(name: String, json: JSON) -> ColorPolyline {
-        
-        print(json.rawString()!)
-        
+    static func createRoutesPolylineFrom(name: String, json: JSON) -> RoutePolyline {
         var pointsToUse: [CLLocationCoordinate2D] = []
         let paths = json["geometry"]["paths"][0]
         // Loop road points
@@ -24,7 +25,7 @@ extension Geometry {
             let coordinate = CLLocationCoordinate2D(latitude: point[1].doubleValue, longitude: point[0].doubleValue)
             pointsToUse += [coordinate]
         }
-        let roadPolyline = ColorPolyline(coordinates: &pointsToUse, count: paths.count)
+        let roadPolyline = RoutePolyline(coordinates: &pointsToUse, count: paths.count)
         // Set color
         switch json["attributes"]["HVR_" + name].stringValue {
         case "Approved":

@@ -30,6 +30,7 @@ class SettingsManager: NSObject {
             if (settingsData != nil) {
                 settings = JSON(data: settingsData!)
             }
+            
         }
     }
 

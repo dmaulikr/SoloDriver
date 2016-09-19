@@ -24,6 +24,7 @@ class RoutesController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let cell = tableView.cellForRow(at: indexPath)!
         SettingsManager.shared.settings["Routes"].string = cell.textLabel!.text
+        SettingsManager.shared.saveSettings()
         _ = self.navigationController?.popViewController(animated: true)
     }
 }

@@ -58,10 +58,9 @@ extension MasterController {
         
         // VicTraffic
         VicTrafficService.getVicTrafficFeatures { (result) in
-            let json = VicTrafficService.parseVicTrafficFeatures(value: result)
             DispatchQueue.global(qos: .userInteractive).async{
                 var incidents: JSON
-                if let dataFromString = json?.data(using: String.Encoding.utf8, allowLossyConversion: false) {
+                if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
                     incidents = JSON(data: dataFromString)["incidents"]
                 } else {
                     return

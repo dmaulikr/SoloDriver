@@ -57,7 +57,7 @@ class ArcGISService: NSObject {
             break
         case "HPFV Routes":
             name = "HPFV_MASS"
-            urls = [baseUrlHPFVRoute + queryParamsRoute]
+            urls = [baseUrlHPFVRoute + queryParamsRoute + Geometry.getVisibleAreaEnvelope(mapView)]
             break
         case "2 Axle SPV Routes":
             break
