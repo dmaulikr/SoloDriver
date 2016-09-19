@@ -13,9 +13,12 @@ import Alamofire
 class ArcGISService: NSObject {
     
     static let baseUrlHMLPoint = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_Route/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
-    static let baseUrlBDoubleRoute = "http://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/B_DOUBLE_NETWORK/FeatureServer/"
+    static let baseUrlBDoubleRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/B_DOUBLE_NETWORK/FeatureServer/"
     static let baseUrlHMLRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_NETWORK/FeatureServer/"
     static let baseUrlHPFVRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HPFV_Mass_Route/FeatureServer/0"
+    static let baseUrl2AxleSPVRoute = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/2_Axle_SPV_Route/FeatureServer/0"
+    static let baseUrl40tSPVRoutes = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/40t_SPV_Route/FeatureServer/0"
+    static let baseUrlOSOMRoutes = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/OSOM_Route/FeatureServer/0"
     static let queryParamsRoute = "/query?f=pjson&outSR=4326&inSR=4326&outFields=*&orderByFields=SUBJECT_PREF_RDNAME&geometry="
     static let layers = [9, 8, 6, 5, 3, 2]
     static let urlBridgeStructures = "https://services2.arcgis.com/18ajPSI0b3ppsmMt/ArcGIS/rest/services/Bridge_Structures/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&where=MIN_CLEARANCE%3E1+AND+MIN_CLEARANCE%3C"
@@ -60,10 +63,16 @@ class ArcGISService: NSObject {
             urls = [baseUrlHPFVRoute + queryParamsRoute + Geometry.getVisibleAreaEnvelope(mapView)]
             break
         case "2 Axle SPV Routes":
+            name = "SPV_2AXLE"
+            urls = [baseUrl2AxleSPVRoute + queryParamsRoute + Geometry.getVisibleAreaEnvelope(mapView)]
             break
         case "40t SPV Routes":
+            name = "SPV_40T"
+            urls = [baseUrl40tSPVRoutes + queryParamsRoute + Geometry.getVisibleAreaEnvelope(mapView)]
             break
         case "OSOM Routes":
+            name = "OSOM_SCHEME_PERMIT"
+            urls = [baseUrlOSOMRoutes + queryParamsRoute + Geometry.getVisibleAreaEnvelope(mapView)]
             break
         default:
             return
