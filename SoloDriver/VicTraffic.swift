@@ -17,11 +17,16 @@ class VicTrafficAnnotation: AlertViewAnnotation {
 
 extension Geometry {
     
-    static func createVicTrafficAnnotationFrom(json: JSON) -> AlertViewAnnotation {
+    static func createVicTrafficAnnotationFrom(json: JSON) -> AlertViewAnnotation? {
         // For annotation
         let annotation = VicTrafficAnnotation()
         annotation.reuseId = json["closure_type"].stringValue
-        annotation.coordinate = CLLocationCoordinate2D(latitude: Double(json["lat"].stringValue)!, longitude: Double(json["long"].stringValue)!)
+        let lat = Double(json["lat"].stringValue)
+        let long = Double(json["long"].stringValue)
+        if (lat == nil || long == nil) {
+            return nil
+        }
+        annotation.coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
         annotation.title = json["closed_road_name"].stringValue
         annotation.subtitle = json["incident_type"].stringValue
         // For alert view

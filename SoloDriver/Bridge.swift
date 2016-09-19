@@ -55,7 +55,7 @@ extension Geometry {
             bridgeAnnotation.image = Config.ICON_BRIDGE
             bridgeAnnotation.alertColor = Config.ORANGE_CODE
             bridgeAnnotation.alertStyle = SCLAlertViewStyle.info
-        } else if (settings["Height (m)"].doubleValue > clearance) {
+        } else {
             bridgeAnnotation.alertTitle = "DANGER"
             bridgeAnnotation.color = Config.RED
             bridgeAnnotation.image = Config.ICON_BRIDGE

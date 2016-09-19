@@ -13,7 +13,7 @@ import SCLAlertView
 
 extension Geometry {
     
-    static func createRoutesPolylineFrom(json: JSON) -> ColorPolyline {
+    static func createRoutesPolylineFrom(name: String, json: JSON) -> ColorPolyline {
         var pointsToUse: [CLLocationCoordinate2D] = []
         let paths = json["geometry"]["paths"][0]
         // Loop road points
@@ -23,7 +23,7 @@ extension Geometry {
         }
         let roadPolyline = ColorPolyline(coordinates: &pointsToUse, count: paths.count)
         // Set color
-        switch json["attributes"]["HVR_HML"].stringValue {
+        switch json["attributes"]["HVR_" + name].stringValue {
         case "Approved":
             roadPolyline.color = Config.GREEN
             break

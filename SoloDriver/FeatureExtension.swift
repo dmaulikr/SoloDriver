@@ -36,10 +36,11 @@ extension MasterController {
                     // Loop through bridges
                     for (_, bridge): (String, JSON) in bridges {
                         let bridgeType = bridge["attributes"]["BRIDGE_TYPE"].stringValue
-                        if (!(bridgeType.contains("OVER ROAD") || bridgeType.contains("PEDESTRIAN UNDERPASS"))) {
+                        if (!bridgeType.contains("OVER ROAD")) {
                             continue
-                        }
-                        if (bridge["attributes"]["MIN_CLEARANCE"].doubleValue <= 1) {
+                        } else if (bridgeType.contains("PEDESTRIAN UNDERPASS")) {
+                            continue
+                        } else if (bridge["attributes"]["MIN_CLEARANCE"].doubleValue > settings["Height (m)"].doubleValue) {
                             continue
                         }
                         let annotation = Geometry.createBridgeAnnotationFrom(bridge: bridge)
@@ -92,7 +93,10 @@ extension MasterController {
                         break
                     }
                     let annotation = Geometry.createVicTrafficAnnotationFrom(json: incident)
-                    let annotationView = annotation.createPinView(nil)
+                    if (annotation == nil) {
+                        continue
+                    }
+                    let annotationView = annotation!.createPinView(nil)
                     if (thisTask != self.currentTask) {
                         break
                     }
@@ -135,7 +139,7 @@ extension MasterController {
         }
         
         // Routes
-        ArcGISService.getRoutes(mapView: mapView, route: settings["Routes"].stringValue) { (result) in
+        ArcGISService.getRoutes(mapView: mapView, route: settings["Routes"].stringValue) { (name, result) in
             DispatchQueue.global(qos: .userInteractive).async {
                 var routes: JSON
                 if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
@@ -144,7 +148,7 @@ extension MasterController {
                     return
                 }
                 for (_, route): (String, JSON) in routes {
-                    let polyline = Geometry.createRoutesPolylineFrom(json: route)
+                    let polyline = Geometry.createRoutesPolylineFrom(name: name, json: route)
                     if (thisTask != self.currentTask) {
                         break
                     }
