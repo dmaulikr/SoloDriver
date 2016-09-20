@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class ArcGISService: NSObject {
     
-    static let interactiveQueue = DispatchQueue.global(qos: .userInteractive)
+    static let backgroundQueue = DispatchQueue.global(qos: .background)
     static let baseUrlHMLPoints = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_Route/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
     static let baseUrlBDoubleRoutes = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/B_DOUBLE_NETWORK/FeatureServer/"
     static let baseUrlHMLRoutes = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_NETWORK/FeatureServer/"
@@ -85,7 +85,7 @@ class ArcGISService: NSObject {
             SettingsManager.shared.networkON()
             let urlForAllObjects = url + queryParamsRoutes + Geometry.getVisibleAreaEnvelope(mapView)
             // Get objectIds for the all routes
-            Alamofire.request(urlForAllObjects).validate().responseString(queue: interactiveQueue) { response in
+            Alamofire.request(urlForAllObjects).validate().responseString(queue: backgroundQueue) { response in
                 SettingsManager.shared.networkOff()
                 if (response.result.isFailure) {
                     return
@@ -119,7 +119,7 @@ class ArcGISService: NSObject {
                     }
                     let urlForSingleObject = url + queryParamsRouteIds + objectIdsForRound
                     SettingsManager.shared.networkON()
-                    Alamofire.request(urlForSingleObject).validate().responseString(queue: interactiveQueue) { response in
+                    Alamofire.request(urlForSingleObject).validate().responseString(queue: backgroundQueue) { response in
                         SettingsManager.shared.networkOff()
                         print(round)
                         if (response.result.isFailure) {
