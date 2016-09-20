@@ -22,6 +22,10 @@ extension MasterController {
         // Setting
         let settings = SettingsManager.shared.settings
         
+        // Clean existing features
+        mapView.removeOverlays(mapView.overlays)
+        mapView.removeAnnotations(mapView.annotations)
+        
         // Bridge Clearance
         if (settings["Bridge Clearance"].boolValue) {
             ArcGISService.getBridgeStructures(mapView, completion: { (result) in
@@ -138,25 +142,28 @@ extension MasterController {
         }
         
         // Routes
-        ArcGISService.getRoutes(mapView: mapView, route: settings["Routes"].stringValue) { (name, result) in
-            DispatchQueue.global(qos: .userInteractive).async {
-                var routes: JSON
-                if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-                    routes = JSON(data: dataFromString)["features"]
-                } else {
-                    return
+        ArcGISService.getRoutes(mapView: mapView, route: settings["Routes"].stringValue) { (name, routes) in
+            // If no results
+            if (routes == nil) {
+                let alert = UIAlertController(title: "Oops", message: "The map area is too large.\nPlease zoom in and search again.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+                return
+            }
+            // Calculate and draw lines on map
+            let routes: JSON = JSON.parse(routes!)["features"]
+            for (_, route): (String, JSON) in routes {
+                let polyline = Geometry.createRoutesPolylineFrom(name: name, json: route)
+                if (thisTask != self.currentTask) {
+                    break
                 }
-                for (_, route): (String, JSON) in routes {
-                    let polyline = Geometry.createRoutesPolylineFrom(name: name, json: route)
-                    if (thisTask != self.currentTask) {
-                        break
-                    }
-                    DispatchQueue.main.async {
-                        self.mapView.add(polyline)
-                    }
+                DispatchQueue.main.async {
+                    self.mapView.add(polyline)
                 }
             }
         }
+        
         
         
         
@@ -203,7 +210,5 @@ extension MasterController {
         //        default:
         //            break
         //        }
-        mapView.removeOverlays(mapView.overlays)
-        mapView.removeAnnotations(mapView.annotations)
     }
 }
