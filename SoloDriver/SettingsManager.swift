@@ -35,7 +35,6 @@ class SettingsManager: NSObject {
     }
 
     func saveSettings() {
-        print(self.settings)
         // Save settings in the background
         DispatchQueue.global(qos: .background).async {
             if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first {
@@ -45,6 +44,25 @@ class SettingsManager: NSObject {
                 }
                 catch { /* error handling here */ }
             }
+        }
+    }
+    
+    static func getRouteName(route: String) -> String? {
+        switch route {
+        case "B-Doubles Routes":
+            return "B_DOUBLE"
+        case "HML Routes":
+            return "HML"
+        case "HPFV Routes":
+            return "HPFV_MASS"
+        case "2 Axle SPV Routes":
+            return "SPV_2AXLE"
+        case "40t SPV Routes":
+            return "SPV_40T"
+        case "OSOM Routes":
+            return "OSOM_SCHEME_PERMIT"
+        default:
+            return nil
         }
     }
     

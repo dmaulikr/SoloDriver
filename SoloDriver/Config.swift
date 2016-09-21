@@ -29,6 +29,7 @@ class Config: NSObject {
     static let ICON_TRAFFIC_ALERT = UIImage(named: "Error-96")?.resize(newWidth: ICON_SIZE)
     static let ICON_ROAD_CLOSED = UIImage(named: "Cancel-96")?.resize(newWidth: ICON_SIZE)
     static let ICON_REST_AREA = UIImage(named: "Park Bench-96")?.resize(newWidth: ICON_SIZE)
+    
 }
 
 extension UIImage {

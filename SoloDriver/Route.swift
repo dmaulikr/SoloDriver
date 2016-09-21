@@ -45,31 +45,4 @@ extension Geometry {
         }
         return roadPolyline
     }
-    
 }
-
-//{
-//    "geometry" : {
-//        "paths" : [
-//        [
-//        [
-//        145.0696135143999,
-//        -37.75663786461165
-//        ],
-//        [
-//        145.0703595562603,
-//        -37.75672745018421
-//        ]
-//        ]
-//        ]
-//    },
-//    "attributes" : {
-//        "HVR_HML" : "Conditionally Approved",
-//        "OBJECTID" : 213196,
-//        "HVR_RD_MANAGER" : "BANYULE",
-//        "LRS_RMACLASS" : "Municipal Road",
-//        "LOCALITIES" : "HEIDELBERG",
-//        "SUBJECT_PREF_RDNAME" : "BURGUNDY STREET ",
-//        "HVR_HML_COMM" : "No left turn into Burgundy Street from Rosanna Road for vehicles longer than 10m"
-//    }
-//}

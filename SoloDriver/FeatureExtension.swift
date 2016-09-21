@@ -145,25 +145,55 @@ extension MasterController {
         
         // Routes
         let envelope = Geometry.getVisibleAreaEnvelope(mapView)
-        ArcGISService.getRoutes(envelope: envelope, route: settings["Routes"].stringValue) { (name, routes) in
-            // If no results
-            if (routes == nil) {
+        let route = settings["Routes"].stringValue
+        ArcGISService.getRouteIds(envelope: envelope, route: route) { (result) in
+            let objectIds = JSON.parse(result)["objectIds"]
+            // Resuest 100 per round
+            let numPerRound = 100
+            let maxRound = Int(objectIds.count/numPerRound) + 1
+            // Allow 100 round at most, alert if exceed
+            if (maxRound > 100) {
                 let alert = UIAlertController(title: "Oops", message: "The map area is too large.\nPlease zoom in and search again.", preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
                 return
             }
-            // Calculate and draw lines on map
-            let routes: JSON = JSON.parse(routes!)["features"]
-            for (_, route): (String, JSON) in routes {
-                let polyline = Geometry.createRoutesPolylineFrom(name: name, json: route)
+            // Query each round
+            for round in 0..<maxRound {
                 if (thisTask != self.currentTask) {
-                    break
+                    return
                 }
-                DispatchQueue.main.async {
-                    self.mapView.add(polyline)
+                let startIndex: Int
+                let endIndex: Int
+                if (round == maxRound - 1) {
+                    startIndex = (maxRound - 1) * numPerRound
+                    endIndex = objectIds.count
+                    if (startIndex > endIndex) {
+                        continue
+                    }
+                } else {
+                    startIndex = round * numPerRound
+                    endIndex = (round + 1) * numPerRound
                 }
+                var objectIdsForRound: String = ""
+                for i in startIndex..<endIndex {
+                    objectIdsForRound += String(objectIds[i].intValue) + ","
+                }
+                ArcGISService.getRoutesByIds(objectIds: objectIdsForRound, route: route, completion: { (result) in
+                    let name = SettingsManager.getRouteName(route: route)
+                    // Calculate and draw lines on map
+                    let routes: JSON = JSON.parse(result)["features"]
+                    for (_, route): (String, JSON) in routes {
+                        let polyline = Geometry.createRoutesPolylineFrom(name: name!, json: route)
+                        if (thisTask != self.currentTask) {
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            self.mapView.add(polyline)
+                        }
+                    }
+                })
             }
         }
     }
