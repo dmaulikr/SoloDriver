@@ -15,9 +15,13 @@ class RoutePolyline: ColorPolyline {
     
 }
 
+class RouteAnnotation: AlertViewAnnotation {
+    
+}
+
 extension Geometry {
     
-    static func createRoutesPolylineFrom(name: String, json: JSON) -> RoutePolyline {
+    static func createRoutePolylineFrom(name: String, json: JSON) -> RoutePolyline {
         var pointsToUse: [CLLocationCoordinate2D] = []
         let paths = json["geometry"]["paths"][0]
         // Loop road points
@@ -44,5 +48,28 @@ extension Geometry {
             roadPolyline.color = UIColor.clear
         }
         return roadPolyline
+    }
+    
+    static func createRouteAnnotationsFrom(name:String, polyline: MKPolyline, json:JSON) -> [RouteAnnotation] {
+        let attributes = json["attributes"]
+        let title = attributes["SUBJECT_PREF_RDNAME"].stringValue
+        let subtitle = attributes["HVR_" + name].stringValue
+        let alertTitle = title
+        let alertSubtitle = attributes["HVR_" + name + "_COMM"].stringValue
+        var annotations: [RouteAnnotation] = []
+        for point in UnsafeBufferPointer(start: polyline.points(), count: polyline.pointCount) {
+            let annotation: RouteAnnotation = RouteAnnotation()
+            annotation.coordinate = MKCoordinateForMapPoint(point)
+            annotation.title = title
+            annotation.subtitle = subtitle
+            annotation.color = Config.ORANGE
+            annotation.alertTitle = alertTitle
+            annotation.alertSubtitle = alertSubtitle
+            annotation.alertColor = Config.ORANGE_CODE
+            annotation.alertStyle = .info
+            annotation.reuseId = "RouteAnnotation"
+            annotations += [annotation]
+        }
+        return annotations
     }
 }

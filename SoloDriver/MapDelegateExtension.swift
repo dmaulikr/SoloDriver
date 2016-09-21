@@ -35,6 +35,10 @@ extension MasterController: MKMapViewDelegate {
             let thisAnnotation = annotation as! DestinationAnnotation
             let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: thisAnnotation.reuseId)
             return thisAnnotation.createPinView(pinView)
+        } else if (annotation is WayPointAnnotation) {
+            let thisAnnotation = annotation as! WayPointAnnotation
+            let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: thisAnnotation.reuseId)
+            return thisAnnotation.createPinView(pinView)
         }
         return nil
     }
@@ -57,10 +61,21 @@ extension MasterController: MKMapViewDelegate {
                     duration: 0,
                     colorStyle: annotation.alertColor!,
                     colorTextButton: 0xFFFFFF)
-
         } else if (view.annotation is DestinationAnnotation) {
             let annotation = view.annotation as! DestinationAnnotation
-            getDirection(annotation: annotation)
+            getDirection(destinationAnnotation: annotation)
+        } else if (view.annotation is WayPointAnnotation) {
+            let thisAnnotation = view.annotation as! WayPointAnnotation
+            for i in 0..<waypoints.count {
+                if (waypoints[i] == thisAnnotation) {
+                    waypoints.remove(at: i)
+                    break
+                }
+            }
+            mapView.removeAnnotation(view.annotation!)
+            for i in 0..<waypoints.count {
+                waypoints[i].title = "Waypoint " + String(i + 1)
+            }
         }
     }
 }

@@ -13,7 +13,8 @@ class MasterController: UIViewController {
 
     var resultSearchController: UISearchController?
     var currentTask: Int = 0
-    var directionPolylines: [DirectionPolyline] = []
+    var directionSteps: [[DirectionPolyline]] = [[]]
+    var waypoints: [WayPointAnnotation] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,15 +64,14 @@ class MasterController: UIViewController {
         actionSheet.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let clearMap = UIAlertAction(title: "Clear Map", style: .default) { (action) in
-            self.mapView.removeOverlays(self.mapView.overlays)
-            self.mapView.removeAnnotations(self.mapView.annotations)
+            self.clearMap()
         }
         let searchMap = UIAlertAction(title: "Search Map Area", style: .default) { (action) in
             self.titleItem.title = action.title
             self.searchFeatures()
         }
         let addWaypoint = UIAlertAction(title: "Add Waypoint", style: .default) { (action) in
-            // TODO
+            self.titleItem.title = action.title
         }
         actionSheet.addAction(cancel)
         actionSheet.addAction(clearMap)
@@ -85,6 +85,14 @@ class MasterController: UIViewController {
         if (titleItem.title == "Search Map Area") {
             searchFeatures()
         }
+    }
+    
+    func clearMap() {
+        self.currentTask = (self.currentTask + 1) % 1024
+        self.directionSteps = [[]]
+        self.waypoints = []
+        self.mapView.removeOverlays(self.mapView.overlays)
+        self.mapView.removeAnnotations(self.mapView.annotations)
     }
 
 }

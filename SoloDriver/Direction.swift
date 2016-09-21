@@ -13,7 +13,7 @@ import SCLAlertView
 
 class DestinationAnnotation: MKPointAnnotation {
 
-    let reuseId = "Destination"
+    let reuseId = "DestinationAnnotation"
     func createPinView(_ oldPinView: MKAnnotationView?) -> MKPinAnnotationView {
         if (oldPinView == nil) {
             let pinView = MKPinAnnotationView(annotation: self, reuseIdentifier: reuseId)
@@ -36,7 +36,26 @@ class DestinationAnnotation: MKPointAnnotation {
 }
 
 class WayPointAnnotation: MKPointAnnotation {
-
+    let reuseId = "WayPointAnnotation"
+    func createPinView(_ oldPinView: MKAnnotationView?) -> MKPinAnnotationView {
+        if (oldPinView == nil) {
+            let pinView = MKPinAnnotationView(annotation: self, reuseIdentifier: reuseId)
+            let rightButton = UIButton(type: .system)
+            rightButton.frame = CGRect(x: 0, y: 0, width: 80, height: 50)
+            rightButton.backgroundColor = UIColor.black
+            rightButton.setTitle("Remove", for: UIControlState())
+            rightButton.setTitleColor(UIColor.white, for: UIControlState())
+            pinView.rightCalloutAccessoryView = rightButton as UIView
+            pinView.isUserInteractionEnabled = true
+            pinView.canShowCallout = true
+            pinView.pinTintColor = UIColor.black
+            pinView.rightCalloutAccessoryView!.tintColor = UIColor.black
+            return pinView
+        } else {
+            oldPinView!.annotation = self
+            return oldPinView! as! MKPinAnnotationView
+        }
+    }
 }
 
 class DirectionPolyline: ColorPolyline {

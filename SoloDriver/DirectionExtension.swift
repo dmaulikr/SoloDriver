@@ -43,6 +43,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         for annotation in mapView.annotations {
             if annotation is DestinationAnnotation {
                 mapView.removeAnnotation(annotation)
+                break
             }
         }
         mapView.addAnnotation(annotation)
@@ -57,38 +58,60 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         mapView.setRegion(region, animated: true)
     }
     
-    func getDirection(annotation: MKAnnotation) {
-        // Clear existing directions
-        for polyline in directionPolylines {
-            mapView.remove(polyline)
-        }
-        directionPolylines = []
-        // Get directions
-        let destination = annotation.coordinate
-        let request: MKDirectionsRequest = MKDirectionsRequest()
+    func getDirection(destinationAnnotation: MKAnnotation) {
+        // Check gps availability
         if (LocationManager.shared.getLastLocation() == nil) {
+            let alert = UIAlertController(title: "Oops", message: "Cannot get your location...", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
             return
         }
-        request.source = coordinateToMapItem(coordinate: LocationManager.shared.getLastLocation()!.coordinate)
-        request.destination = coordinateToMapItem(coordinate: destination)
-        request.requestsAlternateRoutes = true
-        request.transportType = .automobile
-        let directions = MKDirections(request: request)
-        directions.calculate { (response, error) in
-            if (error != nil) {
-                return
+        // Clear existing directions
+        for polylines in directionSteps {
+            mapView.removeOverlays(polylines)
+        }
+        directionSteps = [[]]
+        // Get directions, step by step
+        for waypointCount in 0..<waypoints.count+1 {
+            let source: CLLocationCoordinate2D
+            let destination: CLLocationCoordinate2D
+            // source
+            if (waypointCount == 0) {
+                source = LocationManager.shared.getLastLocation()!.coordinate
+            } else {
+                source = waypoints[waypointCount-1].coordinate
             }
-            if let routes = response?.routes {
-                for i in 0..<routes.count {
-                    let polyline = DirectionPolyline(route: routes[i])
+            // destination
+            if (waypointCount == waypoints.count) {
+                destination = destinationAnnotation.coordinate
+            } else {
+                destination = waypoints[waypointCount].coordinate
+            }
+            // request
+            let request: MKDirectionsRequest = MKDirectionsRequest()
+            request.source = coordinateToMapItem(coordinate: source)
+            request.destination = coordinateToMapItem(coordinate: destination)
+            request.requestsAlternateRoutes = true
+            request.transportType = .automobile
+            // per step
+            let directions = MKDirections(request: request)
+            directions.calculate { (response, error) in
+                if (error != nil || response?.routes == nil) {
+                    return
+                }
+                var directionStep: [DirectionPolyline] = []
+                for i in 0..<response!.routes.count {
+                    let polyline = DirectionPolyline(route: response!.routes[i])
                     if (i == 0) {
                         polyline.color = UIColor.black.withAlphaComponent(0.9)
                     } else {
                         polyline.color = UIColor.black.withAlphaComponent(0.3)
                     }
-                    self.directionPolylines += [polyline]
+                    directionStep += [polyline]
                     self.mapView.add(polyline)
                 }
+                self.directionSteps += [directionStep]
             }
         }
     }

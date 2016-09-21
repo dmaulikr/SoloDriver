@@ -15,18 +15,14 @@ extension MasterController {
     // Search features
     func searchFeatures() {
         
+        // Clean existing features
+        clearMap()
+
         // Semaphore
-        currentTask = (currentTask + 1) % 1024
         let thisTask = currentTask
         
         // Setting
         let settings = SettingsManager.shared.settings
-        
-        // Clean existing features
-        mapView.removeOverlays(mapView.overlays)
-        mapView.removeAnnotations(mapView.annotations)
-        
-        // Search area
         
         // Bridge Clearance
         if (settings["Bridge Clearance"].boolValue) {
@@ -180,20 +176,27 @@ extension MasterController {
                 for i in startIndex..<endIndex {
                     objectIdsForRound += String(objectIds[i].intValue) + ","
                 }
-                ArcGISService.getRoutesByIds(objectIds: objectIdsForRound, route: route, completion: { (result) in
-                    let name = SettingsManager.getRouteName(route: route)
+                ArcGISService.getRoutesByIds(objectIds: objectIdsForRound, route: route) { (result) in
+                    let name = SettingsManager.getRouteName(route: route)!
                     // Calculate and draw lines on map
                     let routes: JSON = JSON.parse(result)["features"]
                     for (_, route): (String, JSON) in routes {
-                        let polyline = Geometry.createRoutesPolylineFrom(name: name!, json: route)
+                        let polyline = Geometry.createRoutePolylineFrom(name: name, json: route)
                         if (thisTask != self.currentTask) {
                             return
                         }
                         DispatchQueue.main.async {
                             self.mapView.add(polyline)
                         }
+                        // Add annotation
+                        if (route["attributes"]["HVR_" + name].stringValue == "Conditionally Approved") {
+                            let annotations = Geometry.createRouteAnnotationsFrom(name: name, polyline: polyline, json: route)
+                            DispatchQueue.main.async {
+                                self.mapView.addAnnotations(annotations)
+                            }
+                        }
                     }
-                })
+                }
             }
         }
     }
