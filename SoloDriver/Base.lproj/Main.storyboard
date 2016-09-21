@@ -231,10 +231,178 @@
             </objects>
             <point key="canvasLocation" x="2384" y="549"/>
         </scene>
+        <!--Handbooks-->
+        <scene sceneID="lUu-Kv-GOz">
+            <objects>
+                <tableViewController title="Handbooks" id="pRB-8b-pyB" customClass="DocumentsController" customModule="SoloDriver" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Wx1-BC-U02">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="OeX-oQ-dkt">
+                                <string key="footerTitle">This guide is for people who handle, store and transport placard loads of dangerous goods. It has been designed to keep in your vehicle for ready reference.</string>
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="4FX-xh-h7d" style="IBUITableViewCellStyleDefault" id="Rk0-pI-Izc">
+                                        <rect key="frame" x="0.0" y="99" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rk0-pI-Izc" id="fie-tk-Daf">
+                                            <frame key="frameInset" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Safely Transporting Dangerous Goods" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4FX-xh-h7d">
+                                                    <frame key="frameInset" minX="15" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection footerTitle="Notice Of Prohibition Of The Transport By Road Of Liquefied Gases In Bulk In Specified Areas And On Specified Routes" id="wue-HI-Ij5">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="zgN-fq-Vih" style="IBUITableViewCellStyleDefault" id="Ucb-22-qAl">
+                                        <rect key="frame" x="0.0" y="223" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ucb-22-qAl" id="0Bj-tU-JPc">
+                                            <frame key="frameInset" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Road Transport (Dangerous Goods)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zgN-fq-Vih">
+                                                    <frame key="frameInset" minX="15" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="Byg-yS-QBI">
+                                <string key="footerTitle">The aim of this guide is to share guidance in order to eliminate or reduce the potential for injuries where vehicle and people interaction occurs when attending to a broken down truck on the roadside up to the point of requiring towing.</string>
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="mit-D5-qYG" style="IBUITableViewCellStyleDefault" id="4b9-hi-eH4">
+                                        <rect key="frame" x="0.0" y="347" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4b9-hi-eH4" id="Uxk-ga-kaH">
+                                            <frame key="frameInset" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Truck Emergency Breakdown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mit-D5-qYG">
+                                                    <frame key="frameInset" minX="15" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="xit-Y5-Wpb">
+                                <string key="footerTitle">This guidance is intended to illustrate practical methods of reducing the likelihood of injuries from falls, both above and below two metres.</string>
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="oMx-5y-9RD" style="IBUITableViewCellStyleDefault" id="Vc6-Kl-yhz">
+                                        <rect key="frame" x="0.0" y="503" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vc6-Kl-yhz" id="k94-bd-4Ll">
+                                            <frame key="frameInset" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Prevention of Falls" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oMx-5y-9RD">
+                                                    <frame key="frameInset" minX="15" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection footerTitle="Advice for road transport operators and workers who use side-gates, side-curtains, restraint lashings and lashing tensioners" id="SWo-df-Gzi">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="YBo-4y-Hjt" style="IBUITableViewCellStyleDefault" id="WxX-pJ-3pY">
+                                        <rect key="frame" x="0.0" y="627" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WxX-pJ-3pY" id="1Br-My-rAB">
+                                            <frame key="frameInset" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Safe Handling when Securing Loads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YBo-4y-Hjt">
+                                                    <frame key="frameInset" minX="15" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="hqf-Nj-6Dn">
+                                <string key="footerTitle">Slips, trips and falls from flat-bed truck trailers can result in severe musculoskeletal injuries such as fractures, sprains and strains or death.</string>
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="DMH-HN-Cun" style="IBUITableViewCellStyleDefault" id="uuc-Qu-o9e">
+                                        <rect key="frame" x="0.0" y="751" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uuc-Qu-o9e" id="A80-dQ-hDD">
+                                            <frame key="frameInset" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Unloading Flat-bed Truck Trailers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DMH-HN-Cun">
+                                                    <frame key="frameInset" minX="15" width="325" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="pRB-8b-pyB" id="Gy1-Ob-zjw"/>
+                            <outlet property="delegate" destination="pRB-8b-pyB" id="mzR-FD-2eU"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jhw-go-hIt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3178" y="548"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="lCQ-vx-BTz">
+            <objects>
+                <viewController storyboardIdentifier="WebViewController" id="hwl-Ns-XFD" customClass="WebViewController" customModule="SoloDriver" customModuleProvider="target" sceneMemberID="viewController">
+                    <webView key="view" contentMode="scaleAspectFit" scalesPageToFit="YES" id="nsC-X1-36V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <dataDetectorType key="dataDetectorTypes"/>
+                    </webView>
+                    <connections>
+                        <outlet property="webView" destination="nsC-X1-36V" id="bad-sF-cP7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bAr-Fz-LVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4002" y="548"/>
+        </scene>
         <!--Filter-->
         <scene sceneID="23A-iG-btg">
             <objects>
-                <tableViewController title="Filter" id="90C-GJ-r3L" userLabel="Filter" customClass="FilterController" customModule="SoloDriver" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Features" id="90C-GJ-r3L" userLabel="Filter" customClass="FilterController" customModule="SoloDriver" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="dAk-6l-ud0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -471,7 +639,7 @@
                                 <string key="footerTitle">Routes will be displayed as polylines and mapped in four categories: approved (green), conditionally approved (orange), restricted (red) and funded improvements (blue).</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="EJ8-St-Oze">
-                                        <rect key="frame" x="0.0" y="460" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="459" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="EJ8-St-Oze" id="4Pu-ZD-ikU">
                                             <frame key="frameInset" width="342" height="43"/>
@@ -504,13 +672,49 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Documents" footerTitle="Useful documents" id="Rs8-hw-wMT">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="xDd-Nh-lz8">
+                                        <rect key="frame" x="0.0" y="627" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="xDd-Nh-lz8" id="usz-NX-cNf">
+                                            <frame key="frameInset" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Document-96" translatesAutoresizingMaskIntoConstraints="NO" id="lyH-65-mk6">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="D40-Zh-Hc4"/>
+                                                        <constraint firstAttribute="width" constant="32" id="uU5-HZ-jH1"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Handbooks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7p-1Z-Dmq">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="g7p-1Z-Dmq" firstAttribute="top" secondItem="usz-NX-cNf" secondAttribute="topMargin" id="bih-iX-1Gl"/>
+                                                <constraint firstItem="g7p-1Z-Dmq" firstAttribute="leading" secondItem="lyH-65-mk6" secondAttribute="trailing" constant="12" id="bwK-jG-uGV"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="g7p-1Z-Dmq" secondAttribute="bottom" id="nTg-le-yvn"/>
+                                                <constraint firstItem="lyH-65-mk6" firstAttribute="leading" secondItem="usz-NX-cNf" secondAttribute="leadingMargin" id="qIq-oe-jmJ"/>
+                                                <constraint firstItem="lyH-65-mk6" firstAttribute="centerY" secondItem="usz-NX-cNf" secondAttribute="centerY" id="qtv-pt-p5U"/>
+                                                <constraint firstItem="g7p-1Z-Dmq" firstAttribute="trailing" secondItem="usz-NX-cNf" secondAttribute="trailingMargin" id="x4A-CB-LWw"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="pRB-8b-pyB" kind="show" id="8ZD-IQ-IxL"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="90C-GJ-r3L" id="bVR-wk-4Ss"/>
                             <outlet property="delegate" destination="90C-GJ-r3L" id="Jz3-oV-waU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Filter" id="ye8-NA-bJA">
+                    <navigationItem key="navigationItem" title="Features" id="ye8-NA-bJA">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="uVk-hE-Xx2">
                             <connections>
                                 <action selector="done:" destination="90C-GJ-r3L" id="yo0-5k-gAU"/>
@@ -935,6 +1139,7 @@
         <image name="Bridge-96" width="96" height="96"/>
         <image name="Bulleted List Filled-44" width="22" height="22"/>
         <image name="Cancel-96" width="96" height="96"/>
+        <image name="Document-96" width="96" height="96"/>
         <image name="Error-96" width="96" height="96"/>
         <image name="Event Accepted Tentatively-96" width="96" height="96"/>
         <image name="Park Bench-96" width="96" height="96"/>

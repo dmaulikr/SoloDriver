@@ -16,11 +16,9 @@
 		4F4BDC1E1D894FBE00932795 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BDC1D1D894FBE00932795 /* Direction.swift */; };
 		4F4BDC201D895BC700932795 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BDC1F1D895BC700932795 /* NavigationExtension.swift */; };
 		4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083C1D5EF9E0006F980A /* AppDelegate.swift */; };
-		4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F52083E1D5EF9E0006F980A /* MapController.swift */; };
 		4F5208441D5EF9E0006F980A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208421D5EF9E0006F980A /* Main.storyboard */; };
 		4F5208491D5EF9E0006F980A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F5208471D5EF9E0006F980A /* LaunchScreen.storyboard */; };
 		4F5208541D5EF9E0006F980A /* SoloDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5208531D5EF9E0006F980A /* SoloDriverTests.swift */; };
-		4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F656DB41D606987009FA6B2 /* PublicDataService.swift */; };
 		4F81D2AD1D83D5750007B5C4 /* RoutesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2AC1D83D5750007B5C4 /* RoutesController.swift */; };
 		4F81D2AF1D83F4840007B5C4 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2AE1D83F4840007B5C4 /* Config.swift */; };
 		4F81D2B11D83F9910007B5C4 /* MapDelegateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F81D2B01D83F9910007B5C4 /* MapDelegateExtension.swift */; };
@@ -37,7 +35,8 @@
 		4FB5193B1D8E560200CFBB6D /* VicTraffic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB5193A1D8E560200CFBB6D /* VicTraffic.swift */; };
 		4FB5193D1D8E7FC700CFBB6D /* RestArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB5193C1D8E7FC700CFBB6D /* RestArea.swift */; };
 		4FB5193F1D8EB09E00CFBB6D /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB5193E1D8EB09E00CFBB6D /* Route.swift */; };
-		4FF7B63D1D62AE5F0098470F /* GeometriesD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */; };
+		4FB519411D92651500CFBB6D /* DocumentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB519401D92651500CFBB6D /* DocumentsController.swift */; };
+		4FB519431D9265DA00CFBB6D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB519421D9265DA00CFBB6D /* WebViewController.swift */; };
 		4FF7B6431D642A850098470F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF7B6421D642A850098470F /* Assets.xcassets */; };
 		DC2BE3CC0EE73AA6519CF15D /* Pods_SoloDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2205E36CEB74CA392FAB298F /* Pods_SoloDriver.framework */; };
 /* End PBXBuildFile section */
@@ -67,14 +66,12 @@
 		4F4BDC1F1D895BC700932795 /* NavigationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
 		4F5208391D5EF9E0006F980A /* SoloDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoloDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F52083C1D5EF9E0006F980A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4F52083E1D5EF9E0006F980A /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		4F5208431D5EF9E0006F980A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F5208481D5EF9E0006F980A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F52084A1D5EF9E0006F980A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F52084F1D5EF9E0006F980A /* SoloDriverTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SoloDriverTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F5208531D5EF9E0006F980A /* SoloDriverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloDriverTests.swift; sourceTree = "<group>"; };
 		4F5208551D5EF9E0006F980A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F656DB41D606987009FA6B2 /* PublicDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicDataService.swift; sourceTree = "<group>"; };
 		4F81D2AC1D83D5750007B5C4 /* RoutesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesController.swift; sourceTree = "<group>"; };
 		4F81D2AE1D83F4840007B5C4 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		4F81D2B01D83F9910007B5C4 /* MapDelegateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDelegateExtension.swift; sourceTree = "<group>"; };
@@ -91,7 +88,8 @@
 		4FB5193A1D8E560200CFBB6D /* VicTraffic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VicTraffic.swift; sourceTree = "<group>"; };
 		4FB5193C1D8E7FC700CFBB6D /* RestArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestArea.swift; sourceTree = "<group>"; };
 		4FB5193E1D8EB09E00CFBB6D /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
-		4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeometriesD.swift; sourceTree = "<group>"; };
+		4FB519401D92651500CFBB6D /* DocumentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsController.swift; sourceTree = "<group>"; };
+		4FB519421D9265DA00CFBB6D /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		4FF7B6421D642A850098470F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A6F816D8F06860C9C75CB4C1 /* Pods-SoloDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoloDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoloDriver/Pods-SoloDriver.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,16 +121,6 @@
 				4F0A95A01D71C3D80036CA39 /* EditTextController.swift */,
 			);
 			name = Settings;
-			sourceTree = "<group>";
-		};
-		4F0A95D71D7460360036CA39 /* Deprecated */ = {
-			isa = PBXGroup;
-			children = (
-				4F656DB41D606987009FA6B2 /* PublicDataService.swift */,
-				4FF7B63C1D62AE5F0098470F /* GeometriesD.swift */,
-				4F52083E1D5EF9E0006F980A /* MapController.swift */,
-			);
-			name = Deprecated;
 			sourceTree = "<group>";
 		};
 		4F5208301D5EF9E0006F980A = {
@@ -169,7 +157,6 @@
 				4F5208421D5EF9E0006F980A /* Main.storyboard */,
 				4F5208471D5EF9E0006F980A /* LaunchScreen.storyboard */,
 				4F52084A1D5EF9E0006F980A /* Info.plist */,
-				4F0A95D71D7460360036CA39 /* Deprecated */,
 			);
 			path = SoloDriver;
 			sourceTree = "<group>";
@@ -235,6 +222,8 @@
 			children = (
 				4F876DFA1D83A05D0086C042 /* FilterController.swift */,
 				4F81D2AC1D83D5750007B5C4 /* RoutesController.swift */,
+				4FB519401D92651500CFBB6D /* DocumentsController.swift */,
+				4FB519421D9265DA00CFBB6D /* WebViewController.swift */,
 			);
 			name = Filter;
 			sourceTree = "<group>";
@@ -470,24 +459,23 @@
 				4F81D2AF1D83F4840007B5C4 /* Config.swift in Sources */,
 				4F4BDC201D895BC700932795 /* NavigationExtension.swift in Sources */,
 				4F876DFB1D83A05D0086C042 /* FilterController.swift in Sources */,
-				4F656DB51D606987009FA6B2 /* PublicDataService.swift in Sources */,
 				4F52083D1D5EF9E0006F980A /* AppDelegate.swift in Sources */,
 				4F81D2AD1D83D5750007B5C4 /* RoutesController.swift in Sources */,
 				4F0A95A11D71C3D80036CA39 /* EditTextController.swift in Sources */,
+				4FB519431D9265DA00CFBB6D /* WebViewController.swift in Sources */,
 				4F81D2B71D8400990007B5C4 /* ArcGISService.swift in Sources */,
 				4FB5193B1D8E560200CFBB6D /* VicTraffic.swift in Sources */,
 				4FB519371D8E054000CFBB6D /* TapGestureExtension.swift in Sources */,
 				4F81D2B11D83F9910007B5C4 /* MapDelegateExtension.swift in Sources */,
 				4F81D2B31D83FA690007B5C4 /* FeatureExtension.swift in Sources */,
-				4F52083F1D5EF9E0006F980A /* MapController.swift in Sources */,
 				4FB5193F1D8EB09E00CFBB6D /* Route.swift in Sources */,
 				4F4BDC1E1D894FBE00932795 /* Direction.swift in Sources */,
 				4F0A95A31D72913F0036CA39 /* SettingsManager.swift in Sources */,
 				4F876DF71D839E7F0086C042 /* LocationManager.swift in Sources */,
 				4FA643221D84285800C0DDA2 /* VicTrafficService.swift in Sources */,
-				4FF7B63D1D62AE5F0098470F /* GeometriesD.swift in Sources */,
 				4FB519391D8E336D00CFBB6D /* YQLService.swift in Sources */,
 				4F81D2BC1D8404DF0007B5C4 /* Geometry.swift in Sources */,
+				4FB519411D92651500CFBB6D /* DocumentsController.swift in Sources */,
 				4F81D2B51D83FA810007B5C4 /* DirectionExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
