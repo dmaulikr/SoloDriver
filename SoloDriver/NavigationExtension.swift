@@ -13,7 +13,7 @@ import SCLAlertView
 extension MasterController{
     
     func startNavigation() {
-        self.titleItem.title = "Cancel Navigation"
+        self.titleItem.title = "End Navigation"
     }
     
     func cancelNavigation() {

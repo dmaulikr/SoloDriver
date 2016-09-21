@@ -59,7 +59,7 @@ class MasterController: UIViewController {
     }
 
     @IBAction func didClickAction(_ sender: AnyObject) {
-        if (titleItem.title == "Cancel Navigation") {
+        if (titleItem.title == "End Navigation") {
             return
         }
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -96,7 +96,7 @@ class MasterController: UIViewController {
             searchFeatures()
         } else if (titleItem.title == "Start Navigation") {
             startNavigation()
-        } else if (titleItem.title == "Cancel Navigation") {
+        } else if (titleItem.title == "End Navigation") {
             cancelNavigation()
         }
     }
