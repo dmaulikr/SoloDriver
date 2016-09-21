@@ -9,7 +9,15 @@
 import UIKit
 
 class DocumentsController: UITableViewController {
-
+    
+    override func viewDidLoad() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(close))
+    }
+    
+    func close(_: AnyObject?) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var urlString: String?
         switch indexPath.section {

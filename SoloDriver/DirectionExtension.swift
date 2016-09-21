@@ -114,5 +114,6 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
                 self.directionSteps += [directionStep]
             }
         }
+        self.titleItem.title = "Start Navigation"
     }
 }

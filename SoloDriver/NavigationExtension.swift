@@ -6,4 +6,13 @@
 //  Copyright © 2016 HaoBoji. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import MapKit
+import SCLAlertView
+
+extension MasterController{
+    
+    func startNavigation() {
+        self.titleItem.title = "Cancel Navigation"
+    }
+}

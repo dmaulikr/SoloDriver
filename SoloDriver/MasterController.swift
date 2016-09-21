@@ -73,10 +73,17 @@ class MasterController: UIViewController {
         let addWaypoint = UIAlertAction(title: "Add Waypoint", style: .default) { (action) in
             self.titleItem.title = action.title
         }
+        let checkHandbooks = UIAlertAction(title: "Check Handbooks", style: .default) { (action) in
+            let controller = self.storyboard!.instantiateViewController(withIdentifier: "DocumentsNavigationController")
+            controller.modalTransitionStyle = .coverVertical
+            controller.modalPresentationStyle = .fullScreen
+            self.present(controller, animated: true, completion: nil)
+        }
         actionSheet.addAction(cancel)
         actionSheet.addAction(clearMap)
         actionSheet.addAction(addWaypoint)
         actionSheet.addAction(searchMap)
+        actionSheet.addAction(checkHandbooks)
         present(actionSheet, animated: true) { }
     }
 
@@ -84,6 +91,8 @@ class MasterController: UIViewController {
     @IBAction func didClickTitle(_ sender: AnyObject) {
         if (titleItem.title == "Search Map Area") {
             searchFeatures()
+        } else if (titleItem.title == "Start Navigation") {
+            startNavigation()
         }
     }
     

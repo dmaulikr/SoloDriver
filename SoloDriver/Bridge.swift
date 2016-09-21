@@ -35,17 +35,13 @@ extension Geometry {
             .replacingOccurrences(of: "RAILWAY LINE OVER ", with: "")
             .trimmingCharacters(in: CharacterSet.decimalDigits)
             .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        bridgeAnnotation.subtitle = "CLEARANCE: " + String(clearance)
+        bridgeAnnotation.subtitle = "CLEARANCE: " + String(clearance) + "m"
         // For alert view
         var subtitle = attributes["FEATURE_CROSSED"].stringValue
             .trimmingCharacters(in: CharacterSet.decimalDigits)
             .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        subtitle += "\nCLEARANCE: " + String(clearance)
-        subtitle += "\nBRIDGE TYPE: " + attributes["BRIDGE_TYPE"].stringValue
-            .replacingOccurrences(of: "(GRADE SEPARATION)", with: "")
-            .replacingOccurrences(of: "(RAIL OVERPASS)", with: "")
-        subtitle += "\nBRIDGE WIDTH: " + String(attributes["OVERALL_WIDTH"].doubleValue)
-        subtitle += "\nBRIDGE LENGTH: " + String(attributes["OVERALL_LENGTH"].doubleValue)
+        subtitle += "\nCLEARANCE: " + String(clearance) + "m"
+        subtitle += "\n" + attributes["BRIDGE_TYPE"].stringValue
         bridgeAnnotation.alertSubtitle = subtitle
         // Set color based on settings
         let settings = SettingsManager.shared.settings

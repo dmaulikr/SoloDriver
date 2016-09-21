@@ -17,7 +17,7 @@ extension MasterController {
         
         // Clean existing features
         clearMap()
-
+        
         // Semaphore
         let thisTask = currentTask
         
@@ -27,84 +27,79 @@ extension MasterController {
         // Bridge Clearance
         if (settings["Bridge Clearance"].boolValue) {
             ArcGISService.getBridgeStructures(completion: { (result) in
-                // Draw annotations in background
-                DispatchQueue.global(qos: .userInteractive).async{
-                    var bridges: JSON
-                    if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-                        bridges = JSON(data: dataFromString)["features"]
-                    } else {
-                        return
-                    }
-                    // Loop through bridges
-                    for (_, bridge): (String, JSON) in bridges {
-                        let bridgeType = bridge["attributes"]["BRIDGE_TYPE"].stringValue
-                        if (!bridgeType.contains("OVER ROAD")) {
-                            continue
-                        } else if (bridgeType.contains("PEDESTRIAN UNDERPASS")) {
-                            continue
-                        } else if (bridge["attributes"]["MIN_CLEARANCE"].doubleValue > settings["Height (m)"].doubleValue) {
-                            continue
-                        }
-                        let annotation = Geometry.createBridgeAnnotationFrom(bridge: bridge)
-                        let annotationView = annotation.createPinView(nil)
-                        if (thisTask != self.currentTask) {
-                            break
-                        }
-                        DispatchQueue.main.async {
-                            self.mapView.addAnnotation(annotationView.annotation!)
-                        }
-                    }
-                }
-            })
-        }
-        
-        // VicTraffic
-        VicTrafficService.getVicTrafficFeatures { (result) in
-            DispatchQueue.global(qos: .userInteractive).async{
-                var incidents: JSON
+                var bridges: JSON
                 if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-                    incidents = JSON(data: dataFromString)["incidents"]
+                    bridges = JSON(data: dataFromString)["features"]
                 } else {
                     return
                 }
-                for (_, incident): (String, JSON) in incidents {
-                    let closureType = incident["closure_type"].stringValue
-                    switch closureType {
-                    case "Road Construction", "Road Maintenance", "Utility Works":
-                        if (!settings["Roadwork"].boolValue) {
-                            continue
-                        }
-                        break
-                    case "Sporting/Social Event":
-                        if (!settings["Event"].boolValue) {
-                            continue
-                        }
-                        break
-                    case "Traffic Alert":
-                        if (!settings["Traffic Alert"].boolValue) {
-                            continue
-                        }
-                        break
-                    case "Road Closed":
-                        if (!settings["Road Closed"].boolValue) {
-                            continue
-                        }
-                        break
-                    default:
-                        break
-                    }
-                    let annotation = Geometry.createVicTrafficAnnotationFrom(json: incident)
-                    if (annotation == nil) {
+                // Loop through bridges
+                for (_, bridge): (String, JSON) in bridges {
+                    let bridgeType = bridge["attributes"]["BRIDGE_TYPE"].stringValue
+                    if (!bridgeType.contains("OVER ROAD")) {
+                        continue
+                    } else if (bridgeType.contains("PEDESTRIAN UNDERPASS")) {
+                        continue
+                    } else if (bridge["attributes"]["MIN_CLEARANCE"].doubleValue > settings["Height (m)"].doubleValue) {
                         continue
                     }
-                    let annotationView = annotation!.createPinView(nil)
+                    let annotation = Geometry.createBridgeAnnotationFrom(bridge: bridge)
+                    let annotationView = annotation.createPinView(nil)
                     if (thisTask != self.currentTask) {
                         break
                     }
                     DispatchQueue.main.async {
                         self.mapView.addAnnotation(annotationView.annotation!)
                     }
-                    
+                }
+                
+            })
+        }
+        
+        // VicTraffic
+        VicTrafficService.getVicTrafficFeatures { (result) in
+            var incidents: JSON
+            if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
+                incidents = JSON(data: dataFromString)["incidents"]
+            } else {
+                return
+            }
+            for (_, incident): (String, JSON) in incidents {
+                let closureType = incident["closure_type"].stringValue
+                switch closureType {
+                case "Road Construction", "Road Maintenance", "Utility Works":
+                    if (!settings["Roadwork"].boolValue) {
+                        continue
+                    }
+                    break
+                case "Sporting/Social Event":
+                    if (!settings["Event"].boolValue) {
+                        continue
+                    }
+                    break
+                case "Traffic Alert":
+                    if (!settings["Traffic Alert"].boolValue) {
+                        continue
+                    }
+                    break
+                case "Road Closed":
+                    if (!settings["Road Closed"].boolValue) {
+                        continue
+                    }
+                    break
+                default:
+                    break
+                }
+                let annotation = Geometry.createVicTrafficAnnotationFrom(json: incident)
+                if (annotation == nil) {
+                    continue
+                }
+                let annotationView = annotation!.createPinView(nil)
+                if (thisTask != self.currentTask) {
+                    break
+                }
+                DispatchQueue.main.async {
+                    self.mapView.addAnnotation(annotationView.annotation!)
                 }
             }
             
@@ -113,29 +108,27 @@ extension MasterController {
         // Rest Area
         if (settings["Rest Area"].boolValue) {
             YQLService.getRestArea(completion: { (result) in
-                // Draw annotations in background
-                DispatchQueue.global(qos: .userInteractive).async{
-                    var restAreas: JSON
-                    if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-                        restAreas = JSON(data: dataFromString)["query"]["results"]["row"]
-                    } else {
-                        return
+                var restAreas: JSON
+                if let dataFromString = result.data(using: String.Encoding.utf8, allowLossyConversion: false) {
+                    restAreas = JSON(data: dataFromString)["query"]["results"]["row"]
+                } else {
+                    return
+                }
+                for i in 1..<restAreas.count {
+                    let restArea = restAreas[i]
+                    if (!restArea["RestAreaType"].stringValue.contains("TRUCKS")) {
+                        continue
                     }
-                    for i in 1..<restAreas.count {
-                        let restArea = restAreas[i]
-                        if (!restArea["RestAreaType"].stringValue.contains("TRUCKS")) {
-                            continue
-                        }
-                        let annotation = Geometry.createRestAreaAnnotationFrom(json: restArea)
-                        let annotationView = annotation.createPinView(nil)
-                        if (thisTask != self.currentTask) {
-                            break
-                        }
-                        DispatchQueue.main.async {
-                            self.mapView.addAnnotation(annotationView.annotation!)
-                        }
+                    let annotation = Geometry.createRestAreaAnnotationFrom(json: restArea)
+                    let annotationView = annotation.createPinView(nil)
+                    if (thisTask != self.currentTask) {
+                        break
+                    }
+                    DispatchQueue.main.async {
+                        self.mapView.addAnnotation(annotationView.annotation!)
                     }
                 }
+                
             })
         }
         
