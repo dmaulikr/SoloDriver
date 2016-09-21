@@ -11,7 +11,7 @@ import MapKit
 import SCLAlertView
 
 extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
-
+    
     func initDirection() {
         // Search bar
         addSearchBar()
@@ -59,11 +59,10 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
     
     func getDirection(annotation: MKAnnotation) {
         // Clear existing directions
-        for overlay in mapView.overlays {
-            if overlay is DirectionPolyline {
-                mapView.remove(overlay)
-            }
+        for polyline in directionPolylines {
+            mapView.remove(polyline)
         }
+        directionPolylines = []
         // Get directions
         let destination = annotation.coordinate
         let request: MKDirectionsRequest = MKDirectionsRequest()
@@ -87,6 +86,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
                     } else {
                         polyline.color = UIColor.black.withAlphaComponent(0.3)
                     }
+                    self.directionPolylines += [polyline]
                     self.mapView.add(polyline)
                 }
             }

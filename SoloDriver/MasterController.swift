@@ -11,8 +11,9 @@ import MapKit
 
 class MasterController: UIViewController {
 
+    var resultSearchController: UISearchController?
     var currentTask: Int = 0
-    var resultSearchController: UISearchController? = nil
+    var directionPolylines: [DirectionPolyline] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()

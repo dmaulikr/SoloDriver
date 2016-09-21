@@ -26,15 +26,12 @@ class ArcGISService: NSObject {
     static let layers = [9, 8, 6, 5, 3, 2]
     static let urlBridgeStructures = "https://services2.arcgis.com/18ajPSI0b3ppsmMt/ArcGIS/rest/services/Bridge_Structures/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&where=MIN_CLEARANCE%3E1+AND+MIN_CLEARANCE%3C"
     
-    static func getBridgeStructures(_ mapView: MKMapView, completion: @escaping (_ result: String) -> Void) {
+    static func getBridgeStructures(completion: @escaping (_ result: String) -> Void) {
         SettingsManager.shared.networkON()
         let url = urlBridgeStructures + SettingsManager.shared.settings["Height (m)"].stringValue
         Alamofire.request(url).validate().responseString { response in
             SettingsManager.shared.networkOff()
             if (response.result.isFailure) {
-                getBridgeStructures(mapView, completion: { (newResult) in
-                    completion(newResult)
-                })
                 return
             }
             if let value = response.result.value {
@@ -43,7 +40,7 @@ class ArcGISService: NSObject {
         }
     }
     
-    static func getRoutes(mapView: MKMapView, route: String, completion: @escaping (_ name: String, _ result: String?) -> Void) {
+    static func getRoutes(envelope: String, route: String, completion: @escaping (_ name: String, _ result: String?) -> Void) {
         var urls: [String] = []
         var name: String = ""
         switch route {
@@ -83,7 +80,7 @@ class ArcGISService: NSObject {
         // execute for all urls
         for url in urls {
             SettingsManager.shared.networkON()
-            let urlForAllObjects = url + queryParamsRoutes + Geometry.getVisibleAreaEnvelope(mapView)
+            let urlForAllObjects = url + queryParamsRoutes + envelope
             // Get objectIds for the all routes
             Alamofire.request(urlForAllObjects).validate().responseString(queue: backgroundQueue) { response in
                 SettingsManager.shared.networkOff()

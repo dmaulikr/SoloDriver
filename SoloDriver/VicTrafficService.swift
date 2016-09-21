@@ -14,7 +14,7 @@ class VicTrafficService: NSObject {
     
     static let url = "http://traffic.vicroads.vic.gov.au/maps.json"
     
-    static func getVicTrafficFeatures(_ completion: @escaping (_ result: String) -> Void) {
+    static func getVicTrafficFeatures(completion: @escaping (_ result: String) -> Void) {
         SettingsManager.shared.networkON()
         Alamofire.request(url).validate().responseString { response in
             SettingsManager.shared.networkOff()
@@ -27,7 +27,7 @@ class VicTrafficService: NSObject {
             print(response.result.error!)
             let deadlineTime = DispatchTime.now() + .seconds(1)
             DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                getVicTrafficFeatures({ (newResult) in
+                getVicTrafficFeatures(completion: { (newResult) in
                     completion(newResult)
                 })
             }

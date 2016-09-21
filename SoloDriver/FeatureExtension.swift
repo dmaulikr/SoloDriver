@@ -26,9 +26,11 @@ extension MasterController {
         mapView.removeOverlays(mapView.overlays)
         mapView.removeAnnotations(mapView.annotations)
         
+        // Search area
+        
         // Bridge Clearance
         if (settings["Bridge Clearance"].boolValue) {
-            ArcGISService.getBridgeStructures(mapView, completion: { (result) in
+            ArcGISService.getBridgeStructures(completion: { (result) in
                 // Draw annotations in background
                 DispatchQueue.global(qos: .userInteractive).async{
                     var bridges: JSON
@@ -142,7 +144,8 @@ extension MasterController {
         }
         
         // Routes
-        ArcGISService.getRoutes(mapView: mapView, route: settings["Routes"].stringValue) { (name, routes) in
+        let envelope = Geometry.getVisibleAreaEnvelope(mapView)
+        ArcGISService.getRoutes(envelope: envelope, route: settings["Routes"].stringValue) { (name, routes) in
             // If no results
             if (routes == nil) {
                 let alert = UIAlertController(title: "Oops", message: "The map area is too large.\nPlease zoom in and search again.", preferredStyle: .alert)
