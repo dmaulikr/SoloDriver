@@ -15,4 +15,8 @@ extension MasterController{
     func startNavigation() {
         self.titleItem.title = "Cancel Navigation"
     }
+    
+    func cancelNavigation() {
+        self.titleItem.title = "Search Map Area"
+    }
 }

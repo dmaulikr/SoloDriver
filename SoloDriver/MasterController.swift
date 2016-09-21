@@ -59,6 +59,9 @@ class MasterController: UIViewController {
     }
 
     @IBAction func didClickAction(_ sender: AnyObject) {
+        if (titleItem.title == "Cancel Navigation") {
+            return
+        }
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionSheet.view.tintColor = view.tintColor
         actionSheet.popoverPresentationController?.barButtonItem = sender as? UIBarButtonItem
@@ -93,6 +96,8 @@ class MasterController: UIViewController {
             searchFeatures()
         } else if (titleItem.title == "Start Navigation") {
             startNavigation()
+        } else if (titleItem.title == "Cancel Navigation") {
+            cancelNavigation()
         }
     }
     
