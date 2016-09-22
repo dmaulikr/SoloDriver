@@ -9,24 +9,19 @@
 import UIKit
 import MapKit
 
-extension MasterController{
+extension MasterController {
     
     func startNavigation() {
         self.titleItem.title = "End Navigation"
-        var newDirectionSteps: [[DirectionPolyline]] = [[]]
+        var newDirectionSteps: [[DirectionPolyline]] = []
         // Remove candidate directions
         for step in directionSteps {
             // remove feature on map
             for polyline in step {
-                if (polyline.renderer.strokeColor != UIColor.black.withAlphaComponent(0.9)) {
-                    mapView.remove(polyline)
-                }
-            }
-            // get picked directions
-            for polyline in step {
                 if (polyline.renderer.strokeColor == UIColor.black.withAlphaComponent(0.9)) {
                     newDirectionSteps += [[polyline]]
-                    break
+                } else {
+                    mapView.remove(polyline)
                 }
             }
         }
@@ -38,9 +33,31 @@ extension MasterController{
         eyeCoordinate.longitude = userCoordinate.longitude
         let mapCamera = MKMapCamera(lookingAtCenter: userCoordinate, fromEyeCoordinate: eyeCoordinate, eyeAltitude: 3000.0)
         mapView.setCamera(mapCamera, animated: true)
+        // Hide nav bar
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        // Get route info
+        self.navigationInstruction.text = directionSteps[0][0].route!.steps[0].instructions
+        for step in directionSteps {
+            let route = step[0].route
+            for routeStep in route!.steps {
+                let pointsArray = routeStep.polyline.points()
+                let firstPoint = pointsArray[0]
+                let firstLocation = MKCoordinateForMapPoint(firstPoint)
+                print(routeStep.instructions)
+                print(firstLocation.latitude)
+            }
+        }
     }
     
     func cancelNavigation() {
-        self.titleItem.title = "Search Map Area"
+        // Display nav bar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        mapView.userTrackingMode = .none
+        self.titleItem.title = "Start Navigation"
+        self.navigationInstruction.text = ""
+        // Set camera
+        let userCoordinate = LocationManager.shared.getLastLocation()!.coordinate
+        let mapCamera = MKMapCamera(lookingAtCenter: userCoordinate, fromEyeCoordinate: userCoordinate, eyeAltitude: 3000.0)
+        mapView.setCamera(mapCamera, animated: true)
     }
 }

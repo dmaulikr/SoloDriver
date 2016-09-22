@@ -71,7 +71,7 @@ extension MasterController: UIGestureRecognizerDelegate, HandleMapSearch {
         for polylines in directionSteps {
             mapView.removeOverlays(polylines)
         }
-        directionSteps = [[]]
+        directionSteps = []
         // Get directions, step by step
         for waypointCount in 0..<waypoints.count+1 {
             let source: CLLocationCoordinate2D

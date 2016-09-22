@@ -13,16 +13,14 @@ class MasterController: UIViewController {
 
     var resultSearchController: UISearchController?
     var currentTask: Int = 0
-    var directionSteps: [[DirectionPolyline]] = [[]]
+    var directionSteps: [[DirectionPolyline]] = []
     var waypoints: [WayPointAnnotation] = []
-    var userTrackingButton: MKUserTrackingBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // tracking button
         toolbarItems![0].width = -10
-        userTrackingButton = MKUserTrackingBarButtonItem(mapView: mapView)
-        toolbarItems![1] = userTrackingButton!
+        toolbarItems![1] = MKUserTrackingBarButtonItem(mapView: mapView)
         toolbarItems![1].customView?.tintColor = view.tintColor
         navigationController?.isToolbarHidden = false
         // Add search bar
@@ -103,7 +101,15 @@ class MasterController: UIViewController {
         }
     }
     
+    @IBOutlet var navigationInstruction: UILabel! {
+        didSet {
+            navigationInstruction.text = ""
+        }
+    }
+    
+    
     func clearMap() {
+        self.titleItem.title = "Search Map Area"
         self.currentTask = (self.currentTask + 1) % 1024
         self.directionSteps = [[]]
         self.waypoints = []

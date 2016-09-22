@@ -9,36 +9,41 @@
 import Foundation
 import CoreLocation
 
+protocol LocationManagerDelegate {
+    func didUpdateLocation(location: CLLocation)
+}
+
 open class LocationManager: NSObject, CLLocationManagerDelegate {
-
-    fileprivate let manager: CLLocationManager
-
+    
     // static instance
     open static let shared = LocationManager()
-
-    fileprivate override init() {
+    
+    let manager: CLLocationManager
+    var delegate: LocationManagerDelegate?
+    
+    override init() {
         self.manager = CLLocationManager()
         super.init()
         self.manager.activityType = CLActivityType.automotiveNavigation
         self.manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         self.manager.delegate = self
     }
-
-    open func start() {
-        self.manager.requestWhenInUseAuthorization()
-        self.manager.startUpdatingLocation()
+    
+    func start() {
         // self.manager.requestAlwaysAuthorization()
-        // self.manager.startMonitoringSignificantLocationChanges()
+        self.manager.requestWhenInUseAuthorization()
+        // self.manager.startUpdatingLocation()
+        self.manager.startMonitoringSignificantLocationChanges()
     }
-
-    open func getLastLocation() -> CLLocation? {
+    
+    func getLastLocation() -> CLLocation? {
         return manager.location
     }
-
-    open func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // print(manager.location!.timestamp)
+    
+    public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        delegate?.didUpdateLocation(location: locations.last!)
     }
-
+    
     // Adapted from https://www.thorntech.com/2016/01/how-to-search-for-location-using-apples-mapkit/
     func parseAddress(_ selectedItem: CLPlacemark) -> String {
         // put a space between "4" and "Melrose Place"
