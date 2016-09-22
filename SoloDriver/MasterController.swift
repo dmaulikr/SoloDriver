@@ -15,12 +15,14 @@ class MasterController: UIViewController {
     var currentTask: Int = 0
     var directionSteps: [[DirectionPolyline]] = [[]]
     var waypoints: [WayPointAnnotation] = []
+    var userTrackingButton: MKUserTrackingBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // tracking button
         toolbarItems![0].width = -10
-        toolbarItems![1] = MKUserTrackingBarButtonItem(mapView: mapView)
+        userTrackingButton = MKUserTrackingBarButtonItem(mapView: mapView)
+        toolbarItems![1] = userTrackingButton!
         toolbarItems![1].customView?.tintColor = view.tintColor
         navigationController?.isToolbarHidden = false
         // Add search bar

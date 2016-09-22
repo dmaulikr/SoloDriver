@@ -78,4 +78,11 @@ extension MasterController: MKMapViewDelegate {
             }
         }
     }
+    
+    // MARK: region did change
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if (self.titleItem.title == "End Navigation") {
+            mapView.userTrackingMode = .followWithHeading
+        }
+    }
 }
