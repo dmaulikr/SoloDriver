@@ -19,9 +19,6 @@ open class LocationManager: NSObject, CLLocationManagerDelegate {
         didSet {
             if (locationInstructions.count == 0) {
                 queuedInstructions = []
-            } else {
-                delegate?.updateInstruction(instruction: locationInstructions[0])
-                locationInstructions.remove(at: 0)
             }
         }
     }
@@ -58,7 +55,7 @@ open class LocationManager: NSObject, CLLocationManagerDelegate {
         
         for i in 0..<locationInstructions.count {
             if (locationInstructions[i].location!.distance(from:locations.last!) < locationInstructions[i].radius!) {
-                if (locationInstructions[i].isNavInstruction) {
+                if (locationInstructions[i].notifyWhenExit) {
                     queuedInstructions += [locationInstructions[i]]
                 } else {
                     delegate?.updateInstruction(instruction: locationInstructions[i])

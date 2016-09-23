@@ -31,8 +31,6 @@ extension Geometry {
         let bridgeAnnotation = BridgeAnnotation()
         bridgeAnnotation.coordinate = coordinate
         bridgeAnnotation.title = attributes["FEATURE_CROSSED"].stringValue
-            .replacingOccurrences(of: "RAILWAY OVER ", with: "")
-            .replacingOccurrences(of: "RAILWAY LINE OVER ", with: "")
             .trimmingCharacters(in: CharacterSet.decimalDigits)
             .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         bridgeAnnotation.subtitle = "CLEARANCE: " + String(clearance) + "m"
