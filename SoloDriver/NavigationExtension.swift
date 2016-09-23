@@ -11,8 +11,7 @@ import MapKit
 import AVFoundation
 
 protocol MasterControllerDelegate {
-    func updateInstruction(instruction: String)
-    func pronounceInstruction(instruction: String)
+    func updateInstruction(instruction: LocationInstruction)
 }
 
 extension MasterController: MasterControllerDelegate {
@@ -41,22 +40,21 @@ extension MasterController: MasterControllerDelegate {
         mapView.setCamera(mapCamera, animated: true)
         // Hide nav bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        // Get route info
-        self.navigationInstruction.text = directionSteps[0][0].route!.steps[0].instructions
-        // Critical point to monitor
+        // Direction instructions
         var locationInstructions: [LocationInstruction] = []
         for step in directionSteps {
             let route = step[0].route
             for routeStep in route!.steps {
-                let pointsArray = routeStep.polyline.points()
-                let firstPoint = pointsArray[0]
-                let firstCoordinate = MKCoordinateForMapPoint(firstPoint)
-                let firstLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
+                locationInstructions += [createInstructionFrom(routeStep: routeStep)]
+            }
+        }
+        // Feature instructions
+        for annotation in mapView.annotations {
+            if (annotation is BridgeAnnotation || annotation is VicTrafficAnnotation) {
                 let locationInstruction = LocationInstruction()
-                locationInstruction.location = firstLocation
-                locationInstruction.instruction = routeStep.instructions
-                locationInstruction.radius = 30
-                locationInstruction.isNavInstruction = true
+                locationInstruction.location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+                locationInstruction.radius = 1000
+                locationInstruction.instruction = annotation.title!! + "\n" + annotation.subtitle!!
                 locationInstructions += [locationInstruction]
             }
         }
@@ -77,9 +75,32 @@ extension MasterController: MasterControllerDelegate {
         mapView.setCamera(mapCamera, animated: true)
     }
     
-    func updateInstruction(instruction: String) {
-        self.navigationInstruction.text = instruction
-        pronounceInstruction(instruction: instruction)
+    func createInstructionFrom(routeStep: MKRouteStep) -> LocationInstruction {
+        let pointsArray = routeStep.polyline.points()
+        let firstPoint = pointsArray[0]
+        let firstCoordinate = MKCoordinateForMapPoint(firstPoint)
+        let firstLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
+        let locationInstruction = LocationInstruction()
+        locationInstruction.location = firstLocation
+        locationInstruction.instruction = routeStep.instructions
+        locationInstruction.radius = 32
+        locationInstruction.isNavInstruction = true
+        return locationInstruction
+    }
+    
+    func updateInstruction(instruction: LocationInstruction) {
+        if (instruction.isNavInstruction) {
+            self.navigationInstruction.text = instruction.instruction
+        } else {
+            self.alertInstruction.text = instruction.instruction
+            let deadline = DispatchTime.now() + .seconds(10)
+            DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
+                if (self.alertInstruction.text == instruction.instruction) {
+                    self.alertInstruction.text = ""
+                }
+            })
+        }
+        pronounceInstruction(instruction: instruction.instruction!)
     }
     
     func pronounceInstruction(instruction: String) {

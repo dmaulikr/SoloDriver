@@ -41,7 +41,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lDA-7S-FUi" firstAttribute="top" secondItem="3nM-sz-nbL" secondAttribute="bottom" id="3GU-GE-LzG"/>
                             <constraint firstItem="ALs-6F-aJv" firstAttribute="centerX" secondItem="Odh-8L-Cmu" secondAttribute="centerX" id="4mg-Ue-vjK"/>
                             <constraint firstItem="rzf-FP-5BV" firstAttribute="top" secondItem="Odh-8L-Cmu" secondAttribute="bottom" constant="10" id="M98-tE-B5y"/>
                             <constraint firstItem="lDA-7S-FUi" firstAttribute="leading" secondItem="lPD-AQ-sfL" secondAttribute="leadingMargin" id="P9u-s8-cdS"/>
@@ -51,6 +50,7 @@
                             <constraint firstItem="ALs-6F-aJv" firstAttribute="leading" secondItem="lPD-AQ-sfL" secondAttribute="leading" id="kst-05-1e9"/>
                             <constraint firstItem="ALs-6F-aJv" firstAttribute="top" secondItem="lPD-AQ-sfL" secondAttribute="top" id="lze-hN-TFm"/>
                             <constraint firstItem="Odh-8L-Cmu" firstAttribute="leading" secondItem="lPD-AQ-sfL" secondAttribute="leadingMargin" id="mEe-1f-kgX"/>
+                            <constraint firstItem="lDA-7S-FUi" firstAttribute="top" secondItem="3nM-sz-nbL" secondAttribute="bottom" constant="10" id="tIP-SR-aMe"/>
                         </constraints>
                     </view>
                     <toolbarItems>
