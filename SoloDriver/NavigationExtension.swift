@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import AVFoundation
 
 protocol MasterControllerDelegate {
     func updateInstruction(instruction: String)
@@ -78,10 +79,12 @@ extension MasterController: MasterControllerDelegate {
     
     func updateInstruction(instruction: String) {
         self.navigationInstruction.text = instruction
+        pronounceInstruction(instruction: instruction)
     }
     
     func pronounceInstruction(instruction: String) {
-        
+        let speechUtterance = AVSpeechUtterance(string: instruction)
+        speechSynthesizer.speak(speechUtterance)
     }
 }
 

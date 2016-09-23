@@ -8,10 +8,12 @@
 
 import UIKit
 import MapKit
+import AVFoundation
 
 class MasterController: UIViewController {
 
     var resultSearchController: UISearchController?
+    let speechSynthesizer = AVSpeechSynthesizer()
     var currentTask: Int = 0
     var directionSteps: [[DirectionPolyline]] = []
     var waypoints: [WayPointAnnotation] = []
@@ -107,6 +109,11 @@ class MasterController: UIViewController {
         }
     }
     
+    @IBOutlet var alertInstruction: UILabel! {
+        didSet {
+            alertInstruction.text = ""
+        }
+    }
     
     func clearMap() {
         self.titleItem.title = "Search Map Area"
