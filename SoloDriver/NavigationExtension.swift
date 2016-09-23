@@ -11,6 +11,7 @@ import MapKit
 
 protocol MasterControllerDelegate {
     func updateInstruction(instruction: String)
+    func pronounceInstruction(instruction: String)
 }
 
 extension MasterController: MasterControllerDelegate {
@@ -53,7 +54,8 @@ extension MasterController: MasterControllerDelegate {
                 let locationInstruction = LocationInstruction()
                 locationInstruction.location = firstLocation
                 locationInstruction.instruction = routeStep.instructions
-                locationInstruction.radius = 100
+                locationInstruction.radius = 30
+                locationInstruction.isNavInstruction = true
                 locationInstructions += [locationInstruction]
             }
         }
@@ -77,10 +79,15 @@ extension MasterController: MasterControllerDelegate {
     func updateInstruction(instruction: String) {
         self.navigationInstruction.text = instruction
     }
+    
+    func pronounceInstruction(instruction: String) {
+        
+    }
 }
 
 class LocationInstruction: NSObject {
     var location: CLLocation?
     var instruction: String?
     var radius: CLLocationDistance?
+    var isNavInstruction = false
 }

@@ -30,7 +30,6 @@ open class LocationManager: NSObject, CLLocationManagerDelegate {
         super.init()
         self.manager.activityType = CLActivityType.automotiveNavigation
         self.manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        self.manager.distanceFilter = 10
         self.manager.delegate = self
     }
     
@@ -48,14 +47,18 @@ open class LocationManager: NSObject, CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         for i in 0..<queuedInstructions.count {
             if (queuedInstructions[i].location!.distance(from: locations.last!) > queuedInstructions[i].radius!) {
-                delegate?.updateInstruction(instruction: locationInstructions[i].instruction!)
+                delegate?.updateInstruction(instruction: queuedInstructions[i].instruction!)
                 queuedInstructions.remove(at: i)
                 break
             }
         }
         for i in 0..<locationInstructions.count {
             if (locationInstructions[i].location!.distance(from:locations.last!) < locationInstructions[i].radius!) {
-                queuedInstructions += [locationInstructions[i]]
+                if (locationInstructions[i].isNavInstruction) {
+                    queuedInstructions += [locationInstructions[i]]
+                } else {
+                    delegate?.pronounceInstruction(instruction: locationInstructions[i].instruction!)
+                }
                 locationInstructions.remove(at: i)
                 break
             }
