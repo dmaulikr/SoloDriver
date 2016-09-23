@@ -9,7 +9,11 @@
 import UIKit
 import MapKit
 
-extension MasterController {
+protocol MasterControllerDelegate {
+    func updateInstruction(instruction: String)
+}
+
+extension MasterController: MasterControllerDelegate {
     
     func startNavigation() {
         self.titleItem.title = "End Navigation"
@@ -37,16 +41,24 @@ extension MasterController {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         // Get route info
         self.navigationInstruction.text = directionSteps[0][0].route!.steps[0].instructions
+        // Critical point to monitor
+        var locationInstructions: [LocationInstruction] = []
         for step in directionSteps {
             let route = step[0].route
             for routeStep in route!.steps {
                 let pointsArray = routeStep.polyline.points()
                 let firstPoint = pointsArray[0]
-                let firstLocation = MKCoordinateForMapPoint(firstPoint)
-                print(routeStep.instructions)
-                print(firstLocation.latitude)
+                let firstCoordinate = MKCoordinateForMapPoint(firstPoint)
+                let firstLocation = CLLocation(latitude: firstCoordinate.latitude, longitude: firstCoordinate.longitude)
+                let locationInstruction = LocationInstruction()
+                locationInstruction.location = firstLocation
+                locationInstruction.instruction = routeStep.instructions
+                locationInstruction.radius = 100
+                locationInstructions += [locationInstruction]
             }
         }
+        LocationManager.shared.locationInstructions = locationInstructions
+        LocationManager.shared.delegate = self
     }
     
     func cancelNavigation() {
@@ -55,9 +67,20 @@ extension MasterController {
         mapView.userTrackingMode = .none
         self.titleItem.title = "Start Navigation"
         self.navigationInstruction.text = ""
+        LocationManager.shared.locationInstructions = []
         // Set camera
         let userCoordinate = LocationManager.shared.getLastLocation()!.coordinate
         let mapCamera = MKMapCamera(lookingAtCenter: userCoordinate, fromEyeCoordinate: userCoordinate, eyeAltitude: 3000.0)
         mapView.setCamera(mapCamera, animated: true)
     }
+    
+    func updateInstruction(instruction: String) {
+        self.navigationInstruction.text = instruction
+    }
+}
+
+class LocationInstruction: NSObject {
+    var location: CLLocation?
+    var instruction: String?
+    var radius: CLLocationDistance?
 }

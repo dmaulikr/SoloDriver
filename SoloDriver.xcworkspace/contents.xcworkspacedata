@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../gips-master/output.gpx">
+   </FileRef>
+   <FileRef
       location = "group:SoloDriver.xcodeproj">
    </FileRef>
    <FileRef

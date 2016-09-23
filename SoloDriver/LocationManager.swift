@@ -9,31 +9,36 @@
 import Foundation
 import CoreLocation
 
-protocol LocationManagerDelegate {
-    func didUpdateLocation(location: CLLocation)
-}
-
 open class LocationManager: NSObject, CLLocationManagerDelegate {
     
     // static instance
     open static let shared = LocationManager()
     
     let manager: CLLocationManager
-    var delegate: LocationManagerDelegate?
+    var locationInstructions: [LocationInstruction] = [] {
+        didSet {
+            if (locationInstructions.count == 0) {
+                queuedInstructions = []
+            }
+        }
+    }
+    var queuedInstructions: [LocationInstruction] = []
+    var delegate: MasterControllerDelegate?
     
     override init() {
         self.manager = CLLocationManager()
         super.init()
         self.manager.activityType = CLActivityType.automotiveNavigation
         self.manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        self.manager.distanceFilter = 10
         self.manager.delegate = self
     }
     
     func start() {
         // self.manager.requestAlwaysAuthorization()
         self.manager.requestWhenInUseAuthorization()
-        // self.manager.startUpdatingLocation()
-        self.manager.startMonitoringSignificantLocationChanges()
+        self.manager.startUpdatingLocation()
+        // self.manager.startMonitoringSignificantLocationChanges()
     }
     
     func getLastLocation() -> CLLocation? {
@@ -41,7 +46,20 @@ open class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        delegate?.didUpdateLocation(location: locations.last!)
+        for i in 0..<queuedInstructions.count {
+            if (queuedInstructions[i].location!.distance(from: locations.last!) > queuedInstructions[i].radius!) {
+                delegate?.updateInstruction(instruction: locationInstructions[i].instruction!)
+                queuedInstructions.remove(at: i)
+                break
+            }
+        }
+        for i in 0..<locationInstructions.count {
+            if (locationInstructions[i].location!.distance(from:locations.last!) < locationInstructions[i].radius!) {
+                queuedInstructions += [locationInstructions[i]]
+                locationInstructions.remove(at: i)
+                break
+            }
+        }
     }
     
     // Adapted from https://www.thorntech.com/2016/01/how-to-search-for-location-using-apples-mapkit/

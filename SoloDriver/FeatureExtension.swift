@@ -141,7 +141,7 @@ extension MasterController {
             let numPerRound = 100
             let maxRound = Int(objectIds.count/numPerRound) + 1
             // Allow 100 round at most, alert if exceed
-            if (maxRound > 100) {
+            if (maxRound > 50) {
                 let alert = UIAlertController(title: "Oops", message: "The map area is too large.\nPlease zoom in and search again.", preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alert.addAction(action)
