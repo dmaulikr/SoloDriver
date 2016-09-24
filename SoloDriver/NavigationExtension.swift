@@ -53,12 +53,16 @@ extension MasterController: MasterControllerDelegate {
         }
         // Feature instructions
         for annotation in mapView.annotations {
-            if (annotation is BridgeAnnotation || annotation is VicTrafficAnnotation) {
+            if (annotation is AlertViewAnnotation) {
+                let thisAnnotation = annotation as! AlertViewAnnotation
+                if (thisAnnotation.image == nil) {
+                    continue
+                }
                 let locationInstruction = LocationInstruction()
                 locationInstruction.location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
                 locationInstruction.radius = 1000
                 locationInstruction.text = annotation.title!! + "\n" + annotation.subtitle!!
-                locationInstruction.voice = locationInstruction.text
+                locationInstruction.voice = thisAnnotation.alertSubtitle
                 locationInstructions += [locationInstruction]
             }
         }
@@ -90,13 +94,14 @@ extension MasterController: MasterControllerDelegate {
         startInstruction.location = firstLocation
         let distance = Int(firstLocation.distance(from: lastLocation)/100) * 100
         if (distance != 0) {
-            startInstruction.text = "In " + String(distance) + "m, " + routeStep.instructions
+            startInstruction.voice = "In " + String(distance) + "m, " + routeStep.instructions
         } else {
-            startInstruction.text = routeStep.instructions
+            startInstruction.voice = routeStep.instructions
         }
-        startInstruction.voice = startInstruction.text
+        startInstruction.text = routeStep.instructions
         startInstruction.radius = 32
         startInstruction.notifyWhenExit = true
+        startInstruction.isNavInstruction = true
         // end point notification
         let endInstruction = LocationInstruction()
         endInstruction.location = lastLocation
@@ -121,7 +126,7 @@ extension MasterController: MasterControllerDelegate {
             self.alertInstruction.text = instruction.text
             let speechUtterance = AVSpeechUtterance(string: instruction.voice!)
             speechSynthesizer.speak(speechUtterance)
-            let deadline = DispatchTime.now() + .seconds(10)
+            let deadline = DispatchTime.now() + .seconds(16)
             DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
                 self.alertInstruction.text = ""
             })

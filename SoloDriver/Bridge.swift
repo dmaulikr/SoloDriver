@@ -39,7 +39,6 @@ extension Geometry {
             .trimmingCharacters(in: CharacterSet.decimalDigits)
             .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         subtitle += "\nCLEARANCE: " + String(clearance) + "m"
-        subtitle += "\n" + attributes["BRIDGE_TYPE"].stringValue
         bridgeAnnotation.alertSubtitle = subtitle
         // Set color based on settings
         let settings = SettingsManager.shared.settings

@@ -39,8 +39,6 @@ extension Geometry {
         if (json["to"].stringValue != "") {
             subtitle += "\nTo: " + json["to"].stringValue
         }
-        subtitle += "\n\nStart: " + json["created_date"].stringValue
-        subtitle += "\nEnd: " + json["updated_date"].stringValue
         annotation.alertSubtitle = subtitle
         annotation.color = Config.ORANGE
         annotation.alertColor = Config.ORANGE_CODE
