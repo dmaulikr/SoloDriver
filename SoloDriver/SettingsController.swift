@@ -27,7 +27,29 @@ class SettingsController: UITableViewController {
     @IBAction func done(_ sender: AnyObject) {
         dismiss(animated: true) { }
     }
-
+    
+    @IBOutlet var sInstruction: UISwitch! {
+        didSet {
+            sInstruction.isOn = SettingsManager.shared.settings["InstructionIsEnabled"].boolValue
+        }
+    }
+    
+    @IBAction func aInstruction(_ sender: UISwitch) {
+        SettingsManager.shared.settings["InstructionIsEnabled"].bool = sender.isOn
+        SettingsManager.shared.saveSettings()
+    }
+    
+    @IBOutlet var sTutorial: UISwitch! {
+        didSet {
+            sTutorial.isOn = SettingsManager.shared.settings["TutorialIsEnabled"].boolValue
+        }
+    }
+    
+    @IBAction func aTutorial(_ sender: UISwitch) {
+        SettingsManager.shared.settings["TutorialIsEnabled"].bool = sender.isOn
+        SettingsManager.shared.saveSettings()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         let settings = SettingsManager.shared.settings
         if (settings["Height (m)"].double == nil) {

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ALs-6F-aJv">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ALs-6F-aJv">
+                                <frame key="frameInset" width="1000" height="1000"/>
                                 <connections>
                                     <outlet property="delegate" destination="iO4-Su-K6r" id="xH1-jV-cji"/>
                                 </connections>
@@ -88,6 +90,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="actionItem" destination="ajd-Ed-73Q" id="kn7-Xa-M93"/>
                         <outlet property="alertInstruction" destination="lDA-7S-FUi" id="MJr-mT-Yx5"/>
                         <outlet property="mapView" destination="ALs-6F-aJv" id="Cul-Wl-sex"/>
                         <outlet property="navigationInstruction" destination="Odh-8L-Cmu" id="B1D-YP-wou"/>
@@ -870,16 +873,72 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Acknowledgements" id="kO3-74-YBb">
+                            <tableViewSection headerTitle="Help" id="kO3-74-YBb" userLabel="Help">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Contributors" textLabel="beR-Jh-qdS" style="IBUITableViewCellStyleDefault" id="LRv-3c-O5c">
-                                        <rect key="frame" x="0.0" y="381" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Instructions" id="LRv-3c-O5c">
+                                        <rect key="frame" x="0.0" y="380" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LRv-3c-O5c" id="ydD-Oi-X9Y">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="LRv-3c-O5c" id="ydD-Oi-X9Y">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display Instructions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BND-Tc-mDr">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pfB-Kq-yha">
+                                                    <connections>
+                                                        <action selector="aInstruction:" destination="NFL-yw-Xfe" eventType="valueChanged" id="Vgf-2j-pu8"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pfB-Kq-yha" secondAttribute="trailing" id="HLL-qm-8Yc"/>
+                                                <constraint firstItem="BND-Tc-mDr" firstAttribute="centerY" secondItem="ydD-Oi-X9Y" secondAttribute="centerY" id="NXP-y4-SWt"/>
+                                                <constraint firstItem="pfB-Kq-yha" firstAttribute="centerY" secondItem="ydD-Oi-X9Y" secondAttribute="centerY" id="Pod-PV-vap"/>
+                                                <constraint firstItem="BND-Tc-mDr" firstAttribute="leading" secondItem="ydD-Oi-X9Y" secondAttribute="leadingMargin" id="mn4-8i-HyY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tutorial" id="7aa-CU-Jos">
+                                        <rect key="frame" x="0.0" y="424" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="7aa-CU-Jos" id="Iox-ex-Df8">
+                                            <frame key="frameInset" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display Tutorial" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkz-bq-1Gb">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qrp-No-EFh">
+                                                    <connections>
+                                                        <action selector="aTutorial:" destination="NFL-yw-Xfe" eventType="valueChanged" id="MfK-54-xFh"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tkz-bq-1Gb" firstAttribute="centerY" secondItem="Iox-ex-Df8" secondAttribute="centerY" id="8la-Mg-EnR"/>
+                                                <constraint firstItem="qrp-No-EFh" firstAttribute="centerY" secondItem="Iox-ex-Df8" secondAttribute="centerY" id="9kz-g2-rNU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="qrp-No-EFh" secondAttribute="trailing" id="DLS-xY-myp"/>
+                                                <constraint firstItem="tkz-bq-1Gb" firstAttribute="leading" secondItem="Iox-ex-Df8" secondAttribute="leadingMargin" id="ubr-zo-wCv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Acknowledgements" id="SwK-0d-5HD">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Contributors" textLabel="3Rr-IX-NFF" style="IBUITableViewCellStyleDefault" id="JGR-vG-pjp">
+                                        <rect key="frame" x="0.0" y="524" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JGR-vG-pjp" id="NsR-pq-N3S">
                                             <frame key="frameInset" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Contributors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="beR-Jh-qdS">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Contributors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Rr-IX-NFF">
                                                     <frame key="frameInset" minX="15" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -892,14 +951,14 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Data Sources" textLabel="YDD-OX-Pth" style="IBUITableViewCellStyleDefault" id="OoU-6g-0CG">
-                                        <rect key="frame" x="0.0" y="425" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Data Sources" textLabel="VJy-5u-WaC" style="IBUITableViewCellStyleDefault" id="JMe-6l-KY2">
+                                        <rect key="frame" x="0.0" y="568" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OoU-6g-0CG" id="m7b-X4-MgK">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JMe-6l-KY2" id="mbV-7B-O3P">
                                             <frame key="frameInset" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Data Sources" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YDD-OX-Pth">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Data Sources" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VJy-5u-WaC">
                                                     <frame key="frameInset" minX="15" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -912,14 +971,14 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Libraries" textLabel="63r-bV-UnU" style="IBUITableViewCellStyleDefault" id="cMH-c0-GaS">
-                                        <rect key="frame" x="0.0" y="469" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Libraries" textLabel="xDe-OM-k4e" style="IBUITableViewCellStyleDefault" id="P7T-8T-8nS">
+                                        <rect key="frame" x="0.0" y="612" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cMH-c0-GaS" id="lap-IO-9Va">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P7T-8T-8nS" id="K4Q-vJ-34V">
                                             <frame key="frameInset" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Libraries" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="63r-bV-UnU">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Libraries" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xDe-OM-k4e">
                                                     <frame key="frameInset" minX="15" width="325" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -950,6 +1009,8 @@
                     <connections>
                         <outlet property="height" destination="7pt-qL-Fy6" id="eB0-9p-jo4"/>
                         <outlet property="length" destination="yCz-kR-X0C" id="Efo-fq-bBg"/>
+                        <outlet property="sInstruction" destination="pfB-Kq-yha" id="Fhs-9I-it8"/>
+                        <outlet property="sTutorial" destination="qrp-No-EFh" id="c78-bP-WaO"/>
                         <outlet property="weight" destination="OOI-0Z-FdK" id="rwJ-Tt-ANl"/>
                         <outlet property="width" destination="XeJ-WI-GZY" id="4Et-cP-D8Y"/>
                     </connections>

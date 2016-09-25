@@ -1,14 +1,21 @@
 PODS:
   - Alamofire (4.0.0)
+  - Instructions (0.5.0):
+    - Instructions/Core (= 0.5.0)
+  - Instructions/Core (0.5.0)
   - SCLAlertView (0.6.0)
   - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - Instructions (from `https://github.com/ephread/Instructions.git`, branch `swift3`)
   - SCLAlertView (from `https://github.com/vikmeup/SCLAlertView-Swift`)
   - SwiftyJSON (from `https://github.com/appsailor/SwiftyJSON.git`, branch `swift3`)
 
 EXTERNAL SOURCES:
+  Instructions:
+    :branch: swift3
+    :git: https://github.com/ephread/Instructions.git
   SCLAlertView:
     :git: https://github.com/vikmeup/SCLAlertView-Swift
   SwiftyJSON:
@@ -16,6 +23,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/appsailor/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  Instructions:
+    :commit: 44f0ad4460f99ff3e08c6aca6d3601b0ba352530
+    :git: https://github.com/ephread/Instructions.git
   SCLAlertView:
     :commit: 2c00bfd1199b984476724c79914d553063ae0b46
     :git: https://github.com/vikmeup/SCLAlertView-Swift
@@ -25,9 +35,10 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  Instructions: 6976f674ce788aefec475be6f18500572f1645d4
   SCLAlertView: 0f6b3c23a48b4993564ff1dd3c065782e4b2b687
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: 9827e33d69435a2d22681bc2c81be4360757b599
+PODFILE CHECKSUM: 92e5a38c8a7a632d0642f7e5c4974826b8a4ab1f
 
 COCOAPODS: 1.1.0.rc.2

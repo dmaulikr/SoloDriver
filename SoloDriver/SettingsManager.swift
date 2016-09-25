@@ -24,13 +24,11 @@ class SettingsManager: NSObject {
     func loadSettings() {
         if let dir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true).first {
             let path = URL(fileURLWithPath: dir).appendingPathComponent(file)
-
             // reading
             let settingsData = try? Data(contentsOf: path)
             if (settingsData != nil) {
                 settings = JSON(data: settingsData!)
             }
-            
         }
     }
 

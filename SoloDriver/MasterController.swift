@@ -9,11 +9,14 @@
 import UIKit
 import MapKit
 import AVFoundation
+import Instructions
 
 class MasterController: UIViewController {
 
     var resultSearchController: UISearchController?
+    let coachMarksController = CoachMarksController()
     let speechSynthesizer = AVSpeechSynthesizer()
+    var userTrackingButton: MKUserTrackingBarButtonItem?
     var currentTask: Int = 0
     var directionSteps: [[DirectionPolyline]] = []
     var waypoints: [WayPointAnnotation] = []
@@ -22,14 +25,26 @@ class MasterController: UIViewController {
         super.viewDidLoad()
         // tracking button
         toolbarItems![0].width = -10
-        toolbarItems![1] = MKUserTrackingBarButtonItem(mapView: mapView)
+        userTrackingButton = MKUserTrackingBarButtonItem(mapView: mapView)
+        toolbarItems![1] = userTrackingButton!
         toolbarItems![1].customView?.tintColor = view.tintColor
         navigationController?.isToolbarHidden = false
         // Add search bar
         initDirection()
         // Taps on map
         registerTapGestures()
-
+        // Instructions
+        initInstructions()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.coachMarksController.startOn(self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.coachMarksController.stop(immediately: true)
     }
 
     @IBOutlet var mapView: MKMapView! {
@@ -60,6 +75,7 @@ class MasterController: UIViewController {
         present(controller, animated: true) { }
     }
 
+    @IBOutlet var actionItem: UIBarButtonItem!
     @IBAction func didClickAction(_ sender: AnyObject) {
         if (titleItem.title == "End Navigation") {
             return

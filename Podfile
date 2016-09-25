@@ -8,6 +8,7 @@ target 'SoloDriver' do
   pod 'Alamofire', '~> 4.0'
   pod 'SwiftyJSON', :git => 'https://github.com/appsailor/SwiftyJSON.git', :branch => 'swift3'
   pod 'SCLAlertView', :git => 'https://github.com/vikmeup/SCLAlertView-Swift'
+  pod 'Instructions', :git => 'https://github.com/ephread/Instructions.git', :branch => 'swift3'
 
   # Pods for SoloDriver
 
