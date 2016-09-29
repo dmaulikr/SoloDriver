@@ -23,7 +23,6 @@ extension MasterController {
     }
     
     func tapHandler(_ gestureRecognizer: UITapGestureRecognizer) {
-        self.navigationController?.view.endEditing(true)
         let tapPosition = gestureRecognizer.location(in: mapView)
         let tapCoordinate = mapView.convert(tapPosition, toCoordinateFrom: mapView)
         let tapMapPoint = MKMapPointForCoordinate(tapCoordinate)
@@ -56,7 +55,6 @@ extension MasterController {
     }
     
     func longTapHandler(_ gestureRecognizer: UILongPressGestureRecognizer) {
-        self.navigationController?.view.endEditing(true)
         if (gestureRecognizer.state != .began) {
             return
         }

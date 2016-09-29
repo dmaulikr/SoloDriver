@@ -30,8 +30,41 @@ class SettingsManager: NSObject {
                 settings = JSON(data: settingsData!)
             }
         }
+        if (settings["Routes"].string == nil) {
+            settings["Routes"].string = "None"
+        }
+        if (settings["Bridge Clearance"].bool == nil) {
+            settings["Bridge Clearance"].bool = true
+        }
+        if (settings["Roadwork"].bool == nil) {
+            settings["Roadwork"].bool = true
+        }
+        if (settings["Event"].bool == nil) {
+            settings["Event"].bool = true
+        }
+        if (settings["Traffic Alert"].bool == nil) {
+            settings["Traffic Alert"].bool = true
+        }
+        if (settings["Road Closed"].bool == nil) {
+            settings["Road Closed"].bool = true
+        }
+        if (settings["Rest Area"].bool == nil) {
+            settings["Rest Area"].bool = true
+        }
+        if (settings["Height (m)"].double == nil) {
+            settings["Height (m)"].double = 4.6
+        }
+        if (settings["Length (m)"].double == nil) {
+            settings["Length (m)"].double = 17.5
+        }
+        if (settings["Width (m)"].double == nil) {
+            settings["Width (m)"].double = 2.4
+        }
+        if (settings["Weight (t)"].double == nil) {
+            settings["Weight (t)"].double = 15.0
+        }
     }
-
+    
     func saveSettings() {
         // Save settings in the background
         DispatchQueue.global(qos: .background).async {

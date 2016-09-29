@@ -11,10 +11,11 @@ import MapKit
 import AVFoundation
 import Instructions
 
-extension MasterController: CoachMarksControllerDataSource {
+extension MasterController: CoachMarksControllerDataSource, CoachMarksControllerDelegate {
     
     func initInstructions() {
         self.coachMarksController.dataSource = self
+        self.coachMarksController.delegate = self
         self.coachMarksController.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
         //        let skipView = CoachMarkSkipDefaultView()
         //        skipView.setTitle("Skip", for: .normal)
@@ -22,12 +23,7 @@ extension MasterController: CoachMarksControllerDataSource {
     }
     
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
-        if (SettingsManager.shared.settings["InstructionIsEnabled"].bool == false) {
-            return 0
-        } else {
-            SettingsManager.shared.settings["InstructionIsEnabled"].bool = false
-            return 6
-        }
+        return 5
     }
     
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
@@ -37,18 +33,15 @@ extension MasterController: CoachMarksControllerDataSource {
             let viewLeft = leftBarButton.value(forKey: "view") as! UIView
             return coachMarksController.helper.makeCoachMark(for: viewLeft)
         case 1:
-            return coachMarksController.helper.makeCoachMark(for: self.navigationItem.titleView)
-        case 2:
-            let rightBarButton = self.navigationItem.rightBarButtonItem! as UIBarButtonItem
-            let viewRight = rightBarButton.value(forKey: "view") as! UIView
-            return coachMarksController.helper.makeCoachMark(for: viewRight)
-        case 3:
-            return coachMarksController.helper.makeCoachMark(for: userTrackingButton?.customView)
-        case 4:
             let view = titleItem.value(forKey: "view") as! UIView
             return coachMarksController.helper.makeCoachMark(for: view)
-        case 5:
-            let view = actionItem.value(forKey: "view") as! UIView
+        case 2:
+            return coachMarksController.helper.makeCoachMark(for: self.navigationItem.titleView)
+        case 3:
+            let view = titleItem.value(forKey: "view") as! UIView
+            return coachMarksController.helper.makeCoachMark(for: view)
+        case 4:
+            let view = titleItem.value(forKey: "view") as! UIView
             return coachMarksController.helper.makeCoachMark(for: view)
         default:
             return coachMarksController.helper.makeCoachMark()
@@ -60,27 +53,60 @@ extension MasterController: CoachMarksControllerDataSource {
         
         switch(index) {
         case 0:
-            coachViews.bodyView.hintLabel.text = "Filter: Change desired map features"
+            coachViews.bodyView.hintLabel.text = "Step 1: Choose desired map features"
             coachViews.bodyView.nextLabel.text = "Next"
+            break
         case 1:
-            coachViews.bodyView.hintLabel.text = "Destination: Search for destination"
+            coachViews.bodyView.hintLabel.text = "Step 2: Search features"
             coachViews.bodyView.nextLabel.text = "Next"
+            break
         case 2:
-            coachViews.bodyView.hintLabel.text = "Settings: Change truck dimensions"
+            coachViews.bodyView.hintLabel.text = "Step 3: Set destination via search bar or long tap on map. Then click \"Get Directions\" on the callout bubble to get potential directions."
             coachViews.bodyView.nextLabel.text = "Next"
+            resultSearchController?.searchBar.text = "Crown Melbourne"
+            break
         case 3:
-            coachViews.bodyView.hintLabel.text = "Tracking Button: Change among tracking modes"
+            coachViews.bodyView.hintLabel.text = "Step 4: Start navigation"
             coachViews.bodyView.nextLabel.text = "Next"
+            break
         case 4:
-            coachViews.bodyView.hintLabel.text = "Current Action: Click to perform this action"
-            coachViews.bodyView.nextLabel.text = "Next"
-        case 5:
-            coachViews.bodyView.hintLabel.text = "All Actions: Click to see all possible actions"
+            coachViews.bodyView.hintLabel.text = "Step 5: End navigation"
             coachViews.bodyView.nextLabel.text = "Done"
+            break
         default:
             break
         }
         
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
+    
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, at index: Int) {
+        switch(index) {
+        case 0:
+            break
+        case 1:
+            titleItem.title = "Search Map Area"
+            searchFeatures()
+            break
+        case 2:
+            let annotation = DestinationAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: -37.823507, longitude: 144.958140)
+            annotation.title = "Crown Melbourne"
+            annotation.subtitle = "8 Whiteman Street, Southbank"
+            addDestinationAnnotationFromSearch(annotation: annotation)
+            getDirection(destinationAnnotation: annotation)
+            break
+        case 3:
+            startNavigation()
+            break
+        case 4:
+            cancelNavigation()
+            self.titleItem.title = "Search Map Area"
+            break
+        default:
+            break
+        }
+    }
+    
 }

@@ -39,11 +39,18 @@ class MasterController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.coachMarksController.startOn(self)
+        self.navigationController?.view.endEditing(true)
+        if (SettingsManager.shared.settings["InstructionIsEnabled"].bool != false) {
+            SettingsManager.shared.settings["InstructionIsEnabled"].bool = false
+            SettingsManager.shared.saveSettings()
+            clearMap()
+            self.coachMarksController.startOn(self)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        self.resultSearchController?.isActive = false
         self.coachMarksController.stop(immediately: true)
     }
 

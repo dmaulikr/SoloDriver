@@ -62,7 +62,7 @@ extension MasterController: MasterControllerDelegate {
                 locationInstruction.location = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
                 locationInstruction.radius = 1000
                 locationInstruction.text = annotation.title!! + "\n" + annotation.subtitle!!
-                locationInstruction.voice = thisAnnotation.alertSubtitle
+                locationInstruction.voice = thisAnnotation.alertTitle! + ".\n" + thisAnnotation.alertSubtitle!
                 locationInstructions += [locationInstruction]
             }
         }
