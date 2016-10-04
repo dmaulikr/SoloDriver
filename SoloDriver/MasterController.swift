@@ -154,6 +154,7 @@ class MasterController: UIViewController {
         self.waypoints = []
         self.mapView.removeOverlays(self.mapView.overlays)
         self.mapView.removeAnnotations(self.mapView.annotations)
+        getAnnotations()
     }
     
     func clearRoutes() {

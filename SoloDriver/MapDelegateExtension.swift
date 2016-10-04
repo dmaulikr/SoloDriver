@@ -85,7 +85,10 @@ extension MasterController: MKMapViewDelegate {
             mapView.userTrackingMode = .followWithHeading
         }
         if (mapView.camera.altitude < 10000) {
+            self.titleItem.title = "Auto Searching ..."
             getRoutes()
+        } else {
+            self.titleItem.title = "Search Map Area"
         }
     }
 }

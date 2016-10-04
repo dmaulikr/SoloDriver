@@ -44,6 +44,7 @@
                         <constraints>
                             <constraint firstItem="ALs-6F-aJv" firstAttribute="top" secondItem="lPD-AQ-sfL" secondAttribute="top" id="8Nm-Qm-VJa"/>
                             <constraint firstItem="ALs-6F-aJv" firstAttribute="leading" secondItem="lPD-AQ-sfL" secondAttribute="leading" id="A0K-dn-OiI"/>
+                            <constraint firstItem="ALs-6F-aJv" firstAttribute="centerY" secondItem="lPD-AQ-sfL" secondAttribute="centerY" id="A9g-81-Tyf"/>
                             <constraint firstAttribute="bottom" secondItem="ALs-6F-aJv" secondAttribute="bottom" id="FLf-Hh-cxV"/>
                             <constraint firstItem="rzf-FP-5BV" firstAttribute="top" secondItem="Odh-8L-Cmu" secondAttribute="bottom" constant="10" id="M98-tE-B5y"/>
                             <constraint firstItem="lDA-7S-FUi" firstAttribute="leading" secondItem="lPD-AQ-sfL" secondAttribute="leadingMargin" id="P9u-s8-cdS"/>
@@ -65,7 +66,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem systemItem="flexibleSpace" id="tt1-fx-tQ4"/>
-                        <barButtonItem systemItem="compose" id="ajd-Ed-73Q">
+                        <barButtonItem image="ellipsis" id="ajd-Ed-73Q">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="didClickAction:" destination="iO4-Su-K6r" id="KPj-sr-GsJ"/>
@@ -1064,7 +1065,7 @@
             <objects>
                 <navigationController storyboardIdentifier="FilterNavigationController" title="FilterNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="rNn-NR-c6f" userLabel="Filter Navigation" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Emv-55-AIM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Emv-55-AIM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1082,7 +1083,7 @@
             <objects>
                 <navigationController storyboardIdentifier="SettingsNavigationController" title="SettingsNavigation" automaticallyAdjustsScrollViewInsets="NO" id="aaS-xU-FeU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e9z-Uq-Qpv">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="e9z-Uq-Qpv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1144,7 +1145,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rZX-Tr-lWX" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="83d-K3-v1x">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="83d-K3-v1x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1162,7 +1163,7 @@
             <objects>
                 <navigationController storyboardIdentifier="DocumentsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="8De-mz-5A8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jTB-qR-Gjh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jTB-qR-Gjh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1186,6 +1187,7 @@
         <image name="Road Worker-96" width="96" height="96"/>
         <image name="Settings Filled-44" width="22" height="22"/>
         <image name="Waypoint Map-96" width="96" height="96"/>
+        <image name="ellipsis" width="22" height="22"/>
     </resources>
     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
