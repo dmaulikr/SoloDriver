@@ -114,11 +114,21 @@ class MasterController: UIViewController {
             controller.modalPresentationStyle = .fullScreen
             self.present(controller, animated: true, completion: nil)
         }
-        actionSheet.addAction(cancel)
-        actionSheet.addAction(clearMap)
-        actionSheet.addAction(addWaypoint)
+        let startNavigation = UIAlertAction(title: "Start Navigation", style: .default) { (action) in
+            if (self.directionSteps.count == 0) {
+                let alert = UIAlertController(title: "Error", message: "Please plan your route first", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                self.startNavigation()
+            }
+        }
         actionSheet.addAction(searchMap)
+        actionSheet.addAction(addWaypoint)
+        actionSheet.addAction(startNavigation)
+        actionSheet.addAction(clearMap)
         actionSheet.addAction(checkHandbooks)
+        actionSheet.addAction(cancel)
         present(actionSheet, animated: true) { }
     }
     

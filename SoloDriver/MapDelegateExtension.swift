@@ -11,7 +11,7 @@ import MapKit
 import SCLAlertView
 
 extension MasterController: MKMapViewDelegate {
-
+    
     // MARK:- MapViewDelegate methods, Polyline view
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is ColorPolyline {
@@ -24,7 +24,7 @@ extension MasterController: MKMapViewDelegate {
         }
         return MKPolylineRenderer()
     }
-
+    
     // MARK:- MapViewDelegate methods, Annotation View
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if (annotation is AlertViewAnnotation) {
@@ -42,7 +42,7 @@ extension MasterController: MKMapViewDelegate {
         }
         return nil
     }
-
+    
     // MARK:- MapViewDelegate methods, Annotation View Callout
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if (view.annotation is AlertViewAnnotation) {
@@ -85,9 +85,11 @@ extension MasterController: MKMapViewDelegate {
             mapView.userTrackingMode = .followWithHeading
         }
         if (mapView.camera.altitude < 10000) {
-            self.titleItem.title = "Auto Searching ..."
+            if (titleItem.title != "End Navigation") {
+                self.titleItem.title = "Auto Searching ..."
+            }
             getRoutes()
-        } else {
+        } else if (titleItem.title != "End Navigation") {
             self.titleItem.title = "Search Map Area"
         }
     }
