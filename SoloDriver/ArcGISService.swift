@@ -15,7 +15,6 @@ class ArcGISService: NSObject {
     
     static let backgroundQueue = DispatchQueue.global(qos: .background)
     static let userInitiatedQueue = DispatchQueue.global(qos: .userInitiated)
-    static let baseUrlHMLPoints = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_Route/FeatureServer/0/query?f=pjson&outSR=4326&inSR=4326&outFields=*&geometry="
     static let baseUrlBDoubleRoutes = "http://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/B_Double_Route/FeatureServer/0"
     static let baseUrlHMLRoutes = "http://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HML_Route/FeatureServer/0"
     static let baseUrlHPFVRoutes = "https://data.vicroads.vic.gov.au/arcgis/rest/services/HeavyVehicles/HPFV_Mass_Route/FeatureServer/0"

@@ -12,15 +12,16 @@ import AVFoundation
 import Instructions
 
 class MasterController: UIViewController {
-
+    
     var resultSearchController: UISearchController?
     let coachMarksController = CoachMarksController()
     let speechSynthesizer = AVSpeechSynthesizer()
     var userTrackingButton: MKUserTrackingBarButtonItem?
-    var currentTask: Int = 0
+    var annotationTaskId: Int = 0
+    var polylineTaskId: Int = 0
     var directionSteps: [[DirectionPolyline]] = []
     var waypoints: [WayPointAnnotation] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // tracking button
@@ -35,6 +36,11 @@ class MasterController: UIViewController {
         registerTapGestures()
         // Instructions
         initInstructions()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        clearMap()
+        getAnnotations()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,7 +59,7 @@ class MasterController: UIViewController {
         self.resultSearchController?.isActive = false
         self.coachMarksController.stop(immediately: true)
     }
-
+    
     @IBOutlet var mapView: MKMapView! {
         didSet {
             // Set map camera
@@ -67,21 +73,21 @@ class MasterController: UIViewController {
             mapView.setCamera(camera, animated: false)
         }
     }
-
+    
     @IBAction func didClickFilter(_ sender: AnyObject) {
         let controller = storyboard!.instantiateViewController(withIdentifier: "FilterNavigationController")
         controller.modalPresentationStyle = .formSheet
         controller.modalTransitionStyle = .coverVertical
         present(controller, animated: true) { }
     }
-
+    
     @IBAction func didClickSettings(_ sender: AnyObject) {
         let controller = storyboard!.instantiateViewController(withIdentifier: "SettingsNavigationController")
         controller.modalPresentationStyle = .formSheet
         controller.modalTransitionStyle = .coverVertical
         present(controller, animated: true) { }
     }
-
+    
     @IBOutlet var actionItem: UIBarButtonItem!
     @IBAction func didClickAction(_ sender: AnyObject) {
         if (titleItem.title == "End Navigation") {
@@ -96,7 +102,8 @@ class MasterController: UIViewController {
         }
         let searchMap = UIAlertAction(title: "Search Map Area", style: .default) { (action) in
             self.titleItem.title = action.title
-            self.searchFeatures()
+            self.polylineTaskId += 1
+            self.getRoutes()
         }
         let addWaypoint = UIAlertAction(title: "Add Waypoint", style: .default) { (action) in
             self.titleItem.title = action.title
@@ -114,11 +121,12 @@ class MasterController: UIViewController {
         actionSheet.addAction(checkHandbooks)
         present(actionSheet, animated: true) { }
     }
-
+    
     @IBOutlet var titleItem: UIBarButtonItem!
     @IBAction func didClickTitle(_ sender: AnyObject) {
         if (titleItem.title == "Search Map Area") {
-            searchFeatures()
+            clearRoutes()
+            getRoutes()
         } else if (titleItem.title == "Start Navigation") {
             startNavigation()
         } else if (titleItem.title == "End Navigation") {
@@ -140,11 +148,25 @@ class MasterController: UIViewController {
     
     func clearMap() {
         self.titleItem.title = "Search Map Area"
-        self.currentTask = (self.currentTask + 1) % 1024
-        self.directionSteps = [[]]
+        self.annotationTaskId += 1
+        self.polylineTaskId += 1
+        self.directionSteps = []
         self.waypoints = []
         self.mapView.removeOverlays(self.mapView.overlays)
         self.mapView.removeAnnotations(self.mapView.annotations)
     }
-
+    
+    func clearRoutes() {
+        polylineTaskId += 1
+        for overlay in mapView.overlays {
+            if (overlay is RoutePolyline) {
+                mapView.remove(overlay)
+            }
+        }
+        for annotation in mapView.annotations {
+            if (annotation is RouteAnnotation) {
+                mapView.removeAnnotation(annotation)
+            }
+        }
+    }
 }

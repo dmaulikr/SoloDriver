@@ -87,7 +87,9 @@ extension MasterController: CoachMarksControllerDataSource, CoachMarksController
             break
         case 1:
             titleItem.title = "Search Map Area"
-            searchFeatures()
+            clearMap()
+            getAnnotations()
+            getRoutes()
             break
         case 2:
             let annotation = DestinationAnnotation()

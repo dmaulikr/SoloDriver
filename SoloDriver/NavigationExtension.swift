@@ -71,12 +71,17 @@ extension MasterController: MasterControllerDelegate {
     }
     
     func cancelNavigation() {
-        // Display nav bar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        mapView.userTrackingMode = .none
+        // Stop speaking
+        speechSynthesizer.stopSpeaking(at: .word)
+        // Reset UI
         self.titleItem.title = "Start Navigation"
         self.navigationInstruction.text = ""
+        self.alertInstruction.text = ""
+        // Display nav bar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         LocationManager.shared.locationInstructions = []
+        // Reset map
+        mapView.userTrackingMode = .none
         // Set camera
         let userCoordinate = LocationManager.shared.getLastLocation()!.coordinate
         let mapCamera = MKMapCamera(lookingAtCenter: userCoordinate, fromEyeCoordinate: userCoordinate, eyeAltitude: 3000.0)
@@ -113,6 +118,10 @@ extension MasterController: MasterControllerDelegate {
     }
     
     func updateInstruction(instruction: LocationInstruction) {
+        // Check whether to process
+        if (titleItem.title != "End Navigation") {
+            return
+        }
         // Discard far away notification
         if (instruction.location!.distance(from: LocationManager.shared.getLastLocation()!) > 1000) {
             return

@@ -12,7 +12,7 @@ import SwiftyJSON
 import SCLAlertView
 
 class RoutePolyline: ColorPolyline {
-    
+    var objectId: Int?
 }
 
 class RouteAnnotation: AlertViewAnnotation {
@@ -30,6 +30,7 @@ extension Geometry {
             pointsToUse += [coordinate]
         }
         let roadPolyline = RoutePolyline(coordinates: &pointsToUse, count: paths.count)
+        roadPolyline.objectId = json["attributes"]["OBJECTID"].intValue
         // Set color
         switch json["attributes"]["HVR_" + name].stringValue {
         case "Approved":

@@ -84,5 +84,8 @@ extension MasterController: MKMapViewDelegate {
         if (self.titleItem.title == "End Navigation") {
             mapView.userTrackingMode = .followWithHeading
         }
+        if (mapView.camera.altitude < 10000) {
+            getRoutes()
+        }
     }
 }
