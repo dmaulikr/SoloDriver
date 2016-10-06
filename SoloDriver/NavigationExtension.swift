@@ -17,6 +17,9 @@ protocol MasterControllerDelegate {
 extension MasterController: MasterControllerDelegate {
     
     func startNavigation() {
+        if (self.directionSteps.count == 0) {
+            return
+        }
         self.titleItem.title = "End Navigation"
         var newDirectionSteps: [[DirectionPolyline]] = []
         // Remove candidate directions

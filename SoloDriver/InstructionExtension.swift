@@ -17,9 +17,6 @@ extension MasterController: CoachMarksControllerDataSource, CoachMarksController
         self.coachMarksController.dataSource = self
         self.coachMarksController.delegate = self
         self.coachMarksController.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
-        //        let skipView = CoachMarkSkipDefaultView()
-        //        skipView.setTitle("Skip", for: .normal)
-        //        self.coachMarksController.skipView = skipView
     }
     
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
@@ -53,11 +50,11 @@ extension MasterController: CoachMarksControllerDataSource, CoachMarksController
         
         switch(index) {
         case 0:
-            coachViews.bodyView.hintLabel.text = "Step 1: Choose desired map features"
+            coachViews.bodyView.hintLabel.text = "Step1: Choose the features you want on the map by turning them on and also selecting the preferred route you want as per your truck category."
             coachViews.bodyView.nextLabel.text = "Next"
             break
         case 1:
-            coachViews.bodyView.hintLabel.text = "Step 2: Search features"
+            coachViews.bodyView.hintLabel.text = "Step2: Select this option to check all the possible routes marked in green or red on the visible map area to get the routes you can take as per your truck type. You can keep searching anytime for any map area."
             coachViews.bodyView.nextLabel.text = "Next"
             break
         case 2:
@@ -66,11 +63,11 @@ extension MasterController: CoachMarksControllerDataSource, CoachMarksController
             resultSearchController?.searchBar.text = "Crown Melbourne"
             break
         case 3:
-            coachViews.bodyView.hintLabel.text = "Step 4: Start navigation"
+            coachViews.bodyView.hintLabel.text = "Step 4: Select start navigation to get real time voice assistance"
             coachViews.bodyView.nextLabel.text = "Next"
             break
         case 4:
-            coachViews.bodyView.hintLabel.text = "Step 5: End navigation"
+            coachViews.bodyView.hintLabel.text = "Step 5: End the navigation whenever you want. You can start and end as per your requirement."
             coachViews.bodyView.nextLabel.text = "Done"
             break
         default:

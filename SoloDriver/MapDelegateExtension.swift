@@ -81,16 +81,21 @@ extension MasterController: MKMapViewDelegate {
     
     // MARK: region did change
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        // Tracking mode
         if (self.titleItem.title == "End Navigation") {
             mapView.userTrackingMode = .followWithHeading
         }
-        if (mapView.camera.altitude < 10000) {
-            if (titleItem.title != "End Navigation") {
+        // Title
+        if (titleItem.title == "Search Map Area" || titleItem.title == "Auto Searching ...") {
+            if (mapView.camera.altitude < 10000) {
                 self.titleItem.title = "Auto Searching ..."
+            } else  {
+                self.titleItem.title = "Search Map Area"
             }
+        }
+        // Searching
+        if (mapView.camera.altitude < 10000) {
             getRoutes()
-        } else if (titleItem.title != "End Navigation") {
-            self.titleItem.title = "Search Map Area"
         }
     }
 }

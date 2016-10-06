@@ -30,6 +30,8 @@ class Config: NSObject {
     static let ICON_ROAD_CLOSED = UIImage(named: "Cancel-96")?.resize(newWidth: ICON_SIZE)
     static let ICON_REST_AREA = UIImage(named: "Park Bench-96")?.resize(newWidth: ICON_SIZE)
     
+    // Instruction
+    static let summary = "Truck drivers!, This is a handy tool offering navigation, which suggests truck routes depending upon the type of heavy vehicle you are driving. It can help you identify the restricted and conditionally restricted routes. It will make you aware of bridge clearances, possible road works and road closures beforehand to help plan your journey with the best possible route. SoloDriver will also alert you when approaching a low height bridge that provides sufficient time to deviate from the route. You can know the closest rest areas on the planned route for a quick break from long and tiring drive. Additionally, it also provides information about carrying dangerous loads and various safety techniques while driving. Stay safe on road!"
 }
 
 extension UIImage {

@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import AVFoundation
 import Instructions
+import SCLAlertView
 
 class MasterController: UIViewController {
     
@@ -39,6 +40,21 @@ class MasterController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        if (SettingsManager.shared.settings["InstructionIsEnabled"].bool != false) {
+            let notice = SCLAlertView(appearance: SCLAlertView.SCLAppearance(
+                kWindowWidth: self.view.bounds.width - 32))
+                .showTitle(
+                    "Notice",
+                    subTitle: Config.summary,
+                    style: .notice,
+                    closeButtonTitle: "Get Started",
+                    duration: 0)
+            notice.setDismissBlock {
+                self.coachMarksController.startOn(self)
+                SettingsManager.shared.settings["InstructionIsEnabled"].bool = false
+                SettingsManager.shared.saveSettings()
+            }
+        }
         clearMap()
         getAnnotations()
     }
@@ -46,12 +62,6 @@ class MasterController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.view.endEditing(true)
-        if (SettingsManager.shared.settings["InstructionIsEnabled"].bool != false) {
-            SettingsManager.shared.settings["InstructionIsEnabled"].bool = false
-            SettingsManager.shared.saveSettings()
-            clearMap()
-            self.coachMarksController.startOn(self)
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
